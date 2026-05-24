@@ -1,0 +1,5 @@
+/Users/mauriceshalam/Documents/GitHub/AlphaAR/AlphaARTest1/.utmp/Debug/2u6l3f3a/arm64-v8a/CMakeFiles/edit_cache.dir
+/Users/mauriceshalam/Documents/GitHub/AlphaAR/AlphaARTest1/.utmp/Debug/2u6l3f3a/arm64-v8a/CMakeFiles/rebuild_cache.dir
+/Users/mauriceshalam/Documents/GitHub/AlphaAR/AlphaARTest1/.utmp/Debug/2u6l3f3a/arm64-v8a/GameActivity/CMakeFiles/game.dir
+/Users/mauriceshalam/Documents/GitHub/AlphaAR/AlphaARTest1/.utmp/Debug/2u6l3f3a/arm64-v8a/GameActivity/CMakeFiles/edit_cache.dir
+/Users/mauriceshalam/Documents/GitHub/AlphaAR/AlphaARTest1/.utmp/Debug/2u6l3f3a/arm64-v8a/GameActivity/CMakeFiles/rebuild_cache.dir

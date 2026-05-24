@@ -1,0 +1,39 @@
+# Unity generated folders
+[Ll]ibrary/
+[Tt]emp/
+[Oo]bj/
+[Bb]uild/
+[Bb]uilds/
+[Ll]ogs/
+[Uu]ser[Ss]ettings/
+.vs/
+
+# Unity keeps meta files for all assets — only ignore .meta files
+# for folders/files you've explicitly excluded above.
+# Generally, DO commit .meta files — they contain GUIDs.
+# Example: ignore meta for auto-generated files
+ExportedObj/
+*.pidb.meta
+*.pdb.meta
+*.mdb.meta
+
+# Unity asset database & editor cache
+*.pidb
+*.pdb
+sysinfo.txt
+*.apk
+*.unitypackage
+*.unityproj
+crashlytics-build.properties
+
+# Build output directories
+Build/
+Builds/
+*.app
+*.exe
+*.x86
+*.x86_64
+*.arm
+*.aab
+*.ipa
+
