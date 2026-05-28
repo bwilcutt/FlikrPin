@@ -1,0 +1,1672 @@
+﻿<Project>
+  <!-- Generated file, do not modify, your changes will be overwritten (use AssetPostprocessor.OnGeneratedCSProject) -->
+  <PropertyGroup>
+    <BaseIntermediateOutputPath>Temp/obj/$(MSBuildProjectName)</BaseIntermediateOutputPath>
+    <IntermediateOutputPath>$(BaseIntermediateOutputPath)</IntermediateOutputPath>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    <UseCommonOutputDirectory>true</UseCommonOutputDirectory>
+    <OutputPath>Temp/bin/Debug/</OutputPath>
+  </PropertyGroup>
+  <Import Project="Sdk.props" Sdk="Microsoft.NET.Sdk" />
+  <ItemGroup>
+    <ProjectCapability Include="Unity" />
+    <ProjectCapability Include="EnableOnDemandExcludedFolderLoading" />
+  </ItemGroup>
+  <PropertyGroup>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <EnableDefaultItems>false</EnableDefaultItems>
+    <LangVersion>9.0</LangVersion>
+    <RootNamespace></RootNamespace>
+    <OutputType>Library</OutputType>
+    <AssemblyName>gpm_common</AssemblyName>
+    <TargetFramework>netstandard2.1</TargetFramework>
+    <BaseDirectory>.</BaseDirectory>
+  </PropertyGroup>
+  <PropertyGroup>
+    <NoWarn>0169;USG0001</NoWarn>
+    <DefineConstants>UNITY_6000_4_4;UNITY_6000_4;UNITY_6000;UNITY_5_3_OR_NEWER;UNITY_5_4_OR_NEWER;UNITY_5_5_OR_NEWER;UNITY_5_6_OR_NEWER;UNITY_2017_1_OR_NEWER;UNITY_2017_2_OR_NEWER;UNITY_2017_3_OR_NEWER;UNITY_2017_4_OR_NEWER;UNITY_2018_1_OR_NEWER;UNITY_2018_2_OR_NEWER;UNITY_2018_3_OR_NEWER;UNITY_2018_4_OR_NEWER;UNITY_2019_1_OR_NEWER;UNITY_2019_2_OR_NEWER;UNITY_2019_3_OR_NEWER;UNITY_2019_4_OR_NEWER;UNITY_2020_1_OR_NEWER;UNITY_2020_2_OR_NEWER;UNITY_2020_3_OR_NEWER;UNITY_2021_1_OR_NEWER;UNITY_2021_2_OR_NEWER;UNITY_2021_3_OR_NEWER;UNITY_2022_1_OR_NEWER;UNITY_2022_2_OR_NEWER;UNITY_2022_3_OR_NEWER;UNITY_2023_1_OR_NEWER;UNITY_2023_2_OR_NEWER;UNITY_2023_3_OR_NEWER;UNITY_6000_0_OR_NEWER;UNITY_6000_1_OR_NEWER;UNITY_6000_2_OR_NEWER;UNITY_6000_3_OR_NEWER;UNITY_6000_4_OR_NEWER;UNITY_INCLUDE_TESTS;ENABLE_AR;ENABLE_AUDIO;ENABLE_AUDIO_SCRIPTABLE_PIPELINE;ENABLE_CACHING;ENABLE_CLOTH;ENABLE_EVENT_QUEUE;ENABLE_MICROPHONE;ENABLE_MULTIPLE_DISPLAYS;ENABLE_PHYSICS;ENABLE_TEXTURE_STREAMING;ENABLE_LZMA;ENABLE_UNITYEVENTS;ENABLE_VR;ENABLE_WEBCAM;ENABLE_UNITYWEBREQUEST;ENABLE_WWW;ENABLE_CLOUD_SERVICES;ENABLE_CLOUD_SERVICES_ADS;ENABLE_CLOUD_SERVICES_USE_WEBREQUEST;ENABLE_UNITY_CONSENT;ENABLE_UNITY_CLOUD_IDENTIFIERS;ENABLE_CLOUD_SERVICES_CRASH_REPORTING;ENABLE_CLOUD_SERVICES_NATIVE_CRASH_REPORTING;ENABLE_CLOUD_SERVICES_PURCHASING;ENABLE_CLOUD_SERVICES_ANALYTICS;ENABLE_CLOUD_SERVICES_BUILD;ENABLE_EDITOR_GAME_SERVICES;ENABLE_UNITY_GAME_SERVICES_ANALYTICS_SUPPORT;ENABLE_CLOUD_LICENSE;ENABLE_EDITOR_HUB_LICENSE;ENABLE_WEBSOCKET_CLIENT;ENABLE_GENERATE_NATIVE_PLUGINS_FOR_ASSEMBLIES_API;ENABLE_DIRECTOR_AUDIO;ENABLE_DIRECTOR_TEXTURE;ENABLE_MANAGED_JOBS;ENABLE_MANAGED_TRANSFORM_JOBS;ENABLE_MANAGED_ANIMATION_JOBS;ENABLE_MANAGED_AUDIO_JOBS;ENABLE_ENGINE_CODE_STRIPPING;ENABLE_ONSCREEN_KEYBOARD;ENABLE_MANAGED_UNITYTLS;INCLUDE_DYNAMIC_GI;ENABLE_SCRIPTING_GC_WBARRIERS;PLATFORM_SUPPORTS_MONO;ENABLE_MARSHALLING_TESTS;ENABLE_VIDEO;ENABLE_NAVIGATION_OFFMESHLINK_TO_NAVMESHLINK;ENABLE_ACCELERATOR_CLIENT_DEBUGGING;ENABLE_ACCESSIBILITY_SCREEN_READER;ENABLE_ACCESSIBILITY_SETTINGS;TEXTCORE_1_0_OR_NEWER;EDITOR_ONLY_NAVMESH_BUILDER_DEPRECATED;PLATFORM_ANDROID;UNITY_ANDROID;UNITY_ANDROID_API;ENABLE_EGL;ENABLE_NETWORK;ENABLE_RUNTIME_GI;ENABLE_CRUNCH_TEXTURE_COMPRESSION;ENABLE_CLOUD_SERVICES_ENGINE_DIAGNOSTICS;ENABLE_FIREBASE_IDENTIFIERS;UNITY_CAN_SHOW_SPLASH_SCREEN;UNITY_HAS_GOOGLEVR;UNITY_HAS_TANGO;ENABLE_SPATIALTRACKING;ENABLE_ETC_COMPRESSION;PLATFORM_EXTENDS_VULKAN_DEVICE;PLATFORM_HAS_MULTIPLE_SWAPCHAINS;UNITY_ANDROID_SUPPORTS_SHADOWFILES;PLATFORM_UPDATES_TIME_OUTSIDE_OF_PLAYER_LOOP;PLATFORM_EXTENDS_VULKAN_PIPELINE_CACHE;PLATFORM_SUPPORTS_SPLIT_GRAPHICS_JOBS;PLATFORM_HAS_ADDITIONAL_API_CHECKS;PLATFORM_HAS_GRAPHICS_JOBS_SUPPORT_CHECK_OVERRIDE;PLATFORM_IMPLEMENTS_INSIGHTS_ANR;PLATFORM_SUPPORTS_INSIGHTS_DEVICE_INFO;ENABLE_ANDROID_ADVERTISING_IDS;PLATFORM_HAS_BUGGY_MSAA_RESOLVE;ENABLE_ANDROID_APP_SET_ID;ENABLE_INSIGHTS_PLATFORM_SPECIFIC_RESOURCES;PLATFORM_REQUIRES_TETHERED_VULKAN_COMMAND_POOL;ENABLE_UNITYADS_RUNTIME;UNITY_UNITYADS_API;ENABLE_MONO;NET_STANDARD_2_0;NET_STANDARD;NET_STANDARD_2_1;NETSTANDARD;NETSTANDARD2_1;ENABLE_PROFILER;ENABLE_PROFILER_ASSISTANT_INTEGRATION;DEBUG;TRACE;UNITY_ASSERTIONS;UNITY_EDITOR;UNITY_EDITOR_64;UNITY_EDITOR_LINUX;ENABLE_UNITY_COLLECTIONS_CHECKS;ENABLE_BURST_AOT;UNITY_TEAM_LICENSE;ENABLE_CUSTOM_RENDER_TEXTURE;ENABLE_DIRECTOR;ENABLE_LOCALIZATION;ENABLE_SPRITES;ENABLE_TERRAIN;ENABLE_TILEMAP;ENABLE_TIMELINE;ENABLE_INPUT_SYSTEM;TEXTCORE_FONT_ENGINE_1_5_OR_NEWER;TEXTCORE_TEXT_ENGINE_1_5_OR_NEWER;TEXTCORE_FONT_ENGINE_1_6_OR_NEWER;CSHARP_7_OR_LATER;CSHARP_7_3_OR_NEWER</DefineConstants>
+    <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup>
+    <NoStandardLibraries>true</NoStandardLibraries>
+    <NoStdLib>true</NoStdLib>
+    <NoConfig>true</NoConfig>
+    <DisableImplicitFrameworkReferences>true</DisableImplicitFrameworkReferences>
+    <MSBuildWarningsAsMessages>MSB3277</MSBuildWarningsAsMessages>
+  </PropertyGroup>
+  <PropertyGroup>
+    <UnityProjectGenerator>Package</UnityProjectGenerator>
+    <UnityProjectGeneratorVersion>2.0.27</UnityProjectGeneratorVersion>
+    <UnityProjectGeneratorStyle>SDK</UnityProjectGeneratorStyle>
+    <UnityProjectType>Game:1</UnityProjectType>
+    <UnityBuildTarget>Android:13</UnityBuildTarget>
+    <UnityVersion>6000.4.4f1</UnityVersion>
+  </PropertyGroup>
+  <ItemGroup>
+    <Analyzer Include="/home/bwilcutt/.vscode/extensions/visualstudiotoolsforunity.vstuc-1.2.2/Analyzers/Microsoft.Unity.Analyzers.dll" />
+    <Analyzer Include="/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/Tools/BuildPipeline/Unity.SourceGenerators/Unity.SourceGenerators.dll" />
+    <Analyzer Include="/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/Tools/BuildPipeline/Unity.SourceGenerators/Unity.Properties.SourceGenerator.dll" />
+    <Analyzer Include="/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/Tools/BuildPipeline/Unity.SourceGenerators/Unity.UIToolkit.SourceGenerator.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Common/Rar/Headers/RarHeaderFactory.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Compressors/ADC/ADCBase.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Compressors/LZMA/LZ/LzBinTree.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Common/ExtractionOptions.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Compressors/Deflate64/InflaterState.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/IO/BufferedSubStream.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Common/IEntry.Extensions.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Compressors/Rar/UnpackV1/Decode/AudioVariables.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Writers/WriterOptions.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Buffers/ArrayPool.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Common/Tar/TarEntry.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/MessagePack/Resolvers/TypelessContractlessStandardResolver.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Common/Zip/ZipEntry.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Compressors/Xz/XZStream.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/MessagePack/LZ4/Codec/LZ4Codec.Safe32.Dirty.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Compressors/LZMA/ICoder.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Common/Tar/TarReadOnlySubStream.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Common/Entry.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Archives/Rar/RarArchiveEntry.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Archives/GZip/GZipWritableArchiveEntry.cs" />
+    <Compile Include="Assets/GPM/Common/Indicator/Scripts/Internal/UnityWebRequestHelper.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/MessagePack/LZ4/LZ4MessagePackSerializer.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Compressors/LZMA/LzmaEncoder.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Writers/GZip/GZipWriterOptions.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Compressors/LZMA/LzmaDecoder.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/MessagePack/Formatters/DynamicObjectTypeFallbackFormatter.cs" />
+    <Compile Include="Assets/GPM/Common/Indicator/Scripts/Internal/Vo/LaunchingInfo.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Compressors/LZMA/LZ/LzOutWindow.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Archives/IArchiveEntryExtensions.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/LitJson/ParserToken.cs" />
+    <Compile Include="Assets/GPM/Common/Net/GpmWebRequest.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Compressors/Xz/BinaryUtils.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Compressors/Rar/UnpackV1/Unpack15.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Common/SevenZip/DataReader.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Common/FlagUtility.cs" />
+    <Compile Include="Assets/GPM/Common/Util/GpmMessagePackMapper.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Compressors/LZMA/RangeCoder/RangeCoderBit.cs" />
+    <Compile Include="Assets/GPM/Common/Compress/Editor/GpmCompress.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Compressors/PPMd/H/ModelPPM.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Common/Zip/ZipHeaderFactory.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Common/GZip/GZipFilePart.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Compressors/Rar/VM/VMCmdFlags.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Compressors/Rar/MultiVolumeReadOnlyStream.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Common/Rar/Headers/MarkHeader.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Crypto/DataLengthException.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Writers/IWriterExtensions.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Compressors/Deflate/InfTree.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Compressors/Rar/UnpackV1/Unpack50.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/MessagePack/UnsafeExtensions/UnityBlitResolver.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Crypto/Crc32Stream.cs" />
+    <Compile Include="Assets/GPM/Common/Indicator/Scripts/Internal/LogNCrashRequest.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Archives/IArchiveExtensions.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Common/CryptographicException.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Common/Zip/Headers/Zip64DirectoryEndHeader.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Common/Rar/Headers/ArchiveCryptHeader.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Common/SevenZip/ArchiveDatabase.cs" />
+    <Compile Include="Assets/GPM/Common/Indicator/Scripts/GpmIndicatorData.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Compressors/Filters/BCJ2Filter.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Buffers/DefaultArrayPool.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/MessagePack/Internal/TinyJsonReader.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Compressors/Deflate/ZlibBaseStream.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Compressors/Rar/UnpackV1/Decode/MultDecode.cs" />
+    <Compile Include="Assets/GPM/Common/Util/GameObjectContainer.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/MessagePack/Internal/UnsafeMemory.Low.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Writers/Tar/TarWriter.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Common/ReaderExtractionEventArgs.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/MessagePack/LZ4/LZ4MessagePackSerializer.NonGeneric.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Compressors/Xz/Filters/BlockFilter.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Compressors/PPMd/I1/Model.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Common/Zip/SeekableZipHeaderFactory.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Archives/Rar/RarArchive.Extensions.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Readers/Rar/NonSeekableStreamFilePart.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/LazyReadOnlyCollection.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Compressors/Deflate/DeflateManager.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/MessagePack/Resolvers/TypelessObjectResolver.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Readers/IReader.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Writers/Zip/ZipCentralDirectoryEntry.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Compressors/Deflate64/BlockType.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/IO/MarkingBinaryReader.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Compressors/PPMd/H/SEE2Context.cs" />
+    <Compile Include="Assets/GPM/Common/Util/GpmPathUtil.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Readers/Rar/RarReaderEntry.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/MessagePack/Formatters/EnumAsStringFormatter.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Compressors/PPMd/I1/Coder.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Compressors/PPMd/I1/Allocator.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/MessagePack/LZ4/Codec/LZ4Codec.Unsafe64.Dirty.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Compressors/Rar/UnpackV2017/BitInput.getbits_cpp.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Compressors/Rar/VM/VMCommands.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/MessagePack/Internal/GuidBits.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Common/Rar/Headers/SignHeader.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Crypto/KeyParameter.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Compressors/LZMA/LzmaEncoderProperties.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/MessagePack/LZ4/Codec/LZ4Codec.Unsafe.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Compressors/Rar/VM/VMOpType.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Common/Zip/ZipVolume.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Compressors/PPMd/H/SubAllocator.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Compressors/Xz/XZHeader.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/MessagePack/Formatters/MultiDimentionalArrayFormatter.cs" />
+    <Compile Include="Assets/GPM/Common/Multilanguage/GpmMultilanguageDefine.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/MessagePack/LZ4/Codec/LZ4Codec.Safe.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Crypto/RijndaelEngine.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/MessagePack/Formatters/NullableFormatter.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Compressors/LZMA/Registry.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Readers/Rar/MultiVolumeRarReader.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Compressors/LZMA/Utilites/CrcBuilderStream.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Archives/IArchiveEntry.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Compressors/Deflate64/Deflate64Stream.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Common/Rar/Headers/EndArchiveHeader.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Common/Zip/ZipFilePart.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/MessagePack/Formatters/IgnoreFormatter.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Compressors/Rar/UnpackV2017/Unpack.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/MessagePack/MessagePackSerializer.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/LitJson/JsonMapper.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Compressors/LZMA/RangeCoder/RangeCoderBitTree.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Compressors/Xz/Crc64.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Compressors/ADC/ADCStream.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Common/Rar/RarRijndael.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/MessagePack/Resolvers/NativeDateTimeResolver.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Compressors/LZMA/LzmaStream.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Compressors/Filters/BCJFilter.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Compressors/PPMd/H/FreqData.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/MessagePack/Formatters/DictionaryFormatter.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Common/Rar/Headers/ProtectHeader.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/IO/ListeningStream.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Compressors/LZMA/Utilites/CrcCheckStream.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/MessagePack/Resolvers/DynamicGenericResolver.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Common/Rar/RarVolume.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Compressors/PPMd/I1/PpmState.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/MessagePack/Resolvers/DynamicObjectResolver.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Common/Zip/Headers/LocalEntryHeaderExtraFactory.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/MessagePack/Formatters/PrimitiveObjectFormatter.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/MessagePack/Resolvers/UnsafeBinaryResolver.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Compressors/Rar/UnpackV2017/BitInput.getbits_hpp.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/MessagePack/IFormatterResolver.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Compressors/PPMd/H/Pointer.cs" />
+    <Compile Include="Assets/GPM/Common/Net/ManagedCoroutineException.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Compressors/Rar/VM/VMPreparedProgram.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/LitJson/Lexer.cs" />
+    <Compile Include="Assets/GPM/Common/Indicator/Scripts/Internal/Implementation/IndicatorImplementation.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Readers/AbstractReader.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/EnumExtensions.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Writers/Zip/ZipWriterEntryOptions.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/MessagePack/Formatters/IMessagePackFormatter.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Compressors/LZMA/LZipStream.cs" />
+    <Compile Include="Assets/GPM/Common/Util/GpmFileUtil.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Writers/WriterFactory.cs" />
+    <Compile Include="Assets/GPM/Common/Multilanguage/Internal/MultilanguageXml.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/MessagePack/MessagePackCode.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Common/CompressionType.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Common/FilePartExtractionBeginEventArgs.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/MessagePack/Resolvers/BuiltinResolver.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Compressors/Rar/UnpackV2017/unpack_hpp.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Compressors/Rar/UnpackV1/Decode/BitDecode.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Compressors/Deflate/DeflateTree.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Common/Zip/Headers/ZipFileEntry.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/MessagePack/MessagePackSerializer.Json.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Compressors/Deflate/DeflateStream.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Compressors/Xz/Filters/Lzma2Filter.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Archives/IWritableArchiveEntry.cs" />
+    <Compile Include="Assets/GPM/Common/Indicator/Scripts/Internal/Implementation/InAppCoroutineObject.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Archives/Rar/RarArchiveVolumeFactory.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Compressors/PPMd/I1/MemoryNode.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Common/Zip/PkwareTraditionalEncryptionData.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Writers/Zip/ZipWriterOptions.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/MessagePack/Formatters/TypelessFormatter.cs" />
+    <Compile Include="Assets/GPM/Common/Indicator/Scripts/Internal/Vo/QueueItem.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/MessagePack/Internal/ArrayPool.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Compressors/BZip2/CRC.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Common/Tar/TarVolume.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Common/Tar/Headers/EntryType.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Common/Tar/TarHeaderFactory.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Compressors/Rar/VM/RarVM.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Common/Rar/Headers/AVHeader.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Archives/AbstractArchive.cs" />
+    <Compile Include="Assets/GPM/Common/Indicator/Scripts/Internal/EditorIndicator.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Common/MultiVolumeExtractionException.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Archives/IWritableArchive.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Compressors/LZMA/RangeCoder/RangeCoder.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Common/Tar/TarFilePart.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Utility.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Common/Tar/Headers/TarHeader.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Archives/GZip/GZipArchive.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/IO/NonDisposingStream.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Common/IncompleteArchiveException.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/MessagePack/Internal/AutomataDictionary.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Archives/Tar/TarArchiveEntry.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Buffers/Utilities.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Common/Rar/RarCrcBinaryReader.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Compressors/Rar/RarStream.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Common/IEntry.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Compressors/BZip2/CBZip2OutputStream.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/MessagePack/Internal/UnsafeMemory.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Compressors/Rar/VM/VMStandardFilters.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Compressors/Rar/VM/BitInput.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/MessagePack/Formatters/PrimitiveFormatter.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Common/InvalidFormatException.cs" />
+    <Compile Include="Assets/GPM/Common/Indicator/Scripts/Internal/Implementation/EditorCoroutineObject.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/MessagePack/Unity/Formatters.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Compressors/PPMd/H/RangeCoder.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Readers/Rar/RarReader.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Readers/Rar/SingleVolumeRarReader.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Common/CompressedBytesReadEventArgs.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Compressors/Rar/UnpackV1/Decode/CodeType.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Common/Zip/SeekableZipFilePart.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Archives/Rar/FileInfoRarFilePart.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/MessagePack/LZ4/LZ4MessagePackSerializer.JSON.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Readers/GZip/GZipReader.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Compressors/Xz/Crc32.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Common/Zip/Headers/LocalEntryHeader.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Compressors/PPMd/I1/Pointer.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/MessagePack/Formatters/TupleFormatter.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Compressors/Deflate/CRC32.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Common/Rar/Headers/NewSubHeaderType.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Common/SevenZip/SevenZipFilePart.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Common/SevenZip/ArchiveReader.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Archives/GZip/GZipArchiveEntry.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Compressors/Rar/UnpackV2017/Unpack.unpack20_cpp.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Compressors/PPMd/H/RarNode.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Compressors/LZMA/DecoderStream.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Common/Zip/Headers/HeaderFlags.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/MessagePack/Resolvers/ContractlessReflectionObjectResolver.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Common/Volume.cs" />
+    <Compile Include="Assets/GPM/Common/Util/XmlHelper.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/LitJson/JsonWriter.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Compressors/Rar/UnpackV2017/FragmentedWindow.unpack50frag_cpp.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Compressors/Xz/XZBlock.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Readers/Zip/ZipReader.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/MessagePack/Formatters/CollectionFormatter.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Common/ArchiveType.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Crypto/IBlockCipher.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Archives/Rar/StreamRarArchiveVolume.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/MessagePack/FloatBits.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Lazy.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Compressors/Rar/VM/VMPreparedCommand.cs" />
+    <Compile Include="Assets/GPM/Common/Util/Miscellaneous.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/MessagePack/Formatters/UnsafeBinaryFormatters.cs" />
+    <Compile Include="Assets/GPM/Common/GpmCommon.cs" />
+    <Compile Include="Assets/GPM/Common/Indicator/Scripts/Internal/IndicatorField.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/MessagePack/Resolvers/AttributeFormatterResolver.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/LitJson/JsonSkipAttribute.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Readers/Rar/RarReaderVolume.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Common/Rar/RarCryptoWrapper.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Compressors/Rar/UnpackV1/UnpackFilter.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/MessagePack/StringEncoding.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/MessagePack/Formatters/OldSpecFormatter.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Common/Zip/Headers/ZipHeader.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Compressors/Deflate64/OutputWindow.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Compressors/Rar/VM/VMFlags.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/MessagePack/MessagePackBinary.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/MessagePack/LZ4/Codec/LZ4Codec.Unsafe32.Dirty.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Common/Zip/Headers/SplitHeader.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/IO/CountingWritableSubStream.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/MessagePack/Resolvers/DynamicUnionResolver.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Compressors/Rar/UnpackV1/Decode/PackDef.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Common/Zip/WinzipAesKeySize.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Compressors/PPMd/I1/See2Context.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Readers/IReaderExtractionListener.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Common/SevenZip/CMethodId.cs" />
+    <Compile Include="Assets/GPM/Common/Util/EditorCoroutine.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/IO/StreamingMode.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Compressors/Rar/UnpackV1/UnpackUtility.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Common/Rar/Headers/RarHeader.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Archives/SevenZip/SevenZipArchiveEntry.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Compressors/LZMA/Utilites/IPasswordProvider.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/LitJson/Netstandard15Polyfill.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Common/OptionsBase.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Compressors/Deflate/FlushType.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Compressors/Filters/Filter.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Common/SevenZip/CFileItem.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Common/Zip/StreamingZipFilePart.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Compressors/Xz/ReadOnlyStream.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Compressors/Rar/UnpackV1/UnpackInline.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Compressors/PPMd/H/RarMemBlock.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Common/Zip/Headers/Zip64DirectoryEndLocatorHeader.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/MessagePack/Resolvers/DynamicEnumAsStringResolver.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/MessagePack/Resolvers/CompositeResolver.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Common/SevenZip/CCoderInfo.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Archives/Tar/TarArchive.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Common/Rar/Headers/FileNameDecoder.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Compressors/PPMd/I1/PpmContext.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/MessagePack/Internal/ByteArrayStringHashTable.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Compressors/Deflate/ZlibCodec.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Compressors/Rar/UnpackV2017/PackDef.compress_hpp.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Compressors/BZip2/CBZip2InputStream.cs" />
+    <Compile Include="Assets/GPM/Common/Multilanguage/Internal/MultilanguageUtil.cs" />
+    <Compile Include="Assets/GPM/Common/Net/ManagedCorutine.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Compressors/LZMA/LZ/LzInWindow.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/IO/ReadOnlySubStream.cs" />
+    <Compile Include="Assets/GPM/Common/Compress/Editor/Internal/CompressImplementation.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Common/GZip/GZipEntry.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/MessagePack/Formatters/ForceSizePrimitiveFormatter.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Archives/Rar/FileInfoRarArchiveVolume.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Readers/ReaderProgress.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Compressors/BZip2/BZip2Constants.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Compressors/Deflate/GZipStream.cs" />
+    <Compile Include="Assets/GPM/Common/Multilanguage/Internal/MultilanguageLoader.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Common/IExtractionListener.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Compressors/Deflate64/HuffmanTree.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Compressors/Rar/UnpackV2017/Unpack.rawint_hpp.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/MessagePack/Resolvers/PrimitiveObjectResolver.cs" />
+    <Compile Include="Assets/GPM/Common/Util/GpmJsonMapper.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Common/EntryStream.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Common/SevenZip/SevenZipVolume.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/LitJson/JsonData.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Crypto/CryptoException.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Compressors/Xz/XZIndexRecord.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Compressors/Xz/XZIndex.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Compressors/Deflate/Zlib.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Archives/ArchiveFactory.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Writers/Tar/TarWriterOptions.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/MessagePack/LZ4/Codec/LZ4Codec.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Compressors/Xz/CheckType.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/MessagePack/Internal/ILGeneratorExtensions.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Compressors/Rar/UnpackV1/Decode/RepDecode.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/ReadOnlyCollection.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Common/SevenZip/CStreamSwitch.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Common/Rar/Headers/Flags.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Common/FilePart.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Common/Rar/Headers/CommentHeader.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/LitJson/JsonMockWrapper.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Archives/IArchiveExtractionListener.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Common/PasswordProtectedException.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Common/Zip/ZipCompressionMethod.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Writers/Zip/ZipWriter.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/MessagePack/Internal/ExpressionUtility.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Common/SevenZip/CFolder.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Common/IVolume.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Compressors/Rar/UnpackV2017/Unpack.unpack_cpp.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Compressors/Deflate/Inflate.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Writers/IWriter.cs" />
+    <Compile Include="Assets/GPM/Common/Indicator/Scripts/Internal/LaunchingRequest.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Common/SevenZip/CBindPair.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Archives/IWritableArchiveExtensions.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Common/Zip/Headers/DirectoryEndHeader.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Compressors/PPMd/PpmdStream.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/MessagePack/UnsafeExtensions/UnsafeBlitFormatter.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/MessagePack/Internal/AsymmetricKeyHashTable.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Common/Rar/Headers/ArchiveHeader.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/MessagePack/Resolvers/StandardResolver.cs" />
+    <Compile Include="Assets/GPM/Common/Multilanguage/GpmMultilanguage.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Archives/Zip/ZipArchiveEntry.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Writers/AbstractWriter.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Compressors/Rar/UnpackV2017/Unpack.unpack15_cpp.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Compressors/Rar/RarCRC.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Compressors/Xz/XZReadOnlyStream.cs" />
+    <Compile Include="Assets/GPM/Common/Indicator/Scripts/Internal/Implementation/ICoroutineObject.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Common/Rar/Headers/FileHeader.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Writers/GZip/GZipWriter.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Compressors/LZMA/BitVector.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/LitJson/IJsonWrapper.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Common/GZip/GZipVolume.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Compressors/PPMd/H/PPMContext.cs" />
+    <Compile Include="Assets/GPM/Common/Indicator/Scripts/Internal/BaseIndicator.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Compressors/Rar/UnpackV2017/Unpack.unpack30_cpp.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/MessagePack/Resolvers/OldSpecResolver.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Compressors/Rar/UnpackV1/Decode/Decode.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Compressors/Xz/XZIndexMarkerReachedException.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Common/ExtractionMethods.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Compressors/Rar/UnpackV1/Decode/DistDecode.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Compressors/PPMd/PpmdProperties.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/MessagePack/Nil.cs" />
+    <Compile Include="Assets/GPM/Common/Log/GpmLogger.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/LitJson/JsonException.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Crypto/ICipherParameters.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Compressors/PPMd/H/State.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/MessagePack/Internal/ByteArrayComparer.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Common/MultipartStreamRequiredException.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/MessagePack/Internal/ReflectionExtensions.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/MessagePack/LZ4/Codec/LZ4Codec.Safe64.Dirty.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Compressors/Rar/UnpackV1/Decode/FilterType.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Archives/Rar/RarArchiveEntryFactory.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Archives/AbstractWritableArchive.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Compressors/Rar/RarCrcStream.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Readers/ReaderOptions.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Readers/Tar/TarReader.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Common/Rar/Headers/IRarHeader.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Compressors/LZMA/Bcj2DecoderStream.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Compressors/PPMd/H/StateRef.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Compressors/Rar/UnpackV1/Decode/LowDistDecode.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Compressors/PPMd/I1/ModelRestorationMethod.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Archives/Rar/SeekableFilePart.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/MessagePack/Internal/ThreadsafeTypeKeyHashTable.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Common/Zip/Headers/ZipHeaderType.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Compressors/Rar/IRarUnpack.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/MessagePack/Resolvers/DynamicEnumResolver.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Archives/IArchive.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/MessagePack/Formatters/ValueTupleFormatter.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/MessagePack/Shims/Reflection.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/MessagePack/Unity/UnityResolver.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Compressors/Deflate64/InflaterManaged.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Compressors/Xz/MultiByteIntegers.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Compressors/LZMA/CRC.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Converters/DataConverter.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/MessagePack/Internal/DynamicAssembly.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/MessagePack/LZ4/Codec/LZ4Codec.Helper.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Compressors/Deflate/ZlibConstants.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Compressors/Deflate64/MatchState.cs" />
+    <Compile Include="Assets/GPM/Common/Indicator/Scripts/Internal/Consts/Launching.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Compressors/Rar/UnpackV1/Unpack20.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Common/ArchiveExtractionEventArgs.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Compressors/Rar/VM/VMPreparedOperand.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Compressors/Deflate/ZlibStream.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Common/Rar/RarEntry.cs" />
+    <Compile Include="Assets/GPM/Common/Indicator/Scripts/GpmIndicator.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Compressors/Deflate64/Match.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Compressors/Rar/UnpackV1/PPM/BlockTypes.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Archives/Tar/TarWritableArchiveEntry.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Compressors/LZMA/LzmaBase.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/MessagePack/Formatters/StandardClassLibraryFormatter.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Compressors/Deflate64/FastEncoderStatus.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Buffers/DefaultArrayPoolBucket.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/MessagePack/Attributes.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Archives/Zip/ZipWritableArchiveEntry.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Compressors/LZMA/Utilites/Utils.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Compressors/LZMA/AesDecoderStream.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Compressors/Xz/XZFooter.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Common/Zip/StreamingZipHeaderFactory.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Compressors/Rar/UnpackV1/Decode/LitDecode.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Compressors/BZip2/BZip2Stream.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/MessagePack/MessagePackSerializer.NonGeneric.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Common/ArchiveEncoding.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Archives/Rar/RarArchive.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Readers/ReaderFactory.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Common/ExtractionException.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Common/ArchiveException.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Compressors/CompressionMode.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Common/Zip/Headers/DirectoryEntryHeader.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Common/Zip/WinzipAesEncryptionData.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Compressors/Rar/UnpackV1/Unpack.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Archives/Zip/ZipArchive.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Compressors/Deflate64/DeflateInput.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Compressors/PPMd/PpmdVersion.cs" />
+    <Compile Include="Assets/GPM/Common/Indicator/Scripts/Internal/InAppIndicator.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/IO/RewindableStream.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Archives/SevenZip/SevenZipArchive.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Common/Zip/Headers/IgnoreHeader.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Compressors/LZMA/Log.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Compressors/Rar/VM/VMStandardFilterSignature.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/LitJson/JsonReader.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Common/Rar/RarFilePart.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Common/SevenZip/SevenZipEntry.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Readers/IReaderExtensions.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Compressors/Rar/UnpackV2017/Unpack.unpackinline_cpp.cs" />
+    <Compile Include="Assets/GPM/Common/Multilanguage/Internal/MultilanguageServiceData.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/MessagePack/Internal/FarmHash.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Compressors/Deflate64/InputBuffer.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Common/Zip/WinzipAesCryptoStream.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/MessagePack/IMessagePackSerializationCallbackReceiver.cs" />
+    <Compile Include="Assets/GPM/Common/Multilanguage/Internal/MultilanguageImplementation.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Compressors/Rar/UnpackV2017/Unpack.unpack50_cpp.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Common/Rar/RarCryptoBinaryReader.cs" />
+    <Compile Include="Assets/GPM/Common/ThirdParty/SharpCompress/Common/Zip/PkwareTraditionalCryptoStream.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Assets/GPM/Common/gpm_common.asmdef" />
+    <None Include="Assets/GPM/Common/ThirdParty/SharpCompress/Compressors/Rar/UnpackV2017/notes.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="UnityEngine">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/Managed/UnityEngine/UnityEngine.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.Scripting">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/Managed/UnityEngine/Unity.Scripting.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.AIModule">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/Managed/UnityEngine/UnityEngine.AIModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.ARModule">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/Managed/UnityEngine/UnityEngine.ARModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.AccessibilityModule">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/Managed/UnityEngine/UnityEngine.AccessibilityModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.AdaptivePerformanceModule">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/Managed/UnityEngine/UnityEngine.AdaptivePerformanceModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.AndroidJNIModule">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/Managed/UnityEngine/UnityEngine.AndroidJNIModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.AnimationModule">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/Managed/UnityEngine/UnityEngine.AnimationModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.AssetBundleModule">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/Managed/UnityEngine/UnityEngine.AssetBundleModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.AudioModule">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/Managed/UnityEngine/UnityEngine.AudioModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.ClothModule">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/Managed/UnityEngine/UnityEngine.ClothModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.ContentLoadModule">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/Managed/UnityEngine/UnityEngine.ContentLoadModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.CoreModule">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/Managed/UnityEngine/UnityEngine.CoreModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.CrashReportingModule">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/Managed/UnityEngine/UnityEngine.CrashReportingModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.DSPGraphModule">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/Managed/UnityEngine/UnityEngine.DSPGraphModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.DirectorModule">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/Managed/UnityEngine/UnityEngine.DirectorModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.GIModule">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/Managed/UnityEngine/UnityEngine.GIModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.GameCenterModule">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/Managed/UnityEngine/UnityEngine.GameCenterModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.GraphicsStateCollectionSerializerModule">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/Managed/UnityEngine/UnityEngine.GraphicsStateCollectionSerializerModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.GridModule">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/Managed/UnityEngine/UnityEngine.GridModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.HierarchyCoreModule">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/Managed/UnityEngine/UnityEngine.HierarchyCoreModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.HotReloadModule">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/Managed/UnityEngine/UnityEngine.HotReloadModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.IMGUIModule">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/Managed/UnityEngine/UnityEngine.IMGUIModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.IdentifiersModule">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/Managed/UnityEngine/UnityEngine.IdentifiersModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.ImageConversionModule">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/Managed/UnityEngine/UnityEngine.ImageConversionModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.InputModule">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/Managed/UnityEngine/UnityEngine.InputModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.InputForUIModule">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/Managed/UnityEngine/UnityEngine.InputForUIModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.InputLegacyModule">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/Managed/UnityEngine/UnityEngine.InputLegacyModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.InsightsModule">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/Managed/UnityEngine/UnityEngine.InsightsModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.JSONSerializeModule">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/Managed/UnityEngine/UnityEngine.JSONSerializeModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.LocalizationModule">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/Managed/UnityEngine/UnityEngine.LocalizationModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.MarshallingModule">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/Managed/UnityEngine/UnityEngine.MarshallingModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.MultiplayerModule">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/Managed/UnityEngine/UnityEngine.MultiplayerModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.ParticleSystemModule">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/Managed/UnityEngine/UnityEngine.ParticleSystemModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.PerformanceReportingModule">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/Managed/UnityEngine/UnityEngine.PerformanceReportingModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.PhysicsModule">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/Managed/UnityEngine/UnityEngine.PhysicsModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.Physics2DModule">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/Managed/UnityEngine/UnityEngine.Physics2DModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.PhysicsBackendPhysXModule">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/Managed/UnityEngine/UnityEngine.PhysicsBackendPhysXModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.PropertiesModule">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/Managed/UnityEngine/UnityEngine.PropertiesModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.RenderAs2DModule">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/Managed/UnityEngine/UnityEngine.RenderAs2DModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.RuntimeInitializeOnLoadManagerInitializerModule">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/Managed/UnityEngine/UnityEngine.RuntimeInitializeOnLoadManagerInitializerModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.ScreenCaptureModule">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/Managed/UnityEngine/UnityEngine.ScreenCaptureModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.ScriptingModule">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/Managed/UnityEngine/UnityEngine.ScriptingModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.ShaderVariantAnalyticsModule">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/Managed/UnityEngine/UnityEngine.ShaderVariantAnalyticsModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.SharedInternalsModule">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/Managed/UnityEngine/UnityEngine.SharedInternalsModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.SpriteMaskModule">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/Managed/UnityEngine/UnityEngine.SpriteMaskModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.SpriteShapeModule">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/Managed/UnityEngine/UnityEngine.SpriteShapeModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.StreamingModule">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/Managed/UnityEngine/UnityEngine.StreamingModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.SubstanceModule">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/Managed/UnityEngine/UnityEngine.SubstanceModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.SubsystemsModule">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/Managed/UnityEngine/UnityEngine.SubsystemsModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.TLSModule">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/Managed/UnityEngine/UnityEngine.TLSModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.TerrainModule">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/Managed/UnityEngine/UnityEngine.TerrainModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.TerrainPhysicsModule">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/Managed/UnityEngine/UnityEngine.TerrainPhysicsModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.TextCoreFontEngineModule">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/Managed/UnityEngine/UnityEngine.TextCoreFontEngineModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.TextCoreTextEngineModule">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/Managed/UnityEngine/UnityEngine.TextCoreTextEngineModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.TextRenderingModule">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/Managed/UnityEngine/UnityEngine.TextRenderingModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.TilemapModule">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/Managed/UnityEngine/UnityEngine.TilemapModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.UIModule">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/Managed/UnityEngine/UnityEngine.UIModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.UIElementsModule">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/Managed/UnityEngine/UnityEngine.UIElementsModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.UmbraModule">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/Managed/UnityEngine/UnityEngine.UmbraModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.UnityAnalyticsModule">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/Managed/UnityEngine/UnityEngine.UnityAnalyticsModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.UnityAnalyticsCommonModule">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/Managed/UnityEngine/UnityEngine.UnityAnalyticsCommonModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.UnityConnectModule">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/Managed/UnityEngine/UnityEngine.UnityConnectModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.UnityConsentModule">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/Managed/UnityEngine/UnityEngine.UnityConsentModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.UnityCurlModule">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/Managed/UnityEngine/UnityEngine.UnityCurlModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.UnityWebRequestModule">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/Managed/UnityEngine/UnityEngine.UnityWebRequestModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.UnityWebRequestAssetBundleModule">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/Managed/UnityEngine/UnityEngine.UnityWebRequestAssetBundleModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.UnityWebRequestAudioModule">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/Managed/UnityEngine/UnityEngine.UnityWebRequestAudioModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.UnityWebRequestTextureModule">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/Managed/UnityEngine/UnityEngine.UnityWebRequestTextureModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.UnityWebRequestWWWModule">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/Managed/UnityEngine/UnityEngine.UnityWebRequestWWWModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.VFXModule">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/Managed/UnityEngine/UnityEngine.VFXModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.VRModule">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/Managed/UnityEngine/UnityEngine.VRModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.VectorGraphicsModule">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/Managed/UnityEngine/UnityEngine.VectorGraphicsModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.VehiclesModule">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/Managed/UnityEngine/UnityEngine.VehiclesModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.VideoModule">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/Managed/UnityEngine/UnityEngine.VideoModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.WindModule">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/Managed/UnityEngine/UnityEngine.WindModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.XRModule">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/Managed/UnityEngine/UnityEngine.XRModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEditor">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/Managed/UnityEngine/UnityEditor.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEditor.AccessibilityModule">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/Managed/UnityEngine/UnityEditor.AccessibilityModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEditor.AdaptivePerformanceModule">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/Managed/UnityEngine/UnityEditor.AdaptivePerformanceModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEditor.AssetComplianceModule">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/Managed/UnityEngine/UnityEditor.AssetComplianceModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEditor.BuildProfileModule">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/Managed/UnityEngine/UnityEditor.BuildProfileModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEditor.ClothModule">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/Managed/UnityEngine/UnityEditor.ClothModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEditor.CoreBusinessMetricsModule">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/Managed/UnityEngine/UnityEditor.CoreBusinessMetricsModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEditor.CoreModule">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/Managed/UnityEngine/UnityEditor.CoreModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEditor.DeviceSimulatorModule">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/Managed/UnityEngine/UnityEditor.DeviceSimulatorModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEditor.DiagnosticsModule">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/Managed/UnityEngine/UnityEditor.DiagnosticsModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEditor.EditorToolbarModule">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/Managed/UnityEngine/UnityEditor.EditorToolbarModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEditor.EmbreeModule">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/Managed/UnityEngine/UnityEditor.EmbreeModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEditor.GIModule">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/Managed/UnityEngine/UnityEditor.GIModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEditor.GraphToolkitModule">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/Managed/UnityEngine/UnityEditor.GraphToolkitModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEditor.GraphViewModule">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/Managed/UnityEngine/UnityEditor.GraphViewModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEditor.GraphicsStateCollectionSerializerModule">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/Managed/UnityEngine/UnityEditor.GraphicsStateCollectionSerializerModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEditor.GridAndSnapModule">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/Managed/UnityEngine/UnityEditor.GridAndSnapModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEditor.GridModule">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/Managed/UnityEngine/UnityEditor.GridModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEditor.HierarchyModule">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/Managed/UnityEngine/UnityEditor.HierarchyModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEditor.MediaModule">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/Managed/UnityEngine/UnityEditor.MediaModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEditor.MultiplayerModule">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/Managed/UnityEngine/UnityEditor.MultiplayerModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEditor.Physics2DModule">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/Managed/UnityEngine/UnityEditor.Physics2DModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEditor.PhysicsModule">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/Managed/UnityEngine/UnityEditor.PhysicsModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEditor.PlayModeModule">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/Managed/UnityEngine/UnityEditor.PlayModeModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEditor.PresetsUIModule">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/Managed/UnityEngine/UnityEditor.PresetsUIModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEditor.ProjectAuditorModule">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/Managed/UnityEngine/UnityEditor.ProjectAuditorModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEditor.PropertiesModule">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/Managed/UnityEngine/UnityEditor.PropertiesModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEditor.QuickInstallModule">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/Managed/UnityEngine/UnityEditor.QuickInstallModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEditor.QuickSearchModule">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/Managed/UnityEngine/UnityEditor.QuickSearchModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEditor.SafeModeModule">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/Managed/UnityEngine/UnityEditor.SafeModeModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEditor.SceneTemplateModule">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/Managed/UnityEngine/UnityEditor.SceneTemplateModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEditor.SceneViewModule">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/Managed/UnityEngine/UnityEditor.SceneViewModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEditor.ShaderBuildSettingsModule">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/Managed/UnityEngine/UnityEditor.ShaderBuildSettingsModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEditor.ShaderCompilationModule">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/Managed/UnityEngine/UnityEditor.ShaderCompilationModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEditor.ShaderFoundryModule">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/Managed/UnityEngine/UnityEditor.ShaderFoundryModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEditor.SketchUpModule">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/Managed/UnityEngine/UnityEditor.SketchUpModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEditor.SpriteMaskModule">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/Managed/UnityEngine/UnityEditor.SpriteMaskModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEditor.SpriteShapeModule">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/Managed/UnityEngine/UnityEditor.SpriteShapeModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEditor.SubstanceModule">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/Managed/UnityEngine/UnityEditor.SubstanceModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEditor.TerrainModule">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/Managed/UnityEngine/UnityEditor.TerrainModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEditor.TextCoreFontEngineModule">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/Managed/UnityEngine/UnityEditor.TextCoreFontEngineModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEditor.TextCoreTextEngineModule">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/Managed/UnityEngine/UnityEditor.TextCoreTextEngineModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEditor.TextRenderingModule">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/Managed/UnityEngine/UnityEditor.TextRenderingModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEditor.TilemapModule">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/Managed/UnityEngine/UnityEditor.TilemapModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEditor.TreeModule">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/Managed/UnityEngine/UnityEditor.TreeModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEditor.UIAutomationModule">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/Managed/UnityEngine/UnityEditor.UIAutomationModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEditor.UIBuilderModule">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/Managed/UnityEngine/UnityEditor.UIBuilderModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEditor.UIElementsModule">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/Managed/UnityEngine/UnityEditor.UIElementsModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEditor.UIElementsSamplesModule">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/Managed/UnityEngine/UnityEditor.UIElementsSamplesModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEditor.UIToolkitAuthoringModule">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/Managed/UnityEngine/UnityEditor.UIToolkitAuthoringModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEditor.UmbraModule">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/Managed/UnityEngine/UnityEditor.UmbraModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEditor.UnityConnectModule">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/Managed/UnityEngine/UnityEditor.UnityConnectModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEditor.VFXModule">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/Managed/UnityEngine/UnityEditor.VFXModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEditor.VectorGraphicsModule">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/Managed/UnityEngine/UnityEditor.VectorGraphicsModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEditor.VideoModule">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/Managed/UnityEngine/UnityEditor.VideoModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEditor.XRModule">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/Managed/UnityEngine/UnityEditor.XRModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEditor.Graphs">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/Managed/UnityEditor.Graphs.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEditor.WebGL.Extensions">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/PlaybackEngines/WebGLSupport/UnityEditor.WebGL.Extensions.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEditor.VisionOS.Extensions">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/PlaybackEngines/VisionOSPlayer/UnityEditor.VisionOS.Extensions.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEditor.Android.Extensions">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/PlaybackEngines/AndroidPlayer/UnityEditor.Android.Extensions.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEditor.iOS.Extensions">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/PlaybackEngines/iOSSupport/UnityEditor.iOS.Extensions.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEditor.LinuxStandalone.Extensions">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/PlaybackEngines/LinuxStandaloneSupport/UnityEditor.LinuxStandalone.Extensions.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="TextMateSharpPlastic">
+      <HintPath>Library/PackageCache/com.unity.collab-proxy@0b1559bcd34e/Lib/Editor/TextMateSharp/TextMateSharpPlastic.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="TextMateSharpPlastic.Grammars">
+      <HintPath>Library/PackageCache/com.unity.collab-proxy@0b1559bcd34e/Lib/Editor/TextMateSharp/TextMateSharpPlastic.Grammars.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.VisualScripting.YamlDotNet">
+      <HintPath>Library/PackageCache/com.unity.visualscripting@8bed5ad90189/Editor/VisualScripting.Core/Dependencies/YamlDotNet/Unity.VisualScripting.YamlDotNet.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.Collections.LowLevel.ILSupport">
+      <HintPath>Library/PackageCache/com.unity.collections@5206fceb8dbd/Unity.Collections.LowLevel.ILSupport/Unity.Collections.LowLevel.ILSupport.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="nunit.framework">
+      <HintPath>Library/PackageCache/com.unity.ext.nunit@ec2d0043d6fc/net40/unity-custom/nunit.framework.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="ReportGeneratorMerged">
+      <HintPath>Library/PackageCache/com.unity.testtools.codecoverage@19a841221620/lib/ReportGenerator/ReportGeneratorMerged.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.Plastic.Antlr3.Runtime">
+      <HintPath>Library/PackageCache/com.unity.collab-proxy@0b1559bcd34e/Lib/Editor/Unity.Plastic.Antlr3.Runtime.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="OnigwrapPlastic">
+      <HintPath>Library/PackageCache/com.unity.collab-proxy@0b1559bcd34e/Lib/Editor/TextMateSharp/Onigwrap/OnigwrapPlastic.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.Plastic.Newtonsoft.Json">
+      <HintPath>Library/PackageCache/com.unity.collab-proxy@0b1559bcd34e/Lib/Editor/Unity.Plastic.Newtonsoft.Json.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="log4netPlastic">
+      <HintPath>Library/PackageCache/com.unity.collab-proxy@0b1559bcd34e/Lib/Editor/log4netPlastic.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.VisualScripting.IonicZip">
+      <HintPath>Library/PackageCache/com.unity.visualscripting@8bed5ad90189/Editor/VisualScripting.Core/Dependencies/DotNetZip/Unity.VisualScripting.IonicZip.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.IO.Hashing">
+      <HintPath>Library/PackageCache/com.unity.collections@5206fceb8dbd/Unity.Collections.Tests/System.IO.Hashing/System.IO.Hashing.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="unityplastic">
+      <HintPath>Library/PackageCache/com.unity.collab-proxy@0b1559bcd34e/Lib/Editor/unityplastic.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.VisualScripting.Antlr3.Runtime">
+      <HintPath>Library/PackageCache/com.unity.visualscripting@8bed5ad90189/Runtime/VisualScripting.Flow/Dependencies/NCalc/Unity.VisualScripting.Antlr3.Runtime.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.VisualScripting.TextureAssets">
+      <HintPath>Library/PackageCache/com.unity.visualscripting@8bed5ad90189/Editor/VisualScripting.Core/EditorAssetResources/Unity.VisualScripting.TextureAssets.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Mono.Cecil">
+      <HintPath>Library/PackageCache/com.unity.nuget.mono-cecil@ecb9724e46ff/Mono.Cecil.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe">
+      <HintPath>Library/PackageCache/com.unity.collections@5206fceb8dbd/Unity.Collections.Tests/System.Runtime.CompilerServices.Unsafe/System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEditor.iOS.Extensions.Xcode">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/PlaybackEngines/iOSSupport/UnityEditor.iOS.Extensions.Xcode.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEditor.iOS.Extensions.Common">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/PlaybackEngines/iOSSupport/UnityEditor.iOS.Extensions.Common.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEditor.Apple.Extensions.Common">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/PlaybackEngines/iOSSupport/UnityEditor.Apple.Extensions.Common.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.Android.Types">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/PlaybackEngines/AndroidPlayer/Unity.Android.Types.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.Android.Gradle">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/PlaybackEngines/AndroidPlayer/Unity.Android.Gradle.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEditor.iOS.Extensions.Xcode">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/PlaybackEngines/VisionOSPlayer/UnityEditor.iOS.Extensions.Xcode.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEditor.Apple.Extensions.Common">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/PlaybackEngines/VisionOSPlayer/UnityEditor.Apple.Extensions.Common.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="netstandard">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/NetStandard/ref/2.1.0/netstandard.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Microsoft.Win32.Primitives">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/Microsoft.Win32.Primitives.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.AppContext">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.AppContext.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Buffers">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Buffers.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Collections.Concurrent">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Collections.Concurrent.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Collections.NonGeneric">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Collections.NonGeneric.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Collections.Specialized">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Collections.Specialized.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Collections">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Collections.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.ComponentModel.EventBasedAsync">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.ComponentModel.EventBasedAsync.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.ComponentModel.Primitives">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.ComponentModel.Primitives.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.ComponentModel.TypeConverter">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.ComponentModel.TypeConverter.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.ComponentModel">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.ComponentModel.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Console">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Console.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Data.Common">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Data.Common.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Diagnostics.Contracts">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Diagnostics.Contracts.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Diagnostics.Debug">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Diagnostics.Debug.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Diagnostics.FileVersionInfo">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Diagnostics.FileVersionInfo.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Diagnostics.Process">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Diagnostics.Process.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Diagnostics.StackTrace">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Diagnostics.StackTrace.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Diagnostics.TextWriterTraceListener">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Diagnostics.TextWriterTraceListener.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Diagnostics.Tools">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Diagnostics.Tools.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Diagnostics.TraceSource">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Diagnostics.TraceSource.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Diagnostics.Tracing">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Diagnostics.Tracing.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Drawing.Primitives">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Drawing.Primitives.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Dynamic.Runtime">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Dynamic.Runtime.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Globalization.Calendars">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Globalization.Calendars.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Globalization.Extensions">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Globalization.Extensions.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Globalization">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Globalization.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.IO.Compression.ZipFile">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.IO.Compression.ZipFile.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.IO.Compression">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.IO.Compression.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.IO.FileSystem.DriveInfo">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.IO.FileSystem.DriveInfo.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.IO.FileSystem.Primitives">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.IO.FileSystem.Primitives.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.IO.FileSystem.Watcher">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.IO.FileSystem.Watcher.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.IO.FileSystem">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.IO.FileSystem.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.IO.IsolatedStorage">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.IO.IsolatedStorage.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.IO.MemoryMappedFiles">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.IO.MemoryMappedFiles.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.IO.Pipes">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.IO.Pipes.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.IO.UnmanagedMemoryStream">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.IO.UnmanagedMemoryStream.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.IO">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.IO.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Linq.Expressions">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Linq.Expressions.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Linq.Parallel">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Linq.Parallel.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Linq.Queryable">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Linq.Queryable.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Linq">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Linq.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Memory">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Memory.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Net.Http">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Net.Http.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Net.NameResolution">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Net.NameResolution.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Net.NetworkInformation">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Net.NetworkInformation.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Net.Ping">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Net.Ping.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Net.Primitives">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Net.Primitives.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Net.Requests">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Net.Requests.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Net.Security">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Net.Security.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Net.Sockets">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Net.Sockets.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Net.WebHeaderCollection">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Net.WebHeaderCollection.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Net.WebSockets.Client">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Net.WebSockets.Client.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Net.WebSockets">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Net.WebSockets.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Numerics.Vectors">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Numerics.Vectors.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.ObjectModel">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.ObjectModel.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Reflection.DispatchProxy">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Reflection.DispatchProxy.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Reflection.Emit.ILGeneration">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Reflection.Emit.ILGeneration.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Reflection.Emit.Lightweight">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Reflection.Emit.Lightweight.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Reflection.Emit">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Reflection.Emit.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Reflection.Extensions">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Reflection.Extensions.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Reflection.Primitives">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Reflection.Primitives.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Reflection">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Reflection.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Resources.Reader">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Resources.Reader.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Resources.ResourceManager">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Resources.ResourceManager.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Resources.Writer">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Resources.Writer.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Runtime.CompilerServices.VisualC">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Runtime.CompilerServices.VisualC.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Runtime.Extensions">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Runtime.Extensions.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Runtime.Handles">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Runtime.Handles.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Runtime.InteropServices.RuntimeInformation">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Runtime.InteropServices.RuntimeInformation.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Runtime.InteropServices">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Runtime.InteropServices.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Runtime.Numerics">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Runtime.Numerics.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization.Formatters">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Runtime.Serialization.Formatters.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization.Json">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Runtime.Serialization.Json.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization.Primitives">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Runtime.Serialization.Primitives.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization.Xml">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Runtime.Serialization.Xml.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Runtime">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Runtime.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Security.Claims">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Security.Claims.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.Algorithms">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Security.Cryptography.Algorithms.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.Csp">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Security.Cryptography.Csp.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.Encoding">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Security.Cryptography.Encoding.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.Primitives">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Security.Cryptography.Primitives.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.X509Certificates">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Security.Cryptography.X509Certificates.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Security.Principal">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Security.Principal.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Security.SecureString">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Security.SecureString.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Text.Encoding.Extensions">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Text.Encoding.Extensions.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Text.Encoding">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Text.Encoding.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Text.RegularExpressions">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Text.RegularExpressions.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Threading.Overlapped">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Threading.Overlapped.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Threading.Tasks.Extensions">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Threading.Tasks.Extensions.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Threading.Tasks.Parallel">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Threading.Tasks.Parallel.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Threading.Tasks">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Threading.Tasks.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Threading.Thread">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Threading.Thread.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Threading.ThreadPool">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Threading.ThreadPool.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Threading.Timer">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Threading.Timer.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Threading">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Threading.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.ValueTuple">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.ValueTuple.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Xml.ReaderWriter">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Xml.ReaderWriter.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Xml.XDocument">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Xml.XDocument.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Xml.XPath.XDocument">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Xml.XPath.XDocument.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Xml.XPath">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Xml.XPath.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Xml.XmlDocument">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Xml.XmlDocument.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Xml.XmlSerializer">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/System.Xml.XmlSerializer.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Runtime.InteropServices.WindowsRuntime">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/NetStandard/Extensions/2.0.0/System.Runtime.InteropServices.WindowsRuntime.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.ComponentModel.Composition">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/NetStandard/compat/2.1.0/shims/netfx/System.ComponentModel.Composition.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Core">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/NetStandard/compat/2.1.0/shims/netfx/System.Core.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Data">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/NetStandard/compat/2.1.0/shims/netfx/System.Data.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Drawing">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/NetStandard/compat/2.1.0/shims/netfx/System.Drawing.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.IO.Compression.FileSystem">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/NetStandard/compat/2.1.0/shims/netfx/System.IO.Compression.FileSystem.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Net">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/NetStandard/compat/2.1.0/shims/netfx/System.Net.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Numerics">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/NetStandard/compat/2.1.0/shims/netfx/System.Numerics.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/NetStandard/compat/2.1.0/shims/netfx/System.Runtime.Serialization.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.ServiceModel.Web">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/NetStandard/compat/2.1.0/shims/netfx/System.ServiceModel.Web.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Transactions">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/NetStandard/compat/2.1.0/shims/netfx/System.Transactions.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Web">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/NetStandard/compat/2.1.0/shims/netfx/System.Web.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Windows">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/NetStandard/compat/2.1.0/shims/netfx/System.Windows.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Xml.Linq">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/NetStandard/compat/2.1.0/shims/netfx/System.Xml.Linq.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Xml.Serialization">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/NetStandard/compat/2.1.0/shims/netfx/System.Xml.Serialization.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Xml">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/NetStandard/compat/2.1.0/shims/netfx/System.Xml.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/NetStandard/compat/2.1.0/shims/netfx/System.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="mscorlib">
+      <HintPath>/home/bwilcutt/Unity/Hub/Editor/6000.4.4f1/Editor/Data/NetStandard/compat/2.1.0/shims/netfx/mscorlib.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEditor.UI">
+      <HintPath>Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.UI">
+      <HintPath>Library/ScriptAssemblies/UnityEngine.UI.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+  </ItemGroup>
+  <Import Project="Sdk.targets" Sdk="Microsoft.NET.Sdk" />
+  <ItemGroup>
+    <ProjectCapability Remove="LaunchProfiles" />
+    <ProjectCapability Remove="SharedProjectReferences" />
+    <ProjectCapability Remove="ReferenceManagerSharedProjects" />
+    <ProjectCapability Remove="ReferenceManagerProjects" />
+    <ProjectCapability Remove="COMReferences" />
+    <ProjectCapability Remove="ReferenceManagerCOM" />
+    <ProjectCapability Remove="AssemblyReferences" />
+    <ProjectCapability Remove="ReferenceManagerAssemblies" />
+  </ItemGroup>
+</Project>

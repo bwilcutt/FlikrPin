@@ -56,5 +56,5 @@
         "temp/": true,
         "Temp/": true
     },
-    "dotnet.defaultSolution": "AlphaARTest1.sln"
+    "dotnet.defaultSolution": "FlikrPin.slnx"
 }

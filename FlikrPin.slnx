@@ -1,0 +1,14 @@
+﻿<Solution>
+  <Project Path="gpm_common.csproj" />
+  <Project Path="Assembly-CSharp.csproj" />
+  <Project Path="LeanCommon.csproj" />
+  <Project Path="NativeFilePicker.Runtime.csproj" />
+  <Project Path="gpm_manager.csproj" />
+  <Project Path="LeanTouch.csproj" />
+  <Project Path="NativeCamera.Runtime.csproj" />
+  <Project Path="CW.Common.csproj" />
+  <Project Path="NativeFilePicker.Editor.csproj" />
+  <Project Path="NativeGallery.Runtime.csproj" />
+  <Project Path="NativeGallery.Editor.csproj" />
+  <Project Path="NativeCamera.Editor.csproj" />
+</Solution>

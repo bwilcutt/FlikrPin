@@ -7,7 +7,6 @@ using Touch = UnityEngine.InputSystem.EnhancedTouch.Touch;
 
 /// <summary>
 /// Swipe left to hide the sidebar, swipe right from left edge to show it.
-/// Uses the New Input System (UnityEngine.InputSystem).
 /// Attach to SidebarPanel.
 /// </summary>
 [RequireComponent(typeof(RectTransform))]
@@ -22,12 +21,14 @@ public class SidebarController : MonoBehaviour
     public float swipeMaxDeltaY = 200f;
     public float edgeSwipeWidth = 40f;
 
+    [Header("UI Windows")]
+    public GameObject postTypeWindow;
+    public GameObject textInputWindow;
+
     private RectTransform rt;
     private float panelWidth;
     private bool isVisible   = true;
     private bool isAnimating = false;
-
-    // Mouse tracking
     private Vector2 mouseStart;
     private bool mouseTracking = false;
 
@@ -37,7 +38,6 @@ public class SidebarController : MonoBehaviour
         Canvas.ForceUpdateCanvases();
         panelWidth = rt.rect.width;
         if (panelWidth <= 0f) panelWidth = 142f;
-        Debug.Log($"SidebarController Awake — panelWidth={panelWidth}");
     }
 
     void OnEnable()
@@ -56,7 +56,12 @@ public class SidebarController : MonoBehaviour
         HandleTouch();
     }
 
-    // ── Mouse (editor / standalone) ──────────────────────────────────────
+    bool IsAnyWindowOpen()
+    {
+        if (postTypeWindow  != null && postTypeWindow.activeSelf)  return true;
+        if (textInputWindow != null && textInputWindow.activeSelf) return true;
+        return false;
+    }
 
     void HandleMouse()
     {
@@ -66,87 +71,50 @@ public class SidebarController : MonoBehaviour
 
         if (mouse.leftButton.wasPressedThisFrame)
         {
-            mouseStart   = mouse.position.ReadValue();
+            mouseStart    = mouse.position.ReadValue();
             mouseTracking = true;
-            Debug.Log($"Mouse down at {mouseStart}");
         }
 
         if (mouseTracking && mouse.leftButton.wasReleasedThisFrame)
         {
             Vector2 delta = mouse.position.ReadValue() - mouseStart;
-            Debug.Log($"Mouse up — delta={delta}");
             mouseTracking = false;
             EvaluateSwipe(delta, mouseStart);
         }
     }
 
-    // ── Touch ────────────────────────────────────────────────────────────
-
-[Header("UI Windows")]
-public GameObject postTypeWindow;
-public GameObject textInputWindow;
-
-bool IsAnyWindowOpen()
-{
-    if (postTypeWindow != null && postTypeWindow.activeSelf) return true;
-    if (textInputWindow != null && textInputWindow.activeSelf) return true;
-    return false;
-}
-
-void HandleTouch()
-{
-    if (IsAnyWindowOpen()) return;
-
-    foreach (var touch in Touch.activeTouches)
+    void HandleTouch()
     {
-        if (touch.phase == UnityEngine.InputSystem.TouchPhase.Began)
+        if (IsAnyWindowOpen()) return;
+
+        foreach (var touch in Touch.activeTouches)
         {
-            mouseStart    = touch.startScreenPosition;
-            mouseTracking = true;
-            Debug.Log($"Touch began at {mouseStart}");
-        }
-        else if (mouseTracking &&
-                 (touch.phase == UnityEngine.InputSystem.TouchPhase.Ended ||
-                  touch.phase == UnityEngine.InputSystem.TouchPhase.Canceled))
-        {
-            Vector2 delta = touch.screenPosition - mouseStart;
-            Debug.Log($"Touch ended — delta={delta}");
-            mouseTracking = false;
-            EvaluateSwipe(delta, mouseStart);
+            if (touch.phase == UnityEngine.InputSystem.TouchPhase.Began)
+            {
+                mouseStart    = touch.startScreenPosition;
+                mouseTracking = true;
+            }
+            else if (mouseTracking &&
+                     (touch.phase == UnityEngine.InputSystem.TouchPhase.Ended ||
+                      touch.phase == UnityEngine.InputSystem.TouchPhase.Canceled))
+            {
+                Vector2 delta = touch.screenPosition - mouseStart;
+                mouseTracking = false;
+                EvaluateSwipe(delta, mouseStart);
+            }
         }
     }
-}
-    // ── Swipe logic ──────────────────────────────────────────────────────
 
     void EvaluateSwipe(Vector2 delta, Vector2 startPos)
     {
-        Debug.Log($"EvaluateSwipe: deltaX={delta.x:F1} deltaY={delta.y:F1} " +
-                  $"startX={startPos.x:F1} isVisible={isVisible}");
-
-        if (Mathf.Abs(delta.y) > swipeMaxDeltaY)
-        {
-            Debug.Log("Rejected — too vertical");
-            return;
-        }
-        if (Mathf.Abs(delta.x) < swipeMinDeltaX)
-        {
-            Debug.Log("Rejected — too short");
-            return;
-        }
+        if (Mathf.Abs(delta.y) > swipeMaxDeltaY) return;
+        if (Mathf.Abs(delta.x) < swipeMinDeltaX) return;
 
         if (delta.x < 0 && isVisible)
-        {
-            Debug.Log("Hiding sidebar.");
             Hide();
-        }
         else if (delta.x > 0 && !isVisible && startPos.x <= edgeSwipeWidth)
-        {
-            Debug.Log("Showing sidebar.");
             Show();
-        }
     }
-
-    // ── Public API ───────────────────────────────────────────────────────
 
     public void Show()   => SetVisible(true);
     public void Hide()   => SetVisible(false);
@@ -179,6 +147,5 @@ void HandleTouch()
 
         rt.anchoredPosition = new Vector2(endX, rt.anchoredPosition.y);
         isAnimating = false;
-        Debug.Log($"Slide complete — x={rt.anchoredPosition.x}");
     }
 }
