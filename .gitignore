@@ -20,7 +20,6 @@ ExportedObj/
 *.pidb
 *.pdb
 sysinfo.txt
-*.apk
 *.unitypackage
 *.unityproj
 crashlytics-build.properties
