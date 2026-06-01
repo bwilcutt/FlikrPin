@@ -1,32 +1,43 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Video;
 using UnityEngine.XR.ARFoundation;
 using UnityEngine.XR.ARSubsystems;
-using System.Collections.Generic;
+using UnityEngine.EventSystems;
 using TMPro;
 
 public class PostTypeWindow : MonoBehaviour
 {
     [Header("References")]
-    public GPS gps;
-    public JSONReader jsonReader;
-    public TextInputWindow textInputWindow;
+    public TextInputWindow    textInputWindow;
     public PlacePrefabInWorld placer;
     public StickerPickerWindow stickerPickerWindow;
-    public PlaceStickerTag placeStickerTag;
+    public PlaceStickerTag    placeStickerTag;
+
+    [Header("Target Icon")]
+    public GameObject targetIcon;
 
     [Header("Buttons")]
-    public Button btnText;       // Top-left    — speech bubble
-    public Button btnFriends;    // Top-right   — people icon
-    public Button btnSticker;    // Center      — sticker/heart icon
-    public Button btnVideo;      // Bottom-left — movie camera
-    public Button btnMedia;      // Bottom-right — camera + photo (gallery)
+    public Button btnText;
+    public Button btnFriends;
+    public Button btnSticker;
+    public Button btnVideo;
+    public Button btnMedia;
+    public Button btnScavenger;
 
-    private Vector3 dropPosition;
+    [Header("Audio")]
+    public AudioClip clickSound;
+
+    [Header("Fade Settings")]
+    public float fadeDuration = 0.25f;
+
+    private CanvasGroup  canvasGroup;
+    private AudioSource  audioSource;
+    private Vector3      dropPosition;
     private ARRaycastManager arRaycastManager;
-
-    // ── Lifecycle ────────────────────────────────────────────────────────────
+    private bool         isVisible = false;
 
     void Awake()
     {
@@ -35,56 +46,108 @@ public class PostTypeWindow : MonoBehaviour
 
         arRaycastManager = FindAnyObjectByType<ARRaycastManager>();
 
-        Debug.Log("Awake — placer: " + (placer != null) +
-                  ", prefab: " + (placer?.postPicturePrefab != null ? placer.postPicturePrefab.name : "NULL") +
-                  ", arRaycastManager: " + (arRaycastManager != null));
+        canvasGroup = GetComponent<CanvasGroup>();
+        if (canvasGroup == null)
+            canvasGroup = gameObject.AddComponent<CanvasGroup>();
 
-        WireButtons(); // Awake fires even when GameObject is inactive
+        audioSource = GetComponent<AudioSource>();
+        if (audioSource == null)
+            audioSource = gameObject.AddComponent<AudioSource>();
+        audioSource.playOnAwake = false;
+        if (clickSound != null)
+            audioSource.clip = clickSound;
+
+        canvasGroup.alpha          = 0f;
+        canvasGroup.interactable   = false;
+        canvasGroup.blocksRaycasts = false;
+
+        WireButtons();
     }
 
     void Start()
     {
-        // GameObject starts hidden — shown only via Show()
-    }
+        if (targetIcon != null)
+        {
+            Button tb = targetIcon.GetComponent<Button>();
+            if (tb == null) tb = targetIcon.AddComponent<Button>();
+            tb.onClick.AddListener(OnTargetIconPressed);
+        }
 
-    // ── Button wiring ────────────────────────────────────────────────────────
+        // Pre-warm sticker picker so copy finishes before first tap
+        if (stickerPickerWindow != null)
+            stickerPickerWindow.Preload();
+    }
 
     void WireButtons()
     {
-    Debug.Log("WireButtons called!");
-    Debug.Log("btnText is: " + (btnText != null ? "assigned" : "NULL"));
-    Debug.Log("btnFriends is: " + (btnFriends != null ? "assigned" : "NULL"));
-    Debug.Log("btnSticker is: " + (btnSticker != null ? "assigned" : "NULL"));
-    Debug.Log("btnVideo is: " + (btnVideo != null ? "assigned" : "NULL"));
-    Debug.Log("btnMedia is: " + (btnMedia != null ? "assigned" : "NULL"));    
-        if (btnText    != null) btnText.onClick.AddListener(OnTextSelected);
-        if (btnFriends != null) btnFriends.onClick.AddListener(OnFriendsSelected);
-        if (btnSticker != null) btnSticker.onClick.AddListener(OnStickerSelected);
-        if (btnVideo   != null) btnVideo.onClick.AddListener(OnVideoSelected);
-        if (btnMedia   != null) btnMedia.onClick.AddListener(OnMediaSelected);
+        if (btnText      != null) { btnText.onClick.AddListener(OnTextSelected);           AddPointerDownSound(btnText.gameObject); }
+        if (btnFriends   != null) { btnFriends.onClick.AddListener(OnFriendsSelected);     AddPointerDownSound(btnFriends.gameObject); }
+        if (btnSticker   != null) { btnSticker.onClick.AddListener(OnStickerSelected);     AddPointerDownSound(btnSticker.gameObject); }
+        if (btnVideo     != null) { btnVideo.onClick.AddListener(OnVideoSelected);         AddPointerDownSound(btnVideo.gameObject); }
+        if (btnMedia     != null) { btnMedia.onClick.AddListener(OnMediaSelected);         AddPointerDownSound(btnMedia.gameObject); }
+        if (btnScavenger != null) { btnScavenger.onClick.AddListener(OnScavengerSelected); AddPointerDownSound(btnScavenger.gameObject); }
     }
 
-    // ── Show / Hide ──────────────────────────────────────────────────────────
+    void AddPointerDownSound(GameObject go)
+    {
+        var trigger = go.GetComponent<EventTrigger>() ?? go.AddComponent<EventTrigger>();
+        var entry = new EventTrigger.Entry { eventID = EventTriggerType.PointerDown };
+        entry.callback.AddListener((_) => PlayClick());
+        trigger.triggers.Add(entry);
+    }
 
-    // Called by whatever triggers the post type window (e.g. a long press).
-    // Captures the AR world position before any native UI (gallery/camera)
-    // takes over and Unity loses focus.
+    void OnTargetIconPressed()
+    {
+        if (!isVisible) Show(Vector3.zero);
+        else            Hide();
+    }
+
+    public void Show()              { Show(Vector3.zero); }
+
     public void Show(Vector3 fallbackPosition)
     {
         dropPosition = GetARDropPosition(fallbackPosition);
-        Debug.Log("PostTypeWindow.Show() — dropPosition set to: " + dropPosition);
-        gameObject.SetActive(true);
+        Debug.Log("PostTypeWindow.Show() — dropPosition: " + dropPosition);
+
+        isVisible = true;
+        if (targetIcon != null) targetIcon.SetActive(false);
+
+        StopAllCoroutines();
+        StartCoroutine(Fade(0f, 1f, true));
     }
 
     public void Hide()
     {
-        gameObject.SetActive(false);
+        isVisible = false;
+        StopAllCoroutines();
+        StartCoroutine(Fade(1f, 0f, false));
     }
 
-    // ── AR drop position ─────────────────────────────────────────────────────
+    IEnumerator Fade(float from, float to, bool interactive)
+    {
+        if (interactive)
+        {
+            canvasGroup.interactable   = true;
+            canvasGroup.blocksRaycasts = true;
+        }
 
-    // Raycasts against AR planes from screen center.
-    // Falls back to 2 m in front of the camera if no plane is hit.
+        float elapsed = 0f;
+        while (elapsed < fadeDuration)
+        {
+            elapsed += Time.deltaTime;
+            canvasGroup.alpha = Mathf.Lerp(from, to, elapsed / fadeDuration);
+            yield return null;
+        }
+        canvasGroup.alpha = to;
+
+        if (!interactive)
+        {
+            canvasGroup.interactable   = false;
+            canvasGroup.blocksRaycasts = false;
+            if (targetIcon != null) targetIcon.SetActive(true);
+        }
+    }
+
     Vector3 GetARDropPosition(Vector3 fallback)
     {
         if (arRaycastManager != null)
@@ -94,16 +157,20 @@ public class PostTypeWindow : MonoBehaviour
 
             if (arRaycastManager.Raycast(screenCenter, hits, TrackableType.PlaneWithinPolygon))
             {
-                Debug.Log("AR plane hit — using raycast position.");
+                Debug.Log("PostTypeWindow: AR plane hit.");
                 return hits[0].pose.position;
             }
         }
 
-        Debug.Log("No AR plane hit — using camera forward fallback.");
+        Debug.Log("PostTypeWindow: No AR plane — using camera forward fallback.");
         return Camera.main.transform.position + Camera.main.transform.forward * 2f;
     }
 
-    // ── Button handlers ──────────────────────────────────────────────────────
+    void PlayClick()
+    {
+        if (audioSource != null && clickSound != null)
+            audioSource.Play();
+    }
 
     void OnTextSelected()
     {
@@ -118,18 +185,16 @@ public class PostTypeWindow : MonoBehaviour
 
     void OnFriendsSelected()
     {
-        Debug.Log("PostTypeWindow: Invite Friends selected.");
+        Debug.Log("PostTypeWindow: Friends selected.");
         Hide();
-
-        // TODO: open friends / invite panel
     }
 
-    void OnStickerSelected()
+    public void OnStickerSelected()
     {
         Debug.Log("PostTypeWindow: Sticker selected.");
         Hide();
 
-        if (stickerPickerWindow != null)
+        if (stickerPickerWindow != null && placeStickerTag != null)
         {
             stickerPickerWindow.OnStickerSelected = (texture) =>
             {
@@ -139,7 +204,10 @@ public class PostTypeWindow : MonoBehaviour
         }
         else
         {
-            Debug.LogWarning("PostTypeWindow: stickerPickerWindow is not assigned.");
+            if (stickerPickerWindow == null)
+                Debug.LogWarning("PostTypeWindow: stickerPickerWindow is not assigned.");
+            if (placeStickerTag == null)
+                Debug.LogWarning("PostTypeWindow: placeStickerTag is not assigned.");
         }
     }
 
@@ -148,25 +216,19 @@ public class PostTypeWindow : MonoBehaviour
         Debug.Log("PostTypeWindow: Video selected.");
         Hide();
 
-        // dropPosition already captured in Show() before the camera opens
         NativeCamera.RecordVideo((path) =>
         {
-            if (path == null)
-            {
-                Debug.Log("Video recording cancelled.");
-                return;
-            }
+            if (path == null) { Debug.Log("Video recording cancelled."); return; }
             Debug.Log("Video recorded: " + path);
             PlaceVideoTag(path);
         }, NativeCamera.Quality.High, 30);
     }
 
-    void OnMediaSelected()
+    public void OnMediaSelected()
     {
-        Debug.Log("PostTypeWindow: Media (gallery) selected.");
+        Debug.Log("PostTypeWindow: Media selected.");
         Hide();
 
-        // dropPosition already captured in Show() before the gallery opens
         GalleryPicker.Instance.OpenGallery((texture) =>
         {
             Debug.Log("Media picked, placing tag at: " + dropPosition);
@@ -174,32 +236,33 @@ public class PostTypeWindow : MonoBehaviour
         });
     }
 
-    // ── Place helpers ────────────────────────────────────────────────────────
+    void OnScavengerSelected()
+    {
+        Debug.Log("PostTypeWindow: Scavenger selected.");
+        Hide();
+    }
 
     void PlacePictureTag(Texture2D texture)
     {
-        if (placer == null)               { Debug.LogError("PostTypeWindow: placer is null!"); return; }
-        if (placer.postPicturePrefab == null) { Debug.LogError("PostTypeWindow: postPicturePrefab is null!"); return; }
+        if (placer == null)                   { Debug.LogError("placer is null!");             return; }
+        if (placer.postPicturePrefab == null) { Debug.LogError("postPicturePrefab is null!"); return; }
 
         GameObject instance = Instantiate(placer.postPicturePrefab, dropPosition, Quaternion.identity);
 
-        // Apply texture to image quad
         Transform imageTransform = instance.transform.Find("image");
         if (imageTransform != null)
         {
             Renderer rend = imageTransform.GetComponent<Renderer>();
-            if (rend != null)
-                rend.material.mainTexture = texture;
+            if (rend != null) rend.material.mainTexture = texture;
         }
 
-        // Timestamp — positioned just below the image quad
         Transform timestampTransform = instance.transform.Find("timestamp");
         if (timestampTransform != null)
         {
             TextMeshPro tmp = timestampTransform.GetComponent<TextMeshPro>();
             if (tmp != null)
             {
-                tmp.text = System.DateTime.Now.ToString("MMM dd, yyyy hh:mm tt");
+                tmp.text      = System.DateTime.Now.ToString("MMM dd, yyyy hh:mm tt");
                 tmp.alignment = TextAlignmentOptions.Center;
             }
 
@@ -210,13 +273,11 @@ public class PostTypeWindow : MonoBehaviour
 
     void PlaceVideoTag(string videoPath)
     {
-        if (placer == null)               { Debug.LogError("PostTypeWindow: placer is null!"); return; }
-        if (placer.postVideoPrefab == null)   { Debug.LogError("PostTypeWindow: postVideoPrefab is null!"); return; }
+        if (placer == null)                { Debug.LogError("placer is null!");           return; }
+        if (placer.postVideoPrefab == null){ Debug.LogError("postVideoPrefab is null!"); return; }
 
-        Debug.Log("PlaceVideoTag — instantiating at: " + dropPosition + ", path: " + videoPath);
         GameObject instance = Instantiate(placer.postVideoPrefab, dropPosition, Quaternion.identity);
 
-        // Prefer VideoTag component on root; fall back to VideoPlayer on "video" child
         VideoTag videoTag = instance.GetComponent<VideoTag>();
         if (videoTag != null)
         {
@@ -228,16 +289,12 @@ public class PostTypeWindow : MonoBehaviour
             if (videoTransform != null)
             {
                 VideoPlayer vp = videoTransform.GetComponent<VideoPlayer>();
-                if (vp != null)
-                    vp.url = "file://" + videoPath;
+                if (vp != null) vp.url = "file://" + videoPath;
             }
             else
-            {
                 Debug.LogWarning("PlaceVideoTag: no 'video' child found on postVideoPrefab.");
-            }
         }
 
-        // Timestamp
         Transform timestampTransform = instance.transform.Find("timestamp");
         if (timestampTransform != null)
         {

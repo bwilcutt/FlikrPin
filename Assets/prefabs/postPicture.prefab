@@ -175,7 +175,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -8898435555121906854, guid: 618f220b17723e296a2b596345913ad9, type: 2}
+  - {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -221,9 +221,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Sample text
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 618f220b17723e296a2b596345913ad9, type: 2}
-  m_sharedMaterial: {fileID: -8898435555121906854, guid: 618f220b17723e296a2b596345913ad9,
-    type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -305,7 +304,6 @@ GameObject:
   m_Component:
   - component: {fileID: 6644511086783584313}
   - component: {fileID: 7830825665247416685}
-  - component: {fileID: 5733756686362496976}
   m_Layer: 0
   m_Name: postPicture
   m_TagString: Untagged
@@ -350,22 +348,10 @@ MonoBehaviour:
   postType: 0
   postId: 
   ownerId: 
+  mediaType: 
+  mediaUrl: 
+  previewUrl: 
+  mediaSource: 
+  message: 
+  stickerIndex: 0
   timestampText: {fileID: 0}
---- !u!114 &5733756686362496976
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5423657603071356314}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f029ae6088fe4235481a3f43ee101252, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::LongPressDelete
-  holdDuration: 3
-  confirmationPanel: {fileID: 0}
-  yesButton: {fileID: 0}
-  noButton: {fileID: 0}
-  postId: 
-  ownerId: 

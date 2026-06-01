@@ -1,19 +1,17 @@
 using UnityEngine;
+using TMPro;
 
 /// <summary>
-/// Instantiates a sticker prefab at a world position,
-/// applies the chosen texture, and sets it up as a
-/// billboard PostTag.
+/// Instantiates the postSticker prefab at a world position,
+/// applies the chosen texture, and configures it as a
+/// billboard PostTag with no border.
 /// </summary>
 public class PlaceStickerTag : MonoBehaviour
 {
     [Header("References")]
-    public GameObject stickerPrefab;    // Prefab with a quad Renderer + PostTag component
-    public PlacePrefabInWorld placer;   // Used to get drop position if needed
+    public GameObject stickerPrefab;  // postSticker prefab
+    public Material   stickerMaterial; // Unlit/Transparent material — assign in Inspector
 
-    /// <summary>
-    /// Place a sticker at the given world position with the given texture.
-    /// </summary>
     public void PlaceSticker(Texture2D texture, Vector3 worldPosition)
     {
         if (stickerPrefab == null)
@@ -28,48 +26,55 @@ public class PlaceStickerTag : MonoBehaviour
             return;
         }
 
-        // Instantiate at the drop position
-        GameObject instance = Instantiate(stickerPrefab, worldPosition, Quaternion.identity);
+        // Instantiate flat on ground — rotate 90 degrees around X axis
+        Quaternion flatRotation = Quaternion.Euler(90f, 0f, 0f);
+        GameObject instance = Instantiate(stickerPrefab, worldPosition, flatRotation);
         instance.name = "StickerTag_" + texture.name;
 
-        // Apply texture — look for a Renderer on the root or a child named "image"
+        // Find renderer — try root first, then child named "sticker"
         Renderer rend = instance.GetComponent<Renderer>();
         if (rend == null)
         {
-            Transform imageChild = instance.transform.Find("image");
-            if (imageChild != null)
-                rend = imageChild.GetComponent<Renderer>();
+            Transform stickerChild = instance.transform.Find("sticker");
+            if (stickerChild != null)
+                rend = stickerChild.GetComponent<Renderer>();
         }
 
         if (rend != null)
         {
-            // Keep natural aspect ratio like a picture tag
+            // Preserve natural aspect ratio
             float ratio = (float)texture.height / (float)texture.width;
             instance.transform.localScale = new Vector3(1f, ratio, 1f);
-            rend.material.mainTexture = texture;
+
+            // Apply texture — use Unlit/Transparent so PNG alpha works
+            Material mat = stickerMaterial != null
+                ? new Material(stickerMaterial)
+                : new Material(Shader.Find("Unlit/Transparent"));
+
+            mat.mainTexture = texture;
+            // Disable backface culling so sticker is visible from both sides
+            mat.SetInt("_Cull", (int)UnityEngine.Rendering.CullMode.Off);
+            rend.material   = mat;
         }
         else
         {
-            Debug.LogWarning("PlaceStickerTag: No Renderer found on stickerPrefab or its 'image' child.");
+            Debug.LogWarning("PlaceStickerTag: No Renderer found on stickerPrefab.");
         }
 
-        // Ensure PostTag is set to Sticker type and billboard mode
+        // Disable PostTag so sticker keeps its dropped orientation
         PostTag postTag = instance.GetComponent<PostTag>();
         if (postTag != null)
-        {
-            postTag.postType = PostTag.PostType.Sticker;
-            postTag.isFlat = false;  // billboard, not flat on ground
-        }
+            postTag.enabled = false;
 
-        // Set timestamp if present
+        // Set timestamp
         Transform timestamp = instance.transform.Find("timestamp");
         if (timestamp != null)
         {
-            TMPro.TextMeshPro tmp = timestamp.GetComponent<TMPro.TextMeshPro>();
+            TextMeshPro tmp = timestamp.GetComponent<TextMeshPro>();
             if (tmp != null)
                 tmp.text = System.DateTime.Now.ToString("MMM dd, yyyy hh:mm tt");
         }
 
-        Debug.Log("PlaceStickerTag: Placed sticker '" + texture.name + "' at " + worldPosition);
+        Debug.Log("PlaceStickerTag: Placed '" + texture.name + "' at " + worldPosition);
     }
 }
