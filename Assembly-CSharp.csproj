@@ -78,7 +78,6 @@
     <Compile Include="Assets/Scripts/PostTag.cs" />
     <Compile Include="Assets/Scripts/Billboard.cs" />
     <Compile Include="Assets/Scripts/ActivateButton.cs" />
-    <Compile Include="Assets/Scripts/CompassController.cs" />
     <Compile Include="Assets/Scripts/SettingsPage.cs" />
     <Compile Include="Assets/Scripts/ChangePanel.cs" />
     <Compile Include="Assets/Scripts/MyPostOptions.cs" />
@@ -96,6 +95,7 @@
     <Compile Include="Assets/Scripts/ProfileSetup.cs" />
     <Compile Include="Assets/Scripts/PlacePrefabInWorld.cs" />
     <Compile Include="Assets/Scripts/SaveUsername.cs" />
+    <Compile Include="Assets/Scripts/CompassBar.cs" />
     <Compile Include="Assets/Scripts/VideoTag.cs" />
     <Compile Include="Assets/Scripts/CameraCapture.cs" />
     <Compile Include="Assets/GoogleSignIn/Impl/GoogleSignInImpl.cs" />
