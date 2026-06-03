@@ -3,7 +3,7 @@
     "m_SelectedProcess": {
         "deviceId": "R5GYC4FF9PP",
         "name": "com.FlikrPin.FlikrPin",
-        "processId": 28721,
+        "processId": 4893,
         "exited": false
     },
     "m_SelectedPriority": 0,
@@ -493,6 +493,90 @@
             "name": "com.FlikrPin.FlikrPin",
             "processId": 28721,
             "exited": false
+        },
+        {
+            "deviceId": "R5GYC4FF9PP",
+            "name": "com.FlikrPin.FlikrPin",
+            "processId": 24655,
+            "exited": false
+        },
+        {
+            "deviceId": "R5GYC4FF9PP",
+            "name": "com.FlikrPin.FlikrPin",
+            "processId": 28524,
+            "exited": false
+        },
+        {
+            "deviceId": "R5GYC4FF9PP",
+            "name": "com.FlikrPin.FlikrPin",
+            "processId": 13222,
+            "exited": false
+        },
+        {
+            "deviceId": "R5GYC4FF9PP",
+            "name": "com.FlikrPin.FlikrPin",
+            "processId": 17812,
+            "exited": false
+        },
+        {
+            "deviceId": "R5GYC4FF9PP",
+            "name": "com.FlikrPin.FlikrPin",
+            "processId": 28213,
+            "exited": false
+        },
+        {
+            "deviceId": "R5GYC4FF9PP",
+            "name": "com.FlikrPin.FlikrPin",
+            "processId": 30925,
+            "exited": false
+        },
+        {
+            "deviceId": "R5GYC4FF9PP",
+            "name": "com.FlikrPin.FlikrPin",
+            "processId": 32262,
+            "exited": false
+        },
+        {
+            "deviceId": "R5GYC4FF9PP",
+            "name": "com.FlikrPin.FlikrPin",
+            "processId": 4652,
+            "exited": false
+        },
+        {
+            "deviceId": "R5GYC4FF9PP",
+            "name": "com.FlikrPin.FlikrPin",
+            "processId": 10421,
+            "exited": false
+        },
+        {
+            "deviceId": "R5GYC4FF9PP",
+            "name": "com.FlikrPin.FlikrPin",
+            "processId": 24320,
+            "exited": false
+        },
+        {
+            "deviceId": "R5GYC4FF9PP",
+            "name": "com.FlikrPin.FlikrPin",
+            "processId": 29370,
+            "exited": false
+        },
+        {
+            "deviceId": "R5GYC4FF9PP",
+            "name": "com.FlikrPin.FlikrPin",
+            "processId": 2157,
+            "exited": false
+        },
+        {
+            "deviceId": "R5GYC4FF9PP",
+            "name": "com.FlikrPin.FlikrPin",
+            "processId": 16276,
+            "exited": false
+        },
+        {
+            "deviceId": "R5GYC4FF9PP",
+            "name": "com.FlikrPin.FlikrPin",
+            "processId": 4893,
+            "exited": false
         }
     ],
     "m_Tags": {
@@ -549,7 +633,7 @@
         "AutoCapture": true
     },
     "m_FilterOptions": {
-        "m_Filter": "sticker",
+        "m_Filter": "",
         "m_UseRegularExpressions": false,
         "m_MatchCase": false
     },

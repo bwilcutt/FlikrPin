@@ -97,6 +97,7 @@
     <Compile Include="Assets/Scripts/PlacePrefabInWorld.cs" />
     <Compile Include="Assets/Scripts/SaveUsername.cs" />
     <Compile Include="Assets/Scripts/VideoTag.cs" />
+    <Compile Include="Assets/Scripts/CameraCapture.cs" />
     <Compile Include="Assets/GoogleSignIn/Impl/GoogleSignInImpl.cs" />
     <Compile Include="Assets/Scripts/LikeAPost.cs" />
     <Compile Include="Assets/Scripts/SelectPost.cs" />

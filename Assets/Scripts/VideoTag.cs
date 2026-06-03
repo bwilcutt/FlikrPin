@@ -38,9 +38,15 @@ void OnVideoPrepared(VideoPlayer vp)
         // Apply to the video quad child, not the root (root handles distance scaling)
         Transform videoQuad = transform.Find("video");
         if (videoQuad != null)
-            videoQuad.localScale = new Vector3(x, y, 1f);
+        {
+            videoQuad.localScale    = new Vector3(x, y, 1f);
+            videoQuad.localRotation = Quaternion.Euler(0f, 0f, 90f);
+        }
         else
-            transform.localScale = new Vector3(x, y, 1f); // fallback
+        {
+            transform.localScale    = new Vector3(x, y, 1f); // fallback
+            transform.localRotation = Quaternion.Euler(0f, 0f, 90f);
+        }
     }
 
     // Show first frame immediately

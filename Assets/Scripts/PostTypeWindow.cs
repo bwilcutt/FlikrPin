@@ -15,6 +15,8 @@ public class PostTypeWindow : MonoBehaviour
     public PlacePrefabInWorld placer;
     public StickerPickerWindow stickerPickerWindow;
     public PlaceStickerTag    placeStickerTag;
+    public CameraCapture      cameraCapture;
+
 
     [Header("Target Icon")]
     public GameObject targetIcon;
@@ -37,6 +39,7 @@ public class PostTypeWindow : MonoBehaviour
     private AudioSource  audioSource;
     private Vector3      dropPosition;
     private ARRaycastManager arRaycastManager;
+    private ARSession    arSession;
     private bool         isVisible = false;
 
     void Awake()
@@ -45,6 +48,7 @@ public class PostTypeWindow : MonoBehaviour
             placer = FindAnyObjectByType<PlacePrefabInWorld>();
 
         arRaycastManager = FindAnyObjectByType<ARRaycastManager>();
+        arSession        = FindAnyObjectByType<ARSession>();
 
         canvasGroup = GetComponent<CanvasGroup>();
         if (canvasGroup == null)
@@ -211,17 +215,26 @@ public class PostTypeWindow : MonoBehaviour
         }
     }
 
-    void OnVideoSelected()
+    public void OnVideoSelected()
     {
         Debug.Log("PostTypeWindow: Video selected.");
         Hide();
 
-        NativeCamera.RecordVideo((path) =>
+        if (cameraCapture == null)
         {
-            if (path == null) { Debug.Log("Video recording cancelled."); return; }
-            Debug.Log("Video recorded: " + path);
-            PlaceVideoTag(path);
-        }, NativeCamera.Quality.High, 30);
+            Debug.LogWarning("PostTypeWindow: cameraCapture is not assigned.");
+            return;
+        }
+
+        if (arSession != null) arSession.enabled = false;
+
+        cameraCapture.OnCancelled  = () => { if (arSession != null) arSession.enabled = true; };
+        cameraCapture.OnVideoReady = (videoPath) =>
+        {
+            if (arSession != null) arSession.enabled = true;
+            PlaceVideoTag(videoPath);
+        };
+        cameraCapture.TakeVideo();
     }
 
     public void OnMediaSelected()
@@ -236,10 +249,26 @@ public class PostTypeWindow : MonoBehaviour
         });
     }
 
-    void OnScavengerSelected()
+    public void OnScavengerSelected()
     {
-        Debug.Log("PostTypeWindow: Scavenger selected.");
+        Debug.Log("PostTypeWindow: Picture selected.");
         Hide();
+
+        if (cameraCapture == null)
+        {
+            Debug.LogWarning("PostTypeWindow: cameraCapture is not assigned.");
+            return;
+        }
+
+        if (arSession != null) arSession.enabled = false;
+
+        cameraCapture.OnCancelled  = () => { if (arSession != null) arSession.enabled = true; };
+        cameraCapture.OnPhotoReady = (texture) =>
+        {
+            if (arSession != null) arSession.enabled = true;
+            PlacePictureTag(texture);
+        };
+        cameraCapture.TakePhoto();
     }
 
     void PlacePictureTag(Texture2D texture)
