@@ -3,35 +3,11 @@
     "m_SelectedProcess": {
         "deviceId": "R5GYC4FF9PP",
         "name": "com.FlikrPin.FlikrPin",
-        "processId": 13936,
+        "processId": 7684,
         "exited": false
     },
     "m_SelectedPriority": 0,
     "m_KnownProcessesForSerialization": [
-        {
-            "deviceId": "R5GYC4FF9PP",
-            "name": "com.FlikrPin.FlikrPin",
-            "processId": 5462,
-            "exited": true
-        },
-        {
-            "deviceId": "R5GYC4FF9PP",
-            "name": "com.FlikrPin.FlikrPin",
-            "processId": 8579,
-            "exited": true
-        },
-        {
-            "deviceId": "R5GYC4FF9PP",
-            "name": "com.FlikrPin.FlikrPin",
-            "processId": 11061,
-            "exited": true
-        },
-        {
-            "deviceId": "R5GYC4FF9PP",
-            "name": "com.FlikrPin.FlikrPin",
-            "processId": 13744,
-            "exited": true
-        },
         {
             "deviceId": "R5GYC4FF9PP",
             "name": "com.sec.android.app.launcher",
@@ -41,19 +17,31 @@
         {
             "deviceId": "R5GYC4FF9PP",
             "name": "com.FlikrPin.FlikrPin",
-            "processId": 3864,
-            "exited": false
-        },
-        {
-            "deviceId": "R5GYC4FF9PP",
-            "name": "com.FlikrPin.FlikrPin",
-            "processId": 11144,
-            "exited": false
-        },
-        {
-            "deviceId": "R5GYC4FF9PP",
-            "name": "com.FlikrPin.FlikrPin",
             "processId": 13936,
+            "exited": true
+        },
+        {
+            "deviceId": "R5GYC4FF9PP",
+            "name": "com.FlikrPin.FlikrPin",
+            "processId": 22787,
+            "exited": true
+        },
+        {
+            "deviceId": "R5GYC4FF9PP",
+            "name": "com.FlikrPin.FlikrPin",
+            "processId": 10655,
+            "exited": true
+        },
+        {
+            "deviceId": "R5GYC4FF9PP",
+            "name": "com.FlikrPin.FlikrPin",
+            "processId": 1361,
+            "exited": true
+        },
+        {
+            "deviceId": "R5GYC4FF9PP",
+            "name": "com.FlikrPin.FlikrPin",
+            "processId": 7684,
             "exited": false
         }
     ],
