@@ -298,6 +298,10 @@ public class PostTypeWindow : MonoBehaviour
             float imageHalfHeight = (imageTransform != null) ? imageTransform.localScale.y / 2f : 0.3f;
             timestampTransform.localPosition = new Vector3(0f, -imageHalfHeight - 0.05f, 0f);
         }
+
+        // Reset debounce so placement tap doesn't immediately select this tag
+        if (TagSelectionManager.Instance != null)
+            TagSelectionManager.Instance.ResetDebounce();
     }
 
     void PlaceVideoTag(string videoPath)
@@ -331,5 +335,9 @@ public class PostTypeWindow : MonoBehaviour
             if (tmp != null)
                 tmp.text = System.DateTime.Now.ToString("MMM dd, yyyy hh:mm tt");
         }
+
+        // Reset debounce so placement tap doesn't immediately select this tag
+        if (TagSelectionManager.Instance != null)
+            TagSelectionManager.Instance.ResetDebounce();
     }
 }

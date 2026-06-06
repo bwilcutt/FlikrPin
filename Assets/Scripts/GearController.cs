@@ -1,5 +1,16 @@
+// =============================================================================
+// File:        GearController.cs
+// Author:      Bryan Wilcutt
+// Date:        2026-06-05
+// Description: Controls the gear/settings panel toggle. Opens panel on button
+//              click, closes it when tapping outside. Uses New Input System.
+// =============================================================================
+
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.EnhancedTouch;
+using Touch = UnityEngine.InputSystem.EnhancedTouch.Touch;
 
 public class GearController : MonoBehaviour
 {
@@ -8,36 +19,77 @@ public class GearController : MonoBehaviour
 
     private bool isPanelOpen = false;
 
+    void OnEnable()
+    {
+        EnhancedTouchSupport.Enable();
+    }
+
+    void OnDisable()
+    {
+        EnhancedTouchSupport.Disable();
+    }
+
     void Start()
     {
-        // Make sure panel is hidden at start
         if (settingsPanel != null)
             settingsPanel.SetActive(false);
 
-        // Add click listener to this gear icon
         Button btn = GetComponent<Button>();
         if (btn != null)
             btn.onClick.AddListener(TogglePanel);
     }
 
+    // -------------------------------------------------------------------------
+    // Function:    TogglePanel
+    // Inputs:      None
+    // Outputs:     None
+    // Description: Toggles the settings panel open/closed.
+    // -------------------------------------------------------------------------
     public void TogglePanel()
     {
         isPanelOpen = !isPanelOpen;
-        settingsPanel.SetActive(isPanelOpen);
+        if (settingsPanel != null)
+            settingsPanel.SetActive(isPanelOpen);
     }
 
-    // Clicking outside the panel closes it
+    // -------------------------------------------------------------------------
+    // Function:    Update
+    // Inputs:      None
+    // Outputs:     None
+    // Description: Detects taps/clicks outside the settings panel and closes it.
+    //              Uses New Input System for both mouse and touch.
+    // -------------------------------------------------------------------------
     void Update()
     {
-        if (isPanelOpen && Input.GetMouseButtonDown(0))
+        if (!isPanelOpen) return;
+
+        Vector2? tapPosition = null;
+
+        // Editor / standalone — mouse
+        var mouse = Mouse.current;
+        if (mouse != null && mouse.leftButton.wasPressedThisFrame)
+            tapPosition = mouse.position.ReadValue();
+
+        // Device — touch
+        if (tapPosition == null)
         {
-            // Check if click was outside the settings panel
-            RectTransform rt = settingsPanel.GetComponent<RectTransform>();
-            if (!RectTransformUtility.RectangleContainsScreenPoint(rt, Input.mousePosition))
+            foreach (var touch in Touch.activeTouches)
             {
-                isPanelOpen = false;
-                settingsPanel.SetActive(false);
+                if (touch.phase == UnityEngine.InputSystem.TouchPhase.Began)
+                {
+                    tapPosition = touch.screenPosition;
+                    break;
+                }
             }
+        }
+
+        if (tapPosition == null) return;
+
+        RectTransform rt = settingsPanel.GetComponent<RectTransform>();
+        if (!RectTransformUtility.RectangleContainsScreenPoint(rt, tapPosition.Value))
+        {
+            isPanelOpen = false;
+            settingsPanel.SetActive(false);
         }
     }
 }

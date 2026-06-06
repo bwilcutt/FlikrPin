@@ -1,3 +1,27 @@
+// =============================================================================
+// File:        TagEditDeleteController.cs
+// Author:      Bryan Wilcutt
+// Date Started: (original)
+// Description: Drives the Select / Edit / Delete buttons in the settings panel.
+//              Receives tag selection from TagSelectionManager (AR tap) or
+//              TagSelectPanel (list UI). Delete currently destroys locally only;
+//              server call is stubbed for future use.
+//
+// SCENE SETUP — add this script to a manager GameObject (e.g. PostCreator).
+// Wire up in Inspector:
+//   - btnSelect        → Btn_Select  (Button)
+//   - btnEdit          → Btn_Edit    (Button)
+//   - btnDelete        → Btn_Delete  (Button)
+//   - tagSelectPanel   → TagSelectPanel GameObject
+//   - textEditPanel    → TextEditPanel GameObject
+//   - textEditInput    → TMP_InputField inside TextEditPanel
+//   - textEditConfirm  → OK button inside TextEditPanel
+//   - textEditCancel   → Cancel button inside TextEditPanel
+//   - stickerPicker    → existing StickerPickerWindow
+//   - showSticker      → existing ShowSticker (for sticker textures)
+//   - jsonReader       → existing JSONReader
+// =============================================================================
+
 using System.Collections;
 using System.Text;
 using UnityEngine;
@@ -5,45 +29,6 @@ using UnityEngine.UI;
 using UnityEngine.Networking;
 using TMPro;
 
-
-/// <summary>
-/// Drives the Select / Edit / Delete buttons in the settings panel.
-/// 
-/// SCENE SETUP — add this script to a manager GameObject (e.g. PostCreator).
-/// Wire up in Inspector:
-///   - btnSelect        → Btn_Select  (Button)
-///   - btnEdit          → Btn_Edit    (Button)
-///   - btnDelete        → Btn_Delete  (Button)
-///   - tagSelectPanel   → TagSelectPanel GameObject
-///   - textEditPanel    → TextEditPanel GameObject (see below)
-///   - textEditInput    → TMP_InputField inside TextEditPanel
-///   - textEditConfirm  → OK button inside TextEditPanel
-///   - textEditCancel   → Cancel button inside TextEditPanel
-///   - stickerPicker    → existing StickerPickerWindow
-///   - showSticker      → existing ShowSticker (for sticker textures)
-///   - jsonReader       → existing JSONReader
-/// 
-/// TextEditPanel SCENE SETUP:
-///   Canvas
-///     └── TextEditPanel           ← MUST be INACTIVE in the Inspector by default
-///           ├── Background        (semi-transparent overlay)
-///           ├── Window
-///           │     ├── TitleText   (TextMeshProUGUI)
-///           │     ├── MessageInput (TMP_InputField, multiline)
-///           │     └── OKButton    (Button)
-///           └── CancelButton      (Button)
-///
-/// TagSelectPanel SCENE SETUP:
-///   Canvas
-///     └── TagSelectPanel          ← MUST be INACTIVE in the Inspector by default
-///           ├── Background
-///           └── Window
-///                 ├── TitleText
-///                 ├── ScrollView  (ScrollRect)
-///                 │     └── Viewport
-///                 │           └── Content   ← assign this to TagSelectPanel.contentParent
-///                 └── CloseButton
-/// </summary>
 public class TagEditDeleteController : MonoBehaviour
 {
     [Header("Settings Panel Buttons")]
@@ -68,19 +53,27 @@ public class TagEditDeleteController : MonoBehaviour
 
     // ── Lifecycle ────────────────────────────────────────────────────────
 
+    // -------------------------------------------------------------------------
+    // Function:    Awake
+    // Inputs:      None
+    // Outputs:     None
+    // Description: Hides panels before first frame renders.
+    // -------------------------------------------------------------------------
     void Awake()
     {
-        // Hide panels immediately — before any frame renders.
-        // This is the fix for the dialog appearing on startup.
-        // Even if the GameObject is accidentally left active in the scene,
-        // Awake() runs before the first frame so nothing is visible.
         if (textEditPanel != null)  textEditPanel.SetActive(false);
         if (tagSelectPanel != null) tagSelectPanel.gameObject.SetActive(false);
     }
 
+    // -------------------------------------------------------------------------
+    // Function:    Start
+    // Inputs:      None
+    // Outputs:     None
+    // Description: Grays out edit/delete buttons until a tag is selected.
+    //              Wires all button listeners.
+    // -------------------------------------------------------------------------
     void Start()
     {
-        // Buttons start ghosted until a tag is selected
         SetEditDeleteInteractable(false);
 
         if (btnSelect != null) btnSelect.onClick.AddListener(OnSelectPressed);
@@ -93,11 +86,23 @@ public class TagEditDeleteController : MonoBehaviour
 
     // ── Button handlers ──────────────────────────────────────────────────
 
+    // -------------------------------------------------------------------------
+    // Function:    OnSelectPressed
+    // Inputs:      None
+    // Outputs:     None
+    // Description: Opens the TagSelectPanel list UI.
+    // -------------------------------------------------------------------------
     void OnSelectPressed()
     {
         tagSelectPanel.Show();
     }
 
+    // -------------------------------------------------------------------------
+    // Function:    OnEditPressed
+    // Inputs:      None
+    // Outputs:     None
+    // Description: Opens the appropriate editor for the selected tag's media type.
+    // -------------------------------------------------------------------------
     void OnEditPressed()
     {
         if (selectedTag == null) return;
@@ -127,24 +132,76 @@ public class TagEditDeleteController : MonoBehaviour
         }
     }
 
-    void OnDeletePressed()
+    // -------------------------------------------------------------------------
+    // Function:    OnDeletePressed
+    // Inputs:      None
+    // Outputs:     None
+    // Description: Deletes the selected tag. Destroys it locally immediately.
+    //              If the tag has a postId (loaded from server), also fires a
+    //              server DELETE. Freshly-created tags with no postId are
+    //              destroyed locally only.
+    // -------------------------------------------------------------------------
+    public void OnDeletePressed()
     {
-        if (selectedTag == null) return;
-        StartCoroutine(DeleteTag());
+        Debug.Log($"TagEditDeleteController: OnDeletePressed fired. selectedTag={(selectedTag == null ? "NULL" : selectedTag.name)}");
+        if (selectedTag == null)
+        {
+            Debug.LogWarning("TagEditDeleteController: OnDeletePressed — no tag selected.");
+            return;
+        }
+
+        if (!string.IsNullOrEmpty(selectedTag.postId))
+        {
+            // Server-backed tag — delete on server then destroy locally
+            StartCoroutine(DeleteTagOnServer());
+        }
+        else
+        {
+            // Local-only tag (not yet saved to server) — destroy immediately
+            Debug.Log("TagEditDeleteController: Destroying local-only tag.");
+            Destroy(selectedTag.gameObject);
+            selectedTag = null;
+            SetEditDeleteInteractable(false);
+        }
     }
 
-    // ── Selection callback ───────────────────────────────────────────────
+    // ── Selection callbacks ──────────────────────────────────────────────
 
-    /// <summary>Called by TagSelectPanel when the user picks a row.</summary>
+    // -------------------------------------------------------------------------
+    // Function:    OnTagSelected
+    // Inputs:      tag — the PostTag that was selected
+    // Outputs:     None
+    // Description: Called by TagSelectionManager (AR tap) or TagSelectPanel
+    //              (list UI). Stores selected tag and enables edit/delete buttons.
+    // -------------------------------------------------------------------------
     public void OnTagSelected(PostTag tag)
     {
         selectedTag = tag;
         SetEditDeleteInteractable(true);
-        Debug.Log($"TagEditDeleteController: selected tag {tag.postId} ({tag.mediaType})");
+        Debug.Log($"TagEditDeleteController: selected tag '{tag.name}' id='{tag.postId}' type='{tag.mediaType}'");
+    }
+
+    // -------------------------------------------------------------------------
+    // Function:    ClearSelection
+    // Inputs:      None
+    // Outputs:     None
+    // Description: Clears the selected tag and disables edit/delete buttons.
+    //              Called by TagSelectionManager on deselect.
+    // -------------------------------------------------------------------------
+    public void ClearSelection()
+    {
+        selectedTag = null;
+        SetEditDeleteInteractable(false);
     }
 
     // ── Edit implementations ─────────────────────────────────────────────
 
+    // -------------------------------------------------------------------------
+    // Function:    OnImagePicked
+    // Inputs:      texture — the new image texture from the gallery
+    // Outputs:     None
+    // Description: Updates the selected tag's image renderer and pushes to server.
+    // -------------------------------------------------------------------------
     void OnImagePicked(Texture2D texture)
     {
         if (selectedTag == null || texture == null) return;
@@ -162,6 +219,12 @@ public class TagEditDeleteController : MonoBehaviour
         StartCoroutine(PushUpdateToServer());
     }
 
+    // -------------------------------------------------------------------------
+    // Function:    UpdateVideoOnTag
+    // Inputs:      path — local file path to the new video
+    // Outputs:     None
+    // Description: Updates the selected tag's video player and pushes to server.
+    // -------------------------------------------------------------------------
     void UpdateVideoOnTag(string path)
     {
         if (selectedTag == null) return;
@@ -179,6 +242,13 @@ public class TagEditDeleteController : MonoBehaviour
         StartCoroutine(PushUpdateToServer());
     }
 
+    // -------------------------------------------------------------------------
+    // Function:    OpenTextEditor
+    // Inputs:      None
+    // Outputs:     None
+    // Description: Opens the text edit panel pre-filled with the selected tag's
+    //              current message.
+    // -------------------------------------------------------------------------
     void OpenTextEditor()
     {
         if (textEditPanel == null || textEditInput == null || selectedTag == null) return;
@@ -190,13 +260,18 @@ public class TagEditDeleteController : MonoBehaviour
         textEditInput.ActivateInputField();
     }
 
+    // -------------------------------------------------------------------------
+    // Function:    OnTextEditConfirmed
+    // Inputs:      None
+    // Outputs:     None
+    // Description: Applies edited text to the tag's bubble and pushes to server.
+    // -------------------------------------------------------------------------
     void OnTextEditConfirmed()
     {
         if (selectedTag == null || textEditInput == null) return;
 
         string newText = textEditInput.text;
 
-        // Update the world-space bubble text immediately
         Transform contentTransform = selectedTag.transform.Find("bubble/content");
         if (contentTransform != null)
         {
@@ -210,11 +285,23 @@ public class TagEditDeleteController : MonoBehaviour
         StartCoroutine(PushUpdateToServer());
     }
 
+    // -------------------------------------------------------------------------
+    // Function:    OnTextEditCancelled
+    // Inputs:      None
+    // Outputs:     None
+    // Description: Closes the text edit panel without saving.
+    // -------------------------------------------------------------------------
     void OnTextEditCancelled()
     {
         if (textEditPanel != null) textEditPanel.SetActive(false);
     }
 
+    // -------------------------------------------------------------------------
+    // Function:    OnStickerPicked
+    // Inputs:      texture — the new sticker texture
+    // Outputs:     None
+    // Description: Updates the selected tag's sticker renderer and pushes to server.
+    // -------------------------------------------------------------------------
     void OnStickerPicked(Texture2D texture)
     {
         if (selectedTag == null || texture == null) return;
@@ -226,18 +313,23 @@ public class TagEditDeleteController : MonoBehaviour
             if (rend != null) rend.material.mainTexture = texture;
         }
 
-        // Match by texture name to find the sticker index (ShowSticker is optional)
         int newIndex = 0;
-
         selectedTag.stickerIndex = newIndex;
         StartCoroutine(PushUpdateToServer());
     }
 
     // ── Server calls ─────────────────────────────────────────────────────
 
+    // -------------------------------------------------------------------------
+    // Function:    PushUpdateToServer
+    // Inputs:      None
+    // Outputs:     IEnumerator (coroutine)
+    // Description: Sends a PUT request to update the selected tag on the server.
+    //              Only called for tags that have a postId.
+    // -------------------------------------------------------------------------
     IEnumerator PushUpdateToServer()
     {
-        if (selectedTag == null) yield break;
+        if (selectedTag == null || string.IsNullOrEmpty(selectedTag.postId)) yield break;
 
         string url = jsonReader.database_ip + "/posts/update";
 
@@ -269,7 +361,14 @@ public class TagEditDeleteController : MonoBehaviour
         }
     }
 
-    IEnumerator DeleteTag()
+    // -------------------------------------------------------------------------
+    // Function:    DeleteTagOnServer
+    // Inputs:      None
+    // Outputs:     IEnumerator (coroutine)
+    // Description: Sends a DELETE request to the server, then destroys the tag
+    //              locally on success. Only called for tags with a postId.
+    // -------------------------------------------------------------------------
+    IEnumerator DeleteTagOnServer()
     {
         string url = jsonReader.database_ip + "/posts/" + selectedTag.postId;
 
@@ -294,6 +393,12 @@ public class TagEditDeleteController : MonoBehaviour
 
     // ── Helpers ──────────────────────────────────────────────────────────
 
+    // -------------------------------------------------------------------------
+    // Function:    SetEditDeleteInteractable
+    // Inputs:      value — true to enable, false to gray out
+    // Outputs:     None
+    // Description: Enables or disables the Edit and Delete buttons.
+    // -------------------------------------------------------------------------
     void SetEditDeleteInteractable(bool value)
     {
         if (btnEdit   != null) btnEdit.interactable   = value;

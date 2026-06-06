@@ -1,3 +1,13 @@
+// =============================================================================
+// File:        PlacePrefabInWorld.cs
+// Author:      Bryan Wilcutt
+// Date Started: (original)
+// Description: Reads post data from JSONReader and instantiates the correct
+//              prefab (picture, video, text, sticker) at the GPS-derived world
+//              position for each post. Adds a BoxCollider at runtime so that
+//              TagSelectionManager raycasts can hit spawned tags.
+// =============================================================================
+
 using System.Collections;
 using System.Collections.Generic;
 using System;
@@ -18,16 +28,35 @@ public class PlacePrefabInWorld : MonoBehaviour
     // Native compass plugin
     private AndroidJavaObject compassPlugin;
 
+    // -------------------------------------------------------------------------
+    // Function:    Radians
+    // Inputs:      degrees — angle in degrees
+    // Outputs:     double — angle in radians
+    // Description: Converts degrees to radians.
+    // -------------------------------------------------------------------------
     double Radians(double degrees)
     {
         return (degrees * (Math.PI)) / 180;
     }
 
+    // -------------------------------------------------------------------------
+    // Function:    toDegrees
+    // Inputs:      radian — angle in radians
+    // Outputs:     double — angle in degrees
+    // Description: Converts radians to degrees.
+    // -------------------------------------------------------------------------
     double toDegrees(double radian)
     {
         return (radian * 180) / Math.PI;
     }
 
+    // -------------------------------------------------------------------------
+    // Function:    DistanceFromGPS
+    // Inputs:      LatObject, LongObject — target GPS coords
+    //              LatPlayer, LongPlayer — player GPS coords
+    // Outputs:     double — distance in meters
+    // Description: Computes great-circle distance between two GPS coordinates.
+    // -------------------------------------------------------------------------
     double DistanceFromGPS(double LatObject, double LongObject, double LatPlayer, double LongPlayer)
     {
         return Math.Acos((Math.Sin(Radians(LatObject)) * Math.Sin(Radians(LatPlayer))) +
@@ -35,6 +64,13 @@ public class PlacePrefabInWorld : MonoBehaviour
                (Math.Cos(Radians(LongPlayer) - Radians(LongObject)))) * 6366707.0195;
     }
 
+    // -------------------------------------------------------------------------
+    // Function:    angleFromCoordinate
+    // Inputs:      lat1, long1 — origin GPS coords
+    //              lat2, long2 — target GPS coords
+    // Outputs:     double — bearing angle in degrees
+    // Description: Computes compass bearing from origin to target.
+    // -------------------------------------------------------------------------
     double angleFromCoordinate(double lat1, double long1, double lat2, double long2)
     {
         long1 = Radians(long1);
@@ -54,6 +90,12 @@ public class PlacePrefabInWorld : MonoBehaviour
         return brng;
     }
 
+    // -------------------------------------------------------------------------
+    // Function:    GetNativeHeading
+    // Inputs:      None
+    // Outputs:     float — compass heading in degrees (0 on editor/fallback)
+    // Description: Reads heading from native Android CompassPlugin.
+    // -------------------------------------------------------------------------
     float GetNativeHeading()
     {
 #if UNITY_ANDROID && !UNITY_EDITOR
@@ -70,6 +112,14 @@ public class PlacePrefabInWorld : MonoBehaviour
         return 0f;
     }
 
+    // -------------------------------------------------------------------------
+    // Function:    getPostPosition
+    // Inputs:      LatObject, LongObject — tag GPS coords
+    //              PlayerLat, PlayerLong — player GPS coords
+    // Outputs:     Vector3 — world-space position for the tag
+    // Description: Converts GPS offset into a Unity world position relative
+    //              to the player, accounting for compass heading.
+    // -------------------------------------------------------------------------
     Vector3 getPostPosition(double LatObject, double LongObject, double PlayerLat, double PlayerLong)
     {
         double distance = DistanceFromGPS(LatObject, LongObject, PlayerLat, PlayerLong);
@@ -83,7 +133,14 @@ public class PlacePrefabInWorld : MonoBehaviour
         return new Vector3(x, 0, y);
     }
 
-    // Helper: positions the timestamp TMP directly below a media transform, centered.
+    // -------------------------------------------------------------------------
+    // Function:    AlignTimestampBelowMedia
+    // Inputs:      timestampTransform — the timestamp child transform
+    //              mediaTransform     — the media child transform to align below
+    //              timestampText      — optional text to set on the TMP component
+    // Outputs:     None
+    // Description: Positions the timestamp TMP directly below a media object.
+    // -------------------------------------------------------------------------
     void AlignTimestampBelowMedia(Transform timestampTransform, Transform mediaTransform, string timestampText = null)
     {
         if (timestampTransform == null) return;
@@ -101,6 +158,15 @@ public class PlacePrefabInWorld : MonoBehaviour
         timestampTransform.localPosition = new Vector3(0f, -mediaHalfHeight - padding, 0f);
     }
 
+    // -------------------------------------------------------------------------
+    // Function:    placeObjectInWorld
+    // Inputs:      None
+    // Outputs:     None
+    // Description: Iterates all posts from JSONReader, selects the correct prefab,
+    //              instantiates it at the GPS-derived world position, adds a
+    //              BoxCollider for tap detection, and configures PostTag data
+    //              and visual components.
+    // -------------------------------------------------------------------------
     void placeObjectInWorld()
     {
         var _posts = j.myPostList.posts;
@@ -126,6 +192,11 @@ public class PlacePrefabInWorld : MonoBehaviour
 
             Vector3    position = getPostPosition(_latitude, _longitude, gps.latitude, gps.longitude);
             GameObject instance = Instantiate(prefabToUse, position, Quaternion.identity);
+
+            // Add BoxCollider at runtime so TagSelectionManager raycasts can hit this tag.
+            // The prefabs themselves are not modified.
+            BoxCollider col = instance.AddComponent<BoxCollider>();
+            col.size = new Vector3(0.5f, 0.5f, 0.1f);
 
             // Configure PostTag with identity + data needed for edit/delete
             PostTag postTag = instance.GetComponent<PostTag>();
@@ -200,6 +271,13 @@ public class PlacePrefabInWorld : MonoBehaviour
         }
     }
 
+    // -------------------------------------------------------------------------
+    // Function:    Start
+    // Inputs:      None
+    // Outputs:     None
+    // Description: Initializes CompassPlugin on Android, starts GPS, and
+    //              schedules placeObjectInWorld after a 3-second delay.
+    // -------------------------------------------------------------------------
     void Start()
     {
 #if UNITY_ANDROID && !UNITY_EDITOR

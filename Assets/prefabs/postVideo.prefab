@@ -62,7 +62,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -8898435555121906854, guid: 618f220b17723e296a2b596345913ad9, type: 2}
+  - {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -108,9 +108,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Sample text
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 618f220b17723e296a2b596345913ad9, type: 2}
-  m_sharedMaterial: {fileID: -8898435555121906854, guid: 618f220b17723e296a2b596345913ad9,
-    type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -193,7 +192,6 @@ GameObject:
   - component: {fileID: 8849196442600775872}
   - component: {fileID: 4608688529811856374}
   - component: {fileID: 4922811919232939953}
-  - component: {fileID: 2944829666466388476}
   - component: {fileID: 7939451089182221151}
   - component: {fileID: 431981136336860316}
   m_Layer: 0
@@ -275,28 +273,6 @@ MeshRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &2944829666466388476
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7880112317934804618}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!328 &7939451089182221151
 VideoPlayer:
   m_ObjectHideFlags: 0
@@ -441,7 +417,6 @@ GameObject:
   - component: {fileID: 6666951888468208340}
   - component: {fileID: 1484343011263386196}
   - component: {fileID: -8393380661490825460}
-  - component: {fileID: 2122697020692667413}
   m_Layer: 0
   m_Name: postVideo
   m_TagString: Untagged
@@ -486,6 +461,12 @@ MonoBehaviour:
   postType: 1
   postId: 
   ownerId: 
+  mediaType: 
+  mediaUrl: 
+  previewUrl: 
+  mediaSource: 
+  message: 
+  stickerIndex: 0
   timestampText: {fileID: 0}
 --- !u!114 &-8393380661490825460
 MonoBehaviour:
@@ -501,18 +482,3 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::VideoTag
   videoPlayer: {fileID: 7939451089182221151}
   maxDistance: 50
---- !u!114 &2122697020692667413
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7919589490868943988}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f029ae6088fe4235481a3f43ee101252, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::LongPressDelete
-  holdDuration: 3
-  postId: 
-  ownerId: 
