@@ -1,3 +1,14 @@
+// =============================================================================
+// File:        CalloutBubble.cs
+// Author:      Bryan Wilcutt
+// Date Started: (original)
+// Description: Procedurally generates a rounded-rectangle mesh with a downward
+//              tail for use as a speech/callout bubble in world space. Rebuilds
+//              the mesh in LateUpdate whenever the content text bounds change.
+//              Expects a child GameObject named "content" with a TextMeshPro
+//              component for the bubble's text content.
+// =============================================================================
+
 using UnityEngine;
 using TMPro;
 
@@ -5,24 +16,32 @@ using TMPro;
 public class CalloutBubble : MonoBehaviour
 {
     [Header("Bubble Settings")]
-    public float cornerRadius = 0.15f;
-    public int cornerSegments = 8;
-    public Color bubbleColor = new Color(0.5f, 0.8f, 1f, 0.8f);
-    public float padding = 0.1f;
+    public float cornerRadius   = 0.15f;
+    public int   cornerSegments = 8;
+    public Color bubbleColor    = new Color(0.5f, 0.8f, 1f, 0.8f);
+    public float padding        = 0.1f;
 
     [Header("Tail Settings")]
-    public float tailWidth = 0.1f;
+    public float tailWidth  = 0.1f;
     public float tailLength = 0.25f;
 
-    private MeshFilter meshFilter;
-    private MeshRenderer meshRenderer;
-    private TextMeshPro contentText;
-    private float lastWidth = -1f;
-    private float lastHeight = -1f;
+    private MeshFilter    meshFilter;
+    private MeshRenderer  meshRenderer;
+    private TextMeshPro   contentText;
+    private float         lastWidth  = -1f;
+    private float         lastHeight = -1f;
 
+    // -------------------------------------------------------------------------
+    // Function:    Awake
+    // Inputs:      None
+    // Outputs:     None
+    // Description: Caches component references, configures the content TextMeshPro
+    //              rect and rendering order, and assigns a transparency-capable
+    //              material to the bubble mesh renderer.
+    // -------------------------------------------------------------------------
     void Awake()
     {
-        meshFilter = GetComponent<MeshFilter>();
+        meshFilter   = GetComponent<MeshFilter>();
         meshRenderer = GetComponent<MeshRenderer>();
 
         Transform contentTransform = transform.Find("content");
@@ -32,71 +51,77 @@ public class CalloutBubble : MonoBehaviour
 
             if (contentText != null)
             {
-                // Center the text alignment so it sits correctly inside the bubble
-                contentText.alignment = TextAlignmentOptions.Center;
-		// Lock the TMP rect to 24 chars wide x 12 lines tall
-		contentText.enableWordWrapping = true;
-		contentText.overflowMode = TextOverflowModes.Truncate;
+                contentText.alignment        = TextAlignmentOptions.Center;
+                contentText.enableWordWrapping = true;
+                contentText.overflowMode     = TextOverflowModes.Truncate;
 
-		// Set rect width to 24 characters wide using monospace character width
-		float charWidth = contentText.fontSize * 0.06f; // RobotoMono character aspect ratio
-		float rectWidth = charWidth * 24f;
-		float rectHeight = contentText.fontSize * 12f;
-		contentText.rectTransform.sizeDelta = new Vector2(rectWidth, rectHeight);
-		contentText.enableWordWrapping = true;
-		contentText.overflowMode = TextOverflowModes.Truncate;
-		
-                // Push text in front of the bubble mesh so it's always drawn on top
-                // Use a small negative Z since the camera looks down -Z in Unity
+                // Size rect to approximately 24 characters wide x 12 lines tall
+                float charWidth  = contentText.fontSize * 0.06f;
+                float rectWidth  = charWidth * 24f;
+                float rectHeight = contentText.fontSize * 12f;
+                contentText.rectTransform.sizeDelta = new Vector2(rectWidth, rectHeight);
+
+                // Push text in front of the bubble mesh so it always draws on top
                 contentText.transform.localPosition = new Vector3(0f, 0f, -0.05f);
-
-                // Make sure TMP renders on top of the bubble mesh
-                contentText.renderer.sortingOrder = 1;
+                contentText.renderer.sortingOrder   = 1;
             }
         }
 
-        // Use a material that supports transparency and draws correctly in world space
-        meshRenderer.material = new Material(Shader.Find("Sprites/Default"));
-        meshRenderer.material.color = bubbleColor;
-        meshRenderer.sortingOrder = 0;
+        // Sprites/Default supports transparency and renders correctly in world space
+        meshRenderer.material           = new Material(Shader.Find("Sprites/Default"));
+        meshRenderer.material.color     = bubbleColor;
+        meshRenderer.sortingOrder       = 0;
     }
 
-	void LateUpdate()
-	{
-	    if (contentText == null) return;
+    // -------------------------------------------------------------------------
+    // Function:    LateUpdate
+    // Inputs:      None
+    // Outputs:     None
+    // Description: Measures the current text bounds and regenerates the bubble
+    //              mesh if the required size has changed. Runs in LateUpdate so
+    //              TMP has already laid out text for this frame.
+    // -------------------------------------------------------------------------
+    void LateUpdate()
+    {
+        if (contentText == null) return;
 
-	    contentText.ForceMeshUpdate();
-	    Bounds bounds = contentText.textBounds;
+        contentText.ForceMeshUpdate();
+        Bounds bounds = contentText.textBounds;
+        if (bounds.size == Vector3.zero) return;
 
-	    if (bounds.size == Vector3.zero) return;
+        float textScale       = contentText.transform.localScale.x;
+        float minBottomPadding = tailLength;
 
-	    float textScale = contentText.transform.localScale.x;
+        float w = contentText.rectTransform.sizeDelta.x * textScale + padding * 2f;
+        float h = bounds.size.y * textScale + padding * 2f + minBottomPadding;
 
-	    // 3 line minimum padding below text
-	    float lineHeight = contentText.fontSize * textScale;
-	    float minBottomPadding = tailLength;
+        w = Mathf.Max(w, 0.3f);
+        h = Mathf.Max(h, 0.15f);
 
-	    float w = contentText.rectTransform.sizeDelta.x * textScale + padding * 2f;
-	    float h = bounds.size.y * textScale + padding * 2f + minBottomPadding;
+        if (Mathf.Abs(w - lastWidth) > 0.001f || Mathf.Abs(h - lastHeight) > 0.001f)
+        {
+            lastWidth  = w;
+            lastHeight = h;
+            GenerateMesh(w, h);
+        }
 
-	    w = Mathf.Max(w, 0.3f);
-	    h = Mathf.Max(h, 0.15f);
+        contentText.transform.localPosition = new Vector3(0f, 0f, -0.05f);
+    }
 
-	    if (Mathf.Abs(w - lastWidth) > 0.001f || Mathf.Abs(h - lastHeight) > 0.001f)
-	    {
-		lastWidth = w;
-		lastHeight = h;
-		GenerateMesh(w, h);
-	    }
-
-	    contentText.transform.localPosition = new Vector3(0f, 0f, -0.05f);
-	}
-	
+    // -------------------------------------------------------------------------
+    // Function:    GenerateMesh
+    // Inputs:      width  — total bubble width in world units
+    //              height — total bubble height in world units (excluding tail)
+    // Outputs:     None
+    // Description: Builds a rounded-rectangle mesh with four arc corners and a
+    //              downward-pointing triangular tail. Uses fan triangulation from
+    //              a center vertex. Assigns the result to the MeshFilter.
+    // -------------------------------------------------------------------------
     public void GenerateMesh(float width, float height)
     {
-        float halfW = width / 2f;
+        float halfW = width  / 2f;
         float halfH = height / 2f;
-        float cr = Mathf.Min(cornerRadius, halfW, halfH);
+        float cr    = Mathf.Min(cornerRadius, halfW, halfH);
 
         var verts = new System.Collections.Generic.List<Vector3>();
         var tris  = new System.Collections.Generic.List<int>();
@@ -104,7 +129,7 @@ public class CalloutBubble : MonoBehaviour
         // Center vertex for fan triangulation
         verts.Add(Vector3.zero);
 
-        // Four rounded corners: top-right, top-left, bottom-left, bottom-right
+        // Arc centers for the four corners: top-right, top-left, bottom-left, bottom-right
         Vector2[] cornerCenters = new Vector2[]
         {
             new Vector2( halfW - cr,  halfH - cr),
@@ -127,11 +152,11 @@ public class CalloutBubble : MonoBehaviour
             }
         }
 
-        // Tail — three verts forming a downward-pointing triangle at the bubble bottom
+        // Tail — three verts forming a downward-pointing triangle at bubble bottom
         int tailStart = verts.Count;
-        verts.Add(new Vector3(-tailWidth,  -halfH,               0f));
-        verts.Add(new Vector3( tailWidth,  -halfH,               0f));
-        verts.Add(new Vector3( 0f,         -halfH - tailLength,  0f));
+        verts.Add(new Vector3(-tailWidth,  -halfH,              0f));
+        verts.Add(new Vector3( tailWidth,  -halfH,              0f));
+        verts.Add(new Vector3( 0f,         -halfH - tailLength, 0f));
 
         // Fan triangles for the rounded rectangle body
         int bodyVerts = (cornerSegments + 1) * 4;
@@ -143,12 +168,12 @@ public class CalloutBubble : MonoBehaviour
             tris.Add(next);
         }
 
-        // Tail triangle (wound correctly for front-face)
+        // Tail triangle
         tris.Add(tailStart);
         tris.Add(tailStart + 2);
         tris.Add(tailStart + 1);
 
-        Mesh mesh = new Mesh();
+        Mesh mesh      = new Mesh();
         mesh.vertices  = verts.ToArray();
         mesh.triangles = tris.ToArray();
         mesh.RecalculateNormals();

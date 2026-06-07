@@ -1,149 +1,128 @@
-using System.Collections;
+// =============================================================================
+// File:        ShowSticker.cs
+// Author:      Bryan Wilcutt
+// Date Started: 06/06/2026
+// Description: Manages sticker display and selection for FlikrPin posts.
+//              Loads sticker textures from a pre-populated stickers array and
+//              instantiates them into a scrollable sticker slot grid. Also
+//              supports picking an image from the device gallery via
+//              NativeGallery for custom post textures.
+// =============================================================================
+
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using System.IO;
 using TMPro;
+
 public class ShowSticker : MonoBehaviour
 {
-    //public Image image;
-    public GameObject cell;
-    public TextMeshProUGUI txt;
-    public GameObject StickersSlot;
-    public GameObject previewImage;
-    private List<string> GetAllGalleryImagePaths()//don't really use this anymore 
-    {
-        List<string> results = new List<string>();
-        HashSet<string> allowedExtesions = new HashSet<string>() { ".png", ".jpg", ".jpeg" };
+    // ── Inspector references ──────────────────────────────────────────────
+    public GameObject      cell;           // Prefab for a single sticker cell in the grid
+    public TextMeshProUGUI txt;            // Debug/status text label
+    public GameObject      StickersSlot;  // Parent container for instantiated sticker cells
+    public GameObject      previewImage;  // Preview image panel shown before stickers load
 
-        try
-        {
-            AndroidJavaClass mediaClass = new AndroidJavaClass("android.provider.MediaStore$Images$Media");
+    // ── Gallery picker state ──────────────────────────────────────────────
+    public Texture2D pickedImage;   // Texture loaded from the gallery
+    public Material  post;          // Material on the AR post quad to apply the texture to
+    public GameObject pre_post;     // RawImage preview of the pending post
+    public Transform quad;          // The AR quad whose scale is adjusted to match image ratio
+    public string    _image_path;   // File path of the picked gallery image
 
-            // Set the tags for the data we want about each image.  This should really be done by calling; 
-            //string dataTag = mediaClass.GetStatic<string>("DATA");
-            // but I couldn't get that to work...
+    // ── Sticker data ──────────────────────────────────────────────────────
+    // Populated in the Inspector with preloaded sticker textures
+    public Object[] stickers;
 
-            const string dataTag = "_data";
-            txt.text = "trying...";
-
-            string[] projection = new string[] { dataTag };
-            AndroidJavaClass player = new AndroidJavaClass("com.unity3d.player.UnityPlayer");
-            AndroidJavaObject currentActivity = player.GetStatic<AndroidJavaObject>("currentActivity");
-
-            string[] urisToSearch = new string[] { "EXTERNAL_CONTENT_URI", "INTERNAL_CONTENT_URI" };
-            foreach (string uriToSearch in urisToSearch)
-            {
-                txt.text = uriToSearch;
-                AndroidJavaObject externalUri = mediaClass.GetStatic<AndroidJavaObject>(uriToSearch);
-                AndroidJavaObject finder = currentActivity.Call<AndroidJavaObject>("managedQuery", externalUri, projection, null, null, null);
-                bool foundOne = finder.Call<bool>("moveToFirst");
-                while (foundOne)
-                {
-                    txt.text = "found one";
-                    int dataIndex = finder.Call<int>("getColumnIndex", dataTag);
-                    string data = finder.Call<string>("getString", dataIndex);
-                    if (allowedExtesions.Contains(Path.GetExtension(data).ToLower()))
-                    {
-                        string path = @"file:///" + data;
-                        results.Add(path);
-                    }
-
-                    foundOne = finder.Call<bool>("moveToNext");
-                }
-            }
-        }
-        catch (System.Exception e)
-        {
-            // do something with error...
-            txt.text = "Could not access photos";
-        }
-
-        return results;
-    }
+    // ── Private state ─────────────────────────────────────────────────────
+    private bool      loaded = false;   // True once sticker cells have been instantiated
+    private GameObject scroll;          // The scroll view parent, shown/hidden on repeat opens
 
     [SerializeField]
-    private RawImage m_image;
+    private RawImage m_image;           // RawImage used for gallery image preview
 
-    public void SetImage()//this is to set selected images to be in a cell like a sticker
+    // -------------------------------------------------------------------------
+    // Function:    Start
+    // Inputs:      None
+    // Outputs:     None
+    // Description: Caches a reference to the scroll view parent by walking up
+    //              from StickersSlot (slot → viewport → scroll view).
+    // -------------------------------------------------------------------------
+    void Start()
     {
-        List<string> galleryImages = GetAllGalleryImagePaths();
-        
-        foreach(string imagePath in galleryImages)
+        if (StickersSlot != null)
         {
-            txt.text = imagePath;
-            Texture2D t = new Texture2D(2, 2);
-            (new WWW(galleryImages[0])).LoadImageIntoTexture(t);
-            m_image.texture = t;
-            cell.GetComponent<RawImage>().texture = t;
-            Instantiate(cell, this.transform);
+            // StickersSlot is inside a Viewport which is inside the ScrollRect
+            scroll = StickersSlot.transform.parent.parent.gameObject;
         }
-        
     }
-    public Texture2D pickedImage;
-    public Material post;
-    public GameObject pre_post;
-    public Transform quad;
-    public string _image_path;
 
-    public Object[] stickers;
-    public void PickImageFromGallery(int maxSize = 1024)//pick image from gallery to post
+    // -------------------------------------------------------------------------
+    // Function:    PickImageFromGallery
+    // Inputs:      maxSize — maximum texture dimension in pixels (default 1024)
+    // Outputs:     None
+    // Description: Opens the native device gallery and lets the user pick an
+    //              image. Loads it as a Texture2D, applies it to the post
+    //              material and preview RawImage, and scales the AR quad to
+    //              match the image's aspect ratio.
+    // -------------------------------------------------------------------------
+    public void PickImageFromGallery(int maxSize = 1024)
     {
         NativeGallery.GetImageFromGallery((path) =>
         {
-            if (path != null)
-            {
-                // Create Texture from selected image
-                pickedImage = NativeGallery.LoadImageAtPath(path, maxSize);
-                post.SetTexture("_MainTex", pickedImage);
-                pre_post.GetComponent<RawImage>().texture = pickedImage;
-                float ratio = (float)pickedImage.height / (float)pickedImage.width;
-                float x = 1; //this will be the width of the quad so set it to whatever...
-                float y = x * ratio;
-                _image_path = path;
-                txt.text = pickedImage.height.ToString()+" "+ pickedImage.width+"\n from: "+_image_path;
-                quad.localScale = new Vector3(x, y, 1);
-            }
+            if (path == null) return;   // User cancelled the picker
+
+            // Load the selected image as a texture at the requested max size
+            pickedImage = NativeGallery.LoadImageAtPath(path, maxSize);
+
+            // Apply texture to the AR post material and the preview panel
+            post.SetTexture("_MainTex", pickedImage);
+            pre_post.GetComponent<RawImage>().texture = pickedImage;
+
+            // Scale the AR quad to match the image's aspect ratio
+            float ratio = (float)pickedImage.height / (float)pickedImage.width;
+            float x     = 1f;           // Base width in world units
+            float y     = x * ratio;    // Height scaled to match aspect ratio
+            quad.localScale = new Vector3(x, y, 1);
+
+            // Store the file path for later upload reference
+            _image_path = path;
         });
-        
     }
 
-    bool loaded = false;
-    GameObject scroll;
-    
-
-    void Start(){
-        if(StickersSlot!=null){
-            scroll = StickersSlot.transform.parent.parent.gameObject;
-        }
-        
-    }
+    // -------------------------------------------------------------------------
+    // Function:    SetStickers
+    // Inputs:      None
+    // Outputs:     None
+    // Description: On first call, instantiates a cell prefab for each sticker
+    //              in the stickers array, assigning its texture and index.
+    //              On subsequent calls, simply re-shows the scroll view since
+    //              cells are already built.
+    // -------------------------------------------------------------------------
     public void SetStickers()
     {
-        //Object[] images = Resources.LoadAll("default stickers");
-        Debug.Log("loading stickers");
-        if(!loaded){
+        if (!loaded)
+        {
+            // First time opening — build all sticker cells from the stickers array
             int count = 0;
             foreach (var image in stickers)
             {
-
-
-                cell.GetComponent<RawImage>().texture = (Texture2D)image;
+                // Configure the cell prefab before instantiating
+                cell.GetComponent<RawImage>().texture          = (Texture2D)image;
                 cell.GetComponent<SelectSticker>().sticker_index = count;
                 count++;
+
+                // Instantiate a copy of the configured cell into the sticker slot container
                 Instantiate(cell, StickersSlot.transform);
             }
+
             loaded = true;
-            Debug.Log("not loaded");
         }
-        else{
+        else
+        {
+            // Already built — just re-show the scroll view and hide the preview
             scroll.SetActive(true);
-            Debug.Log("loaded");
             previewImage.SetActive(false);
         }
     }
-    // Start is called before the first frame update
-    
-
-
 }
