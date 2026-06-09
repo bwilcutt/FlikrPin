@@ -3,22 +3,23 @@
 // Author:      Bryan Wilcutt
 // Date:        2026-06-05
 // Description: Singleton that manages tap-to-select on PostTag objects using
-//              screen-space bounds rather than physics raycasts or center-point
-//              proximity. Each tap projects the combined renderer bounds of every
-//              live PostTag to screen space and checks if the tap falls inside
-//              that rectangle. This means the selectable area exactly matches
-//              the visible footprint of the tag regardless of distance or scale.
+//              screen-space proximity. Each tap checks all live PostTags by
+//              projecting their world position to screen space and measuring
+//              distance to the tap point.
 //
 //              On selection:
-//                - Applies a cyan tint to the selected tag
+//                - Applies alpha pulse to the selected tag
 //                - Notifies TagEditDeleteController so sidebar buttons activate
 //              On deselect (re-tap or tap empty space):
-//                - Restores original tint
+//                - Restores original material colors
 //                - Clears TagEditDeleteController selection
 //
+//              On tap of empty AR space (no tag hit):
+//                - Opens the TagBar via TagBarController
+//
 //              Attach to any persistent scene GameObject (e.g. PostCreator).
-//              Wire TagEditDeleteController and BtnTrashcan in Inspector.
-//              No colliders required on tag prefabs.
+//              Wire TagEditDeleteController, BtnTrashcan, and TagBarController
+//              in Inspector. No colliders required on tag prefabs.
 // =============================================================================
 
 using UnityEngine;
@@ -27,8 +28,6 @@ using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
-using UnityEngine.InputSystem.EnhancedTouch;
-using Touch = UnityEngine.InputSystem.EnhancedTouch.Touch;
 
 public class TagSelectionManager : MonoBehaviour
 {
@@ -42,6 +41,10 @@ public class TagSelectionManager : MonoBehaviour
     [Tooltip("Wire the sidebar trashcan Button here.")]
     public Button trashcanButton;
 
+    [Header("TagBar")]
+    [Tooltip("TagBarController to open when a tap misses all existing tags.")]
+    public TagBarController tagBarController;
+
     [Header("Selection Settings")]
     [Tooltip("How close (in pixels) a tap must be to a tag's screen center to select it.")]
     public float tapRadiusPx = 150f;
@@ -54,34 +57,41 @@ public class TagSelectionManager : MonoBehaviour
     [Tooltip("Maximum alpha during pulse (1 = fully opaque).")]
     public float pulseMaxAlpha = 1.0f;
 
-    private PostTag selectedTag     = null;
-    private Camera  arCamera        = null;
-    private bool    suppressNextTap = false; // prevents trashcan tap from also deselecting
-    private float   lastTapTime     = -1f;       // prevents double-tap within debounce window
-    private float   tapDebounceSeconds = 0.5f;     // minimum seconds between taps
-    private Coroutine pulseCoroutine  = null;          // active pulse coroutine
-    private Dictionary<Material, Color> savedColors = new Dictionary<Material, Color>(); // saved material colors
+    private SidebarController sidebarController = null;
+    private PostTag    selectedTag        = null;
+    private Camera     arCamera           = null;
+    private bool       suppressNextTap    = false;
+    private float      lastTapTime        = -1f;
+    private float      tapDebounceSeconds = 0.5f;
+    private Coroutine  pulseCoroutine     = null;
+    private Dictionary<Material, Color> savedColors = new Dictionary<Material, Color>();
 
     // -------------------------------------------------------------------------
     // Function:    Awake
     // Inputs:      None
     // Outputs:     None
-    // Description: Enforces singleton pattern.
+    // Description: Enforces singleton pattern. Auto-finds TagBarController
+    //              if not assigned in Inspector.
     // -------------------------------------------------------------------------
     void Awake()
     {
         if (Instance != null && Instance != this) { Destroy(gameObject); return; }
         Instance = this;
-    }
 
-    // -------------------------------------------------------------------------
-    // Function:    OnEnable / OnDisable
-    // Inputs:      None
-    // Outputs:     None
-    // Description: Enables/disables New Input System enhanced touch support.
-    // -------------------------------------------------------------------------
-    void OnEnable()  { EnhancedTouchSupport.Enable(); }
-    void OnDisable() { EnhancedTouchSupport.Disable(); }
+        if (sidebarController == null)
+            sidebarController = FindAnyObjectByType<SidebarController>();
+
+        if (tagBarController == null)
+            tagBarController = FindAnyObjectByType<TagBarController>();
+
+        if (sidebarController == null)
+            sidebarController = FindAnyObjectByType<SidebarController>();
+
+        if (tagBarController == null)
+            Debug.LogWarning("TagSelectionManager: TagBarController not found — tapping empty space will not open TagBar.");
+        else
+            Debug.Log("TagSelectionManager: tagBarController found: " + tagBarController.name);
+    }
 
     // -------------------------------------------------------------------------
     // Function:    Start
@@ -106,9 +116,10 @@ public class TagSelectionManager : MonoBehaviour
     // Function:    Update
     // Inputs:      None
     // Outputs:     None
-    // Description: Polls for tap/click each frame. Ignores UI touches. Checks
-    //              all live PostTags via screen-space bounds and selects the
-    //              tapped one. Tapping empty space deselects.
+    // Description: Polls for tap/click each frame using Touchscreen and Mouse
+    //              from the New Input System. Ignores UI touches. Checks all
+    //              live PostTags and selects the tapped one, or opens TagBar
+    //              if no tag is hit.
     // -------------------------------------------------------------------------
     void Update()
     {
@@ -117,24 +128,43 @@ public class TagSelectionManager : MonoBehaviour
         // Editor / standalone — mouse click
         var mouse = Mouse.current;
         if (mouse != null && mouse.leftButton.wasPressedThisFrame)
+        {
             tapPosition = mouse.position.ReadValue();
+            Debug.Log("TagSelectionManager: mouse click at " + tapPosition);
+        }
 
-        // Device — first touch began this frame
+        // Device — touchscreen
         if (tapPosition == null)
         {
-            foreach (var touch in Touch.activeTouches)
+            var touchscreen = Touchscreen.current;
+            if (touchscreen != null)
             {
-                if (touch.phase == UnityEngine.InputSystem.TouchPhase.Began)
+                foreach (var touch in touchscreen.touches)
                 {
-                    tapPosition = touch.screenPosition;
-                    break;
+                    if (touch.phase.ReadValue() == UnityEngine.InputSystem.TouchPhase.Began)
+                    {
+                        tapPosition = touch.position.ReadValue();
+                        Debug.Log("TagSelectionManager: touch began at " + tapPosition);
+                        break;
+                    }
                 }
+            }
+        }
+
+        // Legacy input fallback — catches touches when Touchscreen.current is null
+        if (tapPosition == null && Input.touchCount > 0)
+        {
+            var t = Input.GetTouch(0);
+            if (t.phase == UnityEngine.TouchPhase.Began)
+            {
+                tapPosition = t.position;
+                Debug.Log("TagSelectionManager: legacy touch at " + tapPosition);
             }
         }
 
         if (tapPosition == null) return;
 
-        // Debounce — ignore taps within tapDebounceSeconds of the last processed tap
+        // Debounce
         if (Time.time - lastTapTime < tapDebounceSeconds) return;
         lastTapTime = Time.time;
 
@@ -142,16 +172,16 @@ public class TagSelectionManager : MonoBehaviour
         if (EventSystem.current != null &&
             EventSystem.current.IsPointerOverGameObject())
         {
-            var ped = new UnityEngine.EventSystems.PointerEventData(EventSystem.current);
+            var ped = new PointerEventData(EventSystem.current);
             ped.position = tapPosition.Value;
-            var results = new System.Collections.Generic.List<UnityEngine.EventSystems.RaycastResult>();
+            var results = new List<RaycastResult>();
             EventSystem.current.RaycastAll(ped, results);
             foreach (var r in results)
                 Debug.Log("UI blocker: " + r.gameObject.name + " on " + r.gameObject.transform.parent?.name);
             return;
         }
 
-        // Skip one tap cycle after trashcan fires to prevent immediate deselect
+        // Skip one tap cycle after trashcan fires
         if (suppressNextTap)
         {
             suppressNextTap = false;
@@ -167,45 +197,46 @@ public class TagSelectionManager : MonoBehaviour
     // Function:    FindAndSelectTagAtPoint
     // Inputs:      screenPos — the screen-space tap position
     // Outputs:     None
-    // Description: For every live PostTag, computes a screen-space bounding rect
-    //              from its combined renderer bounds (all 8 world-space corners
-    //              projected to screen). Selects the tapped tag, or clears
-    //              selection if the tap lands outside all tags. When multiple
-    //              tags overlap, the one closest to the camera wins.
+    // Description: For every live PostTag, checks screen-space proximity to
+    //              the tap. Selects the nearest tag within tapRadiusPx, or
+    //              opens the TagBar if no tag is hit.
     // -------------------------------------------------------------------------
     void FindAndSelectTagAtPoint(Vector2 screenPos)
     {
+        // Don't open TagBar if sidebar is open
+        if (sidebarController != null && sidebarController.IsOpen)
+        {
+            Debug.Log("TagSelectionManager: Sidebar open — ignoring tap.");
+            return;
+        }
+
         PostTag[] allTags = FindObjectsByType<PostTag>(FindObjectsSortMode.None);
 
-        PostTag tapped          = null;
-        float   nearestCamDist  = float.MaxValue;
+        PostTag tapped         = null;
+        float   nearestDist    = float.MaxValue;
 
         foreach (PostTag tag in allTags)
         {
-            // Skip tags behind the camera
             Vector3 viewportPos = arCamera.WorldToViewportPoint(tag.transform.position);
             if (viewportPos.z <= 0f) continue;
 
-            // Project tag center to screen space and check distance to tap
             Vector3 screenPosTag = arCamera.WorldToScreenPoint(tag.transform.position);
             float   dist         = Vector2.Distance(screenPos, new Vector2(screenPosTag.x, screenPosTag.y));
 
-            Debug.Log($"TagSelectionManager: Tag '{tag.name}' screen pos {screenPosTag}, dist {dist:F1}px");
+            Debug.Log($"TagSelectionManager: Tag '{tag.name}' dist {dist:F1}px");
 
-            if (dist < nearestCamDist)
+            if (dist < nearestDist)
             {
-                nearestCamDist = dist;
-                tapped         = tag;
+                nearestDist = dist;
+                tapped      = tag;
             }
         }
 
-        // Only select if within tap radius
-        if (tapped != null && nearestCamDist > tapRadiusPx)
+        if (tapped != null && nearestDist > tapRadiusPx)
             tapped = null;
 
         if (tapped != null)
         {
-            // Re-tap same tag = deselect
             if (tapped == selectedTag)
             {
                 ClearTint(selectedTag);
@@ -224,31 +255,65 @@ public class TagSelectionManager : MonoBehaviour
         }
         else
         {
-            // Tapped empty space
+            // Tapped empty space — deselect and open TagBar
             if (selectedTag != null)
             {
                 ClearTint(selectedTag);
                 selectedTag = null;
                 NotifyController(null);
             }
-            Debug.Log("TagSelectionManager: Tap outside all tags — deselected.");
+
+            Debug.Log("TagSelectionManager: Tap outside all tags — opening TagBar.");
+
+            if (tagBarController != null && !tagBarController.IsVisible)
+            {
+                Vector3 fallback = Camera.main.transform.position + Camera.main.transform.forward * 2f;
+                tagBarController.Show(fallback);
+            }
+            else if (tagBarController == null)
+            {
+                Debug.LogWarning("TagSelectionManager: tagBarController is null — cannot open TagBar.");
+            }
         }
+    }
+
+    // -------------------------------------------------------------------------
+    // Function:    IsTagAtScreenPoint
+    // Inputs:      screenPos — screen-space position to check
+    // Outputs:     bool — true if a PostTag is within tapRadiusPx of screenPos
+    // Description: Non-destructive hit test used externally to check whether
+    //              a tap lands on an existing tag without selecting it.
+    // -------------------------------------------------------------------------
+    public bool IsTagAtScreenPoint(Vector2 screenPos)
+    {
+        PostTag[] allTags = FindObjectsByType<PostTag>(FindObjectsSortMode.None);
+
+        foreach (PostTag tag in allTags)
+        {
+            Vector3 viewportPos = arCamera.WorldToViewportPoint(tag.transform.position);
+            if (viewportPos.z <= 0f) continue;
+
+            Vector3 screenPosTag = arCamera.WorldToScreenPoint(tag.transform.position);
+            float   dist         = Vector2.Distance(screenPos, new Vector2(screenPosTag.x, screenPosTag.y));
+
+            if (dist <= tapRadiusPx)
+                return true;
+        }
+
+        return false;
     }
 
     // -------------------------------------------------------------------------
     // Function:    ResetDebounce
     // Inputs:      None
     // Outputs:     None
-    // Description: Resets the tap debounce timer. Call this after programmatically
-    //              placing a tag so the placement tap doesn't immediately select
-    //              the newly created tag.
+    // Description: Resets the tap debounce timer. Call after programmatically
+    //              placing a tag so the placement tap doesn't select the new tag.
     // -------------------------------------------------------------------------
     public void ResetDebounce()
     {
-        // Set lastTapTime to future so debounce blocks for a full tapDebounceSeconds
         lastTapTime = Time.time + tapDebounceSeconds;
 
-        // Also clear any accidental selection that occurred during tag placement
         if (selectedTag != null)
         {
             ClearTint(selectedTag);
@@ -262,8 +327,8 @@ public class TagSelectionManager : MonoBehaviour
     // Inputs:      None
     // Outputs:     None
     // Description: Called by the trashcan button. Delegates to
-    //              TagEditDeleteController so the server DELETE is fired.
-    //              Falls back to local Destroy if controller is not wired.
+    //              TagEditDeleteController for server DELETE. Falls back to
+    //              local Destroy if controller is not wired.
     // -------------------------------------------------------------------------
     public void TryDeleteSelected()
     {
@@ -273,11 +338,9 @@ public class TagSelectionManager : MonoBehaviour
             return;
         }
 
-        suppressNextTap = true; // prevent this same tap from also deselecting via Update
+        suppressNextTap = true;
         if (tagEditDeleteController != null)
-        {
             tagEditDeleteController.OnDeletePressed();
-        }
         else
         {
             Debug.LogWarning("TagSelectionManager: No controller assigned — destroying locally only.");
@@ -316,16 +379,6 @@ public class TagSelectionManager : MonoBehaviour
             tagEditDeleteController.ClearSelection();
     }
 
-    // -------------------------------------------------------------------------
-    // Function:    ApplyTint
-    // Inputs:      tag — PostTag to highlight
-    // Outputs:     None
-    // Description: For each child Renderer on the tag, creates a duplicate
-    //              GameObject with the FlikrPin/SelectionOutline shader applied.
-    //              The outline mesh sits on top of the original, showing only
-    //              a colored border around the tag's silhouette.
-    // -------------------------------------------------------------------------
-    // -------------------------------------------------------------------------
     // -------------------------------------------------------------------------
     // Function:    ApplyTint
     // Inputs:      tag — PostTag to highlight
@@ -372,7 +425,7 @@ public class TagSelectionManager : MonoBehaviour
     // Inputs:      tag — PostTag to pulse
     // Outputs:     IEnumerator (coroutine)
     // Description: Animates _Color alpha between pulseMinAlpha and pulseMaxAlpha
-    //              using a sine wave. No scale changes — alpha only.
+    //              using a sine wave. Alpha only — no scale changes.
     // -------------------------------------------------------------------------
     IEnumerator PulseTag(PostTag tag)
     {

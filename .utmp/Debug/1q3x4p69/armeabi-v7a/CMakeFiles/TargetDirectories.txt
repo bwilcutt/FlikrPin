@@ -1,5 +1,0 @@
-/home/bwilcutt/GamaTag/.utmp/Debug/1q3x4p69/armeabi-v7a/CMakeFiles/edit_cache.dir
-/home/bwilcutt/GamaTag/.utmp/Debug/1q3x4p69/armeabi-v7a/CMakeFiles/rebuild_cache.dir
-/home/bwilcutt/GamaTag/.utmp/Debug/1q3x4p69/armeabi-v7a/GameActivity/CMakeFiles/game.dir
-/home/bwilcutt/GamaTag/.utmp/Debug/1q3x4p69/armeabi-v7a/GameActivity/CMakeFiles/edit_cache.dir
-/home/bwilcutt/GamaTag/.utmp/Debug/1q3x4p69/armeabi-v7a/GameActivity/CMakeFiles/rebuild_cache.dir

@@ -1,5 +1,0 @@
-/Users/mauriceshalam/Documents/GitHub/AlphaAR/AlphaARTest1/.utmp/RelWithDebInfo/1m4k5149/armeabi-v7a/CMakeFiles/edit_cache.dir
-/Users/mauriceshalam/Documents/GitHub/AlphaAR/AlphaARTest1/.utmp/RelWithDebInfo/1m4k5149/armeabi-v7a/CMakeFiles/rebuild_cache.dir
-/Users/mauriceshalam/Documents/GitHub/AlphaAR/AlphaARTest1/.utmp/RelWithDebInfo/1m4k5149/armeabi-v7a/GameActivity/CMakeFiles/game.dir
-/Users/mauriceshalam/Documents/GitHub/AlphaAR/AlphaARTest1/.utmp/RelWithDebInfo/1m4k5149/armeabi-v7a/GameActivity/CMakeFiles/edit_cache.dir
-/Users/mauriceshalam/Documents/GitHub/AlphaAR/AlphaARTest1/.utmp/RelWithDebInfo/1m4k5149/armeabi-v7a/GameActivity/CMakeFiles/rebuild_cache.dir

@@ -3,7 +3,7 @@
     "m_SelectedProcess": {
         "deviceId": "R5GYC4FF9PP",
         "name": "com.FlikrPin.FlikrPin",
-        "processId": 24970,
+        "processId": 9188,
         "exited": false
     },
     "m_SelectedPriority": 0,
@@ -151,6 +151,60 @@
             "name": "com.FlikrPin.FlikrPin",
             "processId": 24970,
             "exited": false
+        },
+        {
+            "deviceId": "R5GYC4FF9PP",
+            "name": "com.FlikrPin.FlikrPin",
+            "processId": 22084,
+            "exited": false
+        },
+        {
+            "deviceId": "R5GYC4FF9PP",
+            "name": "com.FlikrPin.FlikrPin",
+            "processId": 3763,
+            "exited": false
+        },
+        {
+            "deviceId": "R5GYC4FF9PP",
+            "name": "com.FlikrPin.FlikrPin",
+            "processId": 27079,
+            "exited": false
+        },
+        {
+            "deviceId": "R5GYC4FF9PP",
+            "name": "com.FlikrPin.FlikrPin",
+            "processId": 29378,
+            "exited": false
+        },
+        {
+            "deviceId": "R5GYC4FF9PP",
+            "name": "com.FlikrPin.FlikrPin",
+            "processId": 25420,
+            "exited": false
+        },
+        {
+            "deviceId": "R5GYC4FF9PP",
+            "name": "com.FlikrPin.FlikrPin",
+            "processId": 28770,
+            "exited": false
+        },
+        {
+            "deviceId": "R5GYC4FF9PP",
+            "name": "com.FlikrPin.FlikrPin",
+            "processId": 30207,
+            "exited": false
+        },
+        {
+            "deviceId": "R5GYC4FF9PP",
+            "name": "com.FlikrPin.FlikrPin",
+            "processId": 2646,
+            "exited": false
+        },
+        {
+            "deviceId": "R5GYC4FF9PP",
+            "name": "com.FlikrPin.FlikrPin",
+            "processId": 9188,
+            "exited": false
         }
     ],
     "m_Tags": {
@@ -207,7 +261,7 @@
         "AutoCapture": true
     },
     "m_FilterOptions": {
-        "m_Filter": "",
+        "m_Filter": "SidebarController",
         "m_UseRegularExpressions": false,
         "m_MatchCase": false
     },
