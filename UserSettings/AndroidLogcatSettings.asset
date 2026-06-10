@@ -3,7 +3,7 @@
     "m_SelectedProcess": {
         "deviceId": "R5GYC4FF9PP",
         "name": "com.FlikrPin.FlikrPin",
-        "processId": 9188,
+        "processId": 31688,
         "exited": false
     },
     "m_SelectedPriority": 0,
@@ -204,6 +204,42 @@
             "deviceId": "R5GYC4FF9PP",
             "name": "com.FlikrPin.FlikrPin",
             "processId": 9188,
+            "exited": false
+        },
+        {
+            "deviceId": "R5GYC4FF9PP",
+            "name": "com.FlikrPin.FlikrPin",
+            "processId": 32038,
+            "exited": false
+        },
+        {
+            "deviceId": "R5GYC4FF9PP",
+            "name": "com.FlikrPin.FlikrPin",
+            "processId": 16018,
+            "exited": false
+        },
+        {
+            "deviceId": "R5GYC4FF9PP",
+            "name": "com.FlikrPin.FlikrPin",
+            "processId": 23468,
+            "exited": false
+        },
+        {
+            "deviceId": "R5GYC4FF9PP",
+            "name": "com.FlikrPin.FlikrPin",
+            "processId": 25788,
+            "exited": false
+        },
+        {
+            "deviceId": "R5GYC4FF9PP",
+            "name": "com.FlikrPin.FlikrPin",
+            "processId": 27732,
+            "exited": false
+        },
+        {
+            "deviceId": "R5GYC4FF9PP",
+            "name": "com.FlikrPin.FlikrPin",
+            "processId": 31688,
             "exited": false
         }
     ],

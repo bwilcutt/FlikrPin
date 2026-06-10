@@ -54,6 +54,7 @@ public class TagBarController : MonoBehaviour
     public Button btnSticker;
     public Button btnVideo;
     public Button btnMedia;
+    public Button btnCamera;
     public Button btnScavenger;
 
     [Header("Audio")]
@@ -219,6 +220,7 @@ public class TagBarController : MonoBehaviour
         if (btnSticker   != null) { btnSticker.onClick.AddListener(OnStickerSelected);     AddPointerDownSound(btnSticker.gameObject); }
         if (btnVideo     != null) { btnVideo.onClick.AddListener(OnVideoSelected);         AddPointerDownSound(btnVideo.gameObject); }
         if (btnMedia     != null) { btnMedia.onClick.AddListener(OnMediaSelected);         AddPointerDownSound(btnMedia.gameObject); }
+        if (btnCamera    != null) { btnCamera.onClick.AddListener(OnCameraSelected);       AddPointerDownSound(btnCamera.gameObject); }
         if (btnScavenger != null) { btnScavenger.onClick.AddListener(OnScavengerSelected); AddPointerDownSound(btnScavenger.gameObject); }
     }
 
@@ -250,7 +252,7 @@ public class TagBarController : MonoBehaviour
     void OnTargetIconPressed()
     {
         Debug.Log($"TagBarController.OnTargetIconPressed() — isVisible={isVisible}");
-        if (!isVisible) Show(Vector3.zero);
+        if (!isVisible) Show(new Vector2(Screen.width / 2f, Screen.height / 2f));
         else            Hide();
     }
 
@@ -258,23 +260,26 @@ public class TagBarController : MonoBehaviour
     /// Function:   Show (parameterless overload)
     /// Inputs:     none
     /// Outputs:    none
-    /// Description: Convenience overload for Inspector Button wiring.
+    /// Description: Convenience overload — raycasts from screen center.
+    ///              Used by Inspector Button wiring and any caller that
+    ///              does not have a finger screen position available.
     /// </summary>
-    public void Show() { Show(Vector3.zero); }
+    public void Show() { Show(new Vector2(Screen.width / 2f, Screen.height / 2f)); }
 
     /// <summary>
     /// Function:   Show
-    /// Inputs:     fallbackPosition — world-space position to use if
-    ///             an AR plane raycast misses
+    /// Inputs:     screenPos — the finger-up screen-space position to use
+    ///             for the AR drop raycast. Pass screen center if the
+    ///             caller does not have a precise finger position.
     /// Outputs:    none
-    /// Description: Captures the AR drop position, hides the Target
-    ///              Icon, activates the backdrop, and slides the
-    ///              TagBar in from the right.
+    /// Description: Raycasts against AR planes from screenPos to capture
+    ///              the drop position, hides the Target Icon, activates
+    ///              the backdrop, and slides the TagBar in from the right.
     /// </summary>
-    public void Show(Vector3 fallbackPosition)
+    public void Show(Vector2 screenPos)
     {
-        dropPosition = GetARDropPosition(fallbackPosition);
-        Debug.Log($"TagBarController.Show() — dropPosition={dropPosition} barWidth={barWidth} fromX={HiddenX()} toX={VisibleX()}");
+        dropPosition = GetARDropPosition(screenPos);
+        Debug.Log($"TagBarController.Show() — screenPos={screenPos} dropPosition={dropPosition} barWidth={barWidth} fromX={HiddenX()} toX={VisibleX()}");
 
         isVisible = true;
 
@@ -416,26 +421,26 @@ public class TagBarController : MonoBehaviour
 
     /// <summary>
     /// Function:   GetARDropPosition
-    /// Inputs:     fallback — world-space fallback if no AR plane hit
+    /// Inputs:     screenPos — the screen-space position to raycast from,
+    ///             typically the finger-up position
     /// Outputs:    Vector3 — world-space position for tag placement
-    /// Description: Raycasts from screen center against AR planes.
-    ///              Falls back to camera-forward 2m if no hit.
+    /// Description: Raycasts from screenPos against AR planes.
+    ///              Falls back to camera-forward 2m if no plane is hit.
     /// </summary>
-    Vector3 GetARDropPosition(Vector3 fallback)
+    Vector3 GetARDropPosition(Vector2 screenPos)
     {
         if (arRaycastManager != null)
         {
             var hits = new List<ARRaycastHit>();
-            Vector2 screenCenter = new Vector2(Screen.width / 2f, Screen.height / 2f);
 
-            if (arRaycastManager.Raycast(screenCenter, hits, TrackableType.PlaneWithinPolygon))
+            if (arRaycastManager.Raycast(screenPos, hits, TrackableType.PlaneWithinPolygon))
             {
-                Debug.Log("TagBarController: AR plane hit.");
+                Debug.Log($"TagBarController: AR plane hit at screenPos={screenPos}.");
                 return hits[0].pose.position;
             }
         }
 
-        Debug.Log("TagBarController: No AR plane — using camera forward fallback.");
+        Debug.Log($"TagBarController: No AR plane at screenPos={screenPos} — using camera forward fallback.");
         return Camera.main.transform.position + Camera.main.transform.forward * 2f;
     }
 
@@ -518,6 +523,43 @@ public class TagBarController : MonoBehaviour
             Debug.Log("TagBarController: Media picked, placing tag at: " + dropPosition);
             PlacePictureTag(texture);
         });
+    }
+
+    // -------------------------------------------------------------------------
+    // Function:    OnCameraSelected
+    // Inputs:      None
+    // Outputs:     None
+    // Description: Opens the device camera for a single photo capture.
+    //              Disables ARSession during capture to avoid conflicts.
+    //              On success, places a picture tag at dropPosition via
+    //              PlacePictureTag(). Re-enables ARSession on completion
+    //              or cancellation.
+    // -------------------------------------------------------------------------
+    public void OnCameraSelected()
+    {
+        Debug.Log("TagBarController: Camera selected.");
+        Hide();
+
+        if (cameraCapture == null)
+        {
+            Debug.LogWarning("TagBarController: cameraCapture is not assigned.");
+            return;
+        }
+
+        if (arSession != null) arSession.enabled = false;
+
+        cameraCapture.OnCancelled = () =>
+        {
+            if (arSession != null) arSession.enabled = true;
+        };
+
+        cameraCapture.OnPhotoReady = (texture) =>
+        {
+            if (arSession != null) arSession.enabled = true;
+            PlacePictureTag(texture);
+        };
+
+        cameraCapture.TakePhoto();
     }
 
     public void OnScavengerSelected()

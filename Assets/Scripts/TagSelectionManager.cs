@@ -66,6 +66,17 @@ public class TagSelectionManager : MonoBehaviour
     private Coroutine  pulseCoroutine     = null;
     private Dictionary<Material, Color> savedColors = new Dictionary<Material, Color>();
 
+    // Touch tracking — finger-down position recorded at Began,
+    // evaluated at Ended to distinguish tap from swipe/scroll.
+    private Vector2 touchDownPos             = Vector2.zero;
+    private bool    trackingTouch            = false;
+
+    // Maximum pixel drift allowed between finger-down and finger-up
+    // for the gesture to be treated as a tap rather than a swipe.
+    // SidebarController uses 80px as its swipe threshold, so 40px
+    // gives a clean gap between scroll and tap intent.
+    private const float TapStayedPutThresholdPx = 40f;
+
     // -------------------------------------------------------------------------
     // Function:    Awake
     // Inputs:      None
@@ -116,16 +127,26 @@ public class TagSelectionManager : MonoBehaviour
     // Function:    Update
     // Inputs:      None
     // Outputs:     None
-    // Description: Polls for tap/click each frame using Touchscreen and Mouse
-    //              from the New Input System. Ignores UI touches. Checks all
-    //              live PostTags and selects the tapped one, or opens TagBar
-    //              if no tag is hit.
+    // Description: Polls touch/click each frame using Touchscreen and Mouse
+    //              from the New Input System.
+    //
+    //              Touch devices use a two-phase approach to avoid mistaking
+    //              sidebar swipe gestures for tag placement taps:
+    //                - TouchPhase.Began  : records finger-down position only.
+    //                - TouchPhase.Ended  : compares finger-up position to
+    //                  finger-down. If the finger moved more than
+    //                  TapStayedPutThresholdPx in any direction, the gesture
+    //                  is treated as a swipe/scroll and ignored. Only when the
+    //                  finger stayed put is the tap processed, using the
+    //                  finger-up position for the AR drop raycast.
+    //
+    //              Mouse clicks fire immediately on press (editor use only).
     // -------------------------------------------------------------------------
     void Update()
     {
         Vector2? tapPosition = null;
 
-        // Editor / standalone — mouse click
+        // ── Editor / standalone — mouse click ────────────────────────────────
         var mouse = Mouse.current;
         if (mouse != null && mouse.leftButton.wasPressedThisFrame)
         {
@@ -133,7 +154,7 @@ public class TagSelectionManager : MonoBehaviour
             Debug.Log("TagSelectionManager: mouse click at " + tapPosition);
         }
 
-        // Device — touchscreen
+        // ── Device — touchscreen (New Input System) ──────────────────────────
         if (tapPosition == null)
         {
             var touchscreen = Touchscreen.current;
@@ -141,34 +162,86 @@ public class TagSelectionManager : MonoBehaviour
             {
                 foreach (var touch in touchscreen.touches)
                 {
-                    if (touch.phase.ReadValue() == UnityEngine.InputSystem.TouchPhase.Began)
+                    var phase = touch.phase.ReadValue();
+
+                    if (phase == UnityEngine.InputSystem.TouchPhase.Began)
                     {
-                        tapPosition = touch.position.ReadValue();
-                        Debug.Log("TagSelectionManager: touch began at " + tapPosition);
+                        // Record finger-down position — no action yet.
+                        touchDownPos   = touch.position.ReadValue();
+                        trackingTouch  = true;
+                        Debug.Log("TagSelectionManager: touch began at " + touchDownPos);
+                        break;
+                    }
+
+                    if (phase == UnityEngine.InputSystem.TouchPhase.Ended && trackingTouch)
+                    {
+                        trackingTouch = false;
+                        Vector2 upPos = touch.position.ReadValue();
+                        float   drift = Vector2.Distance(touchDownPos, upPos);
+
+                        if (drift > TapStayedPutThresholdPx)
+                        {
+                            // Finger moved too far — treat as swipe/scroll, ignore.
+                            Debug.Log($"TagSelectionManager: touch ended — drift {drift:F1}px > threshold, ignoring as swipe.");
+                            break;
+                        }
+
+                        // Finger stayed put — treat as tap at finger-up position.
+                        tapPosition = upPos;
+                        Debug.Log($"TagSelectionManager: touch ended — drift {drift:F1}px, treating as tap at {tapPosition}.");
+                        break;
+                    }
+
+                    if (phase == UnityEngine.InputSystem.TouchPhase.Canceled)
+                    {
+                        trackingTouch = false;
                         break;
                     }
                 }
             }
         }
 
-        // Legacy input fallback — catches touches when Touchscreen.current is null
+        // ── Legacy input fallback ────────────────────────────────────────────
+        // Catches touches when Touchscreen.current is null. Applies the same
+        // stayed-put check using legacy TouchPhase.
         if (tapPosition == null && Input.touchCount > 0)
         {
             var t = Input.GetTouch(0);
+
             if (t.phase == UnityEngine.TouchPhase.Began)
             {
-                tapPosition = t.position;
-                Debug.Log("TagSelectionManager: legacy touch at " + tapPosition);
+                touchDownPos  = t.position;
+                trackingTouch = true;
+                Debug.Log("TagSelectionManager: legacy touch began at " + touchDownPos);
+            }
+            else if (t.phase == UnityEngine.TouchPhase.Ended && trackingTouch)
+            {
+                trackingTouch = false;
+                float drift = Vector2.Distance(touchDownPos, t.position);
+
+                if (drift > TapStayedPutThresholdPx)
+                {
+                    Debug.Log($"TagSelectionManager: legacy touch ended — drift {drift:F1}px > threshold, ignoring as swipe.");
+                }
+                else
+                {
+                    tapPosition = t.position;
+                    Debug.Log($"TagSelectionManager: legacy touch ended — drift {drift:F1}px, treating as tap at {tapPosition}.");
+                }
+            }
+            else if (t.phase == UnityEngine.TouchPhase.Canceled)
+            {
+                trackingTouch = false;
             }
         }
 
         if (tapPosition == null) return;
 
-        // Debounce
+        // ── Debounce ─────────────────────────────────────────────────────────
         if (Time.time - lastTapTime < tapDebounceSeconds) return;
         lastTapTime = Time.time;
 
-        // Ignore taps that land on a UI element
+        // ── Ignore taps that land on a UI element ────────────────────────────
         if (EventSystem.current != null &&
             EventSystem.current.IsPointerOverGameObject())
         {
@@ -181,7 +254,7 @@ public class TagSelectionManager : MonoBehaviour
             return;
         }
 
-        // Skip one tap cycle after trashcan fires
+        // ── Suppress one tap cycle after trashcan fires ───────────────────────
         if (suppressNextTap)
         {
             suppressNextTap = false;
@@ -189,17 +262,19 @@ public class TagSelectionManager : MonoBehaviour
             return;
         }
 
-        Debug.Log($"TagSelectionManager: Tap at screen pos {tapPosition.Value}");
+        Debug.Log($"TagSelectionManager: Tap confirmed at screen pos {tapPosition.Value}");
         FindAndSelectTagAtPoint(tapPosition.Value);
     }
 
     // -------------------------------------------------------------------------
     // Function:    FindAndSelectTagAtPoint
-    // Inputs:      screenPos — the screen-space tap position
+    // Inputs:      screenPos — the confirmed finger-up screen-space position
     // Outputs:     None
     // Description: For every live PostTag, checks screen-space proximity to
     //              the tap. Selects the nearest tag within tapRadiusPx, or
-    //              opens the TagBar if no tag is hit.
+    //              opens the TagBar if no tag is hit. Passes screenPos into
+    //              TagBarController.Show() so the AR drop raycast fires from
+    //              the actual finger position rather than screen center.
     // -------------------------------------------------------------------------
     void FindAndSelectTagAtPoint(Vector2 screenPos)
     {
@@ -267,8 +342,7 @@ public class TagSelectionManager : MonoBehaviour
 
             if (tagBarController != null && !tagBarController.IsVisible)
             {
-                Vector3 fallback = Camera.main.transform.position + Camera.main.transform.forward * 2f;
-                tagBarController.Show(fallback);
+                tagBarController.Show(screenPos);
             }
             else if (tagBarController == null)
             {
