@@ -34,8 +34,6 @@ public class TagSelectionManager : MonoBehaviour
     public static TagSelectionManager Instance { get; private set; }
 
     [Header("Sidebar Controller")]
-    [Tooltip("The TagEditDeleteController that owns the server delete/edit logic.")]
-    public TagEditDeleteController tagEditDeleteController;
 
     [Header("Trashcan Button")]
     [Tooltip("Wire the sidebar trashcan Button here.")]
@@ -118,9 +116,6 @@ public class TagSelectionManager : MonoBehaviour
             trashcanButton.onClick.AddListener(TryDeleteSelected);
         else
             Debug.LogWarning("TagSelectionManager: trashcanButton is not assigned.");
-
-        if (tagEditDeleteController == null)
-            Debug.LogWarning("TagSelectionManager: tagEditDeleteController is not assigned — server deletes will not work.");
     }
 
     // -------------------------------------------------------------------------
@@ -242,16 +237,37 @@ public class TagSelectionManager : MonoBehaviour
         lastTapTime = Time.time;
 
         // ── Ignore taps that land on a UI element ────────────────────────────
-        if (EventSystem.current != null &&
-            EventSystem.current.IsPointerOverGameObject())
+        // Exception: the TagBar backdrop is a full-screen transparent Button
+        // that sits over the entire screen. A tap on the backdrop should still
+        // reach tag hit-detection — the backdrop is just the AR world with a
+        // UI layer on top. We pass through if the ONLY UI hit is the backdrop.
+        // Any other UI element (buttons, panels, sidebars) still blocks.
+        //
+        // NOTE: IsPointerOverGameObject() is NOT used — unreliable on the same
+        // frame as TouchPhase.Ended with the New Input System. RaycastAll runs
+        // unconditionally instead.
+        if (EventSystem.current != null)
         {
             var ped = new PointerEventData(EventSystem.current);
             ped.position = tapPosition.Value;
             var results = new List<RaycastResult>();
             EventSystem.current.RaycastAll(ped, results);
+            bool blockedByRealUI = false;
             foreach (var r in results)
-                Debug.Log("UI blocker: " + r.gameObject.name + " on " + r.gameObject.transform.parent?.name);
-            return;
+            {
+                bool isBackdrop = tagBarController != null &&
+                                  r.gameObject == tagBarController.backdropButton?.gameObject;
+                if (!isBackdrop)
+                {
+                    blockedByRealUI = true;
+                    break;
+                }
+            }
+            if (blockedByRealUI)
+            {
+                tapPosition = null;
+                return;
+            }
         }
 
         // ── Suppress one tap cycle after trashcan fires ───────────────────────
@@ -310,10 +326,13 @@ public class TagSelectionManager : MonoBehaviour
         if (tapped != null && nearestDist > tapRadiusPx)
             tapped = null;
 
+
+
         if (tapped != null)
         {
             if (tapped == selectedTag)
             {
+                // Re-tap on the already-selected tag — deselect it
                 ClearTint(selectedTag);
                 selectedTag = null;
                 NotifyController(null);
@@ -321,6 +340,7 @@ public class TagSelectionManager : MonoBehaviour
             }
             else
             {
+                // New tag tapped — select it
                 if (selectedTag != null) ClearTint(selectedTag);
                 selectedTag = tapped;
                 ApplyTint(selectedTag);
@@ -330,24 +350,26 @@ public class TagSelectionManager : MonoBehaviour
         }
         else
         {
-            // Tapped empty space — deselect and open TagBar
+            // Tapped empty space — deselect any current tag
             if (selectedTag != null)
             {
                 ClearTint(selectedTag);
                 selectedTag = null;
                 NotifyController(null);
             }
+            Debug.Log("TagSelectionManager: Tap missed all tags — deselected.");
+        }
 
-            Debug.Log("TagSelectionManager: Tap outside all tags — opening TagBar.");
-
-            if (tagBarController != null && !tagBarController.IsVisible)
-            {
-                tagBarController.Show(screenPos);
-            }
-            else if (tagBarController == null)
-            {
-                Debug.LogWarning("TagSelectionManager: tagBarController is null — cannot open TagBar.");
-            }
+        // Always open the TagBar on any tap (tag hit or miss).
+        // If a tag was selected above, the TagBar delete button will act on it.
+        if (tagBarController != null && !tagBarController.IsVisible)
+        {
+            Debug.Log("TagSelectionManager: Opening TagBar.");
+            tagBarController.Show(screenPos);
+        }
+        else if (tagBarController == null)
+        {
+            Debug.LogWarning("TagSelectionManager: tagBarController is null — cannot open TagBar.");
         }
     }
 
@@ -413,11 +435,15 @@ public class TagSelectionManager : MonoBehaviour
         }
 
         suppressNextTap = true;
-        if (tagEditDeleteController != null)
-            tagEditDeleteController.OnDeletePressed();
+        if (selectedTag.postId == null)
+        {
+            // No server record yet — local destroy only
+            Destroy(selectedTag.gameObject);
+        }
         else
         {
-            Debug.LogWarning("TagSelectionManager: No controller assigned — destroying locally only.");
+            // TODO: call server DELETE endpoint here
+            Debug.LogWarning("TagSelectionManager: Server delete not yet implemented for postId=" + selectedTag.postId);
             Destroy(selectedTag.gameObject);
         }
 
@@ -442,15 +468,15 @@ public class TagSelectionManager : MonoBehaviour
     // Function:    NotifyController
     // Inputs:      tag — the newly selected PostTag, or null to clear
     // Outputs:     None
-    // Description: Pushes selection state to TagEditDeleteController.
+    // Description: Pushes selection state to TagEditDeleteController and
+    //              shows/hides the TagBar delete button accordingly.
     // -------------------------------------------------------------------------
     void NotifyController(PostTag tag)
     {
-        if (tagEditDeleteController == null) return;
-        if (tag != null)
-            tagEditDeleteController.OnTagSelected(tag);
-        else
-            tagEditDeleteController.ClearSelection();
+        Debug.Log($"TagSelectionManager: NotifyController tag={tag?.name ?? "null"} tagBarController={tagBarController?.name ?? "NULL"}");
+        // Show delete button in TagBar only when a tag is selected
+        if (tagBarController != null)
+            tagBarController.ShowDeleteButton(tag != null);
     }
 
     // -------------------------------------------------------------------------

@@ -23,7 +23,6 @@ public class TagSelectPanel : MonoBehaviour
     [Header("References")]
     public Transform  contentParent;
     public GameObject entryPrefab;          // TagEntryPrefab — see below
-    public TagEditDeleteController controller;
     public Button     closeButton;
 
     // Row height in pixels — must match your entryPrefab height
@@ -43,7 +42,6 @@ public class TagSelectPanel : MonoBehaviour
 
         if (contentParent == null) Debug.LogWarning("TagSelectPanel: contentParent NOT assigned!");
         if (entryPrefab   == null) Debug.LogWarning("TagSelectPanel: entryPrefab NOT assigned!");
-        if (controller    == null) Debug.LogWarning("TagSelectPanel: controller NOT assigned!");
     }
 
     // -------------------------------------------------------------------------
@@ -182,7 +180,6 @@ public class TagSelectPanel : MonoBehaviour
     void OnRowClicked(PostTag tag)
     {
         Debug.Log($"TagSelectPanel: Selected tag postId={tag.postId} type={tag.mediaType}");
-        controller.OnTagSelected(tag);
         Hide();
     }
 }

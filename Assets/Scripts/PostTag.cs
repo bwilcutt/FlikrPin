@@ -28,6 +28,7 @@ public class PostTag : MonoBehaviour
     [HideInInspector] public string mediaSource = "";   // "url" | "gallery"
     [HideInInspector] public string message     = "";   // text content
     [HideInInspector] public int    stickerIndex = 0;  // index into ShowSticker.stickers
+    [HideInInspector] public float  stickerAspectRatio = 1f; // height/width ratio, set by PlaceStickerTag at placement time
 
     [Header("References")]
     public TextMesh timestampText;
@@ -68,10 +69,17 @@ public class PostTag : MonoBehaviour
                 transform.rotation = Quaternion.LookRotation(-lookDir);
         }
 
-        // Logarithmic scale
+        // Logarithmic scale — for flat stickers, preserve the XY aspect ratio
+        // set by PlaceStickerTag at placement time (stored in stickerAspectRatio).
+        // Using Vector3.one * scale on a sticker would clobber that aspect ratio
+        // every frame, shrinking the visual footprint and breaking tap detection.
         float t     = 1f - Mathf.Log(1f + distance) / Mathf.Log(1f + maxDistance);
         float scale = Mathf.Lerp(minScale, maxScale, t);
-        transform.localScale = Vector3.one * scale;
+
+        if (postType == PostType.Sticker && isFlat)
+            transform.localScale = new Vector3(scale, scale * stickerAspectRatio, scale);
+        else
+            transform.localScale = Vector3.one * scale;
 
         // Enable/disable collider based on selectable distance
         if (postCollider != null)

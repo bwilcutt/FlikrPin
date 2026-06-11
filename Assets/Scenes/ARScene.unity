@@ -1838,7 +1838,6 @@ MonoBehaviour:
   contentParent: {fileID: 370403335}
   entryPrefab: {fileID: 2377745583201289454, guid: 966a833d6b735dd39b30b72af0c893a2,
     type: 3}
-  controller: {fileID: 1537050825}
   closeButton: {fileID: 2126798683}
 --- !u!1 &596054376
 GameObject:
@@ -8285,17 +8284,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90c7598b765c3b60db6743a4e29be955, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TagEditDeleteController
-  btnSelect: {fileID: 2000006535}
-  btnEdit: {fileID: 772285868}
-  btnDelete: {fileID: 255256667}
-  tagSelectPanel: {fileID: 572864624}
-  textEditPanel: {fileID: 0}
-  textEditInput: {fileID: 0}
-  textEditConfirm: {fileID: 0}
-  textEditCancel: {fileID: 0}
-  stickerPicker: {fileID: 0}
-  showSticker: {fileID: 0}
-  jsonReader: {fileID: 1537050823}
 --- !u!114 &1537050826
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8308,7 +8296,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a84ee8c5497f6b96974a2500dccdf89, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TagSelectionManager
-  tagEditDeleteController: {fileID: 1537050825}
   trashcanButton: {fileID: 0}
   tagBarController: {fileID: 1922902383}
   tapRadiusPx: 400
@@ -8652,7 +8639,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a84ee8c5497f6b96974a2500dccdf89, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TagSelectionManager
-  tagEditDeleteController: {fileID: 0}
   trashcanButton: {fileID: 0}
   tagBarController: {fileID: 0}
   tapRadiusPx: 150
@@ -9636,6 +9622,7 @@ MonoBehaviour:
   btnMedia: {fileID: 1348275399}
   btnCamera: {fileID: 1686328465}
   btnScavenger: {fileID: 0}
+  btnTrashcan: {fileID: 255256667}
   clickSound: {fileID: 8300000, guid: d65a84e7fa96b55f4acfc785e50b23ae, type: 3}
   slideDuration: 0.25
   slideCurve:

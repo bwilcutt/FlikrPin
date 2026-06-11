@@ -116,7 +116,6 @@
     <Compile Include="Assets/Scripts/TagSelectionManager.cs" />
     <Compile Include="Assets/Scripts/Window_QuestPointer.cs" />
     <Compile Include="Assets/Scripts/InputTest.cs" />
-    <Compile Include="Assets/Scripts/TagEditDeleteController.cs" />
     <Compile Include="Assets/Scripts/ProceduralIcon.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -57,10 +57,13 @@ public class PlaceStickerTag : MonoBehaviour
                 rend = stickerChild.GetComponent<Renderer>();
         }
 
+        // Compute aspect ratio here so it's in scope for both the renderer
+        // block (scale) and the PostTag block (stickerAspectRatio).
+        float ratio = (float)texture.height / (float)texture.width;
+
         if (rend != null)
         {
             // Preserve natural aspect ratio
-            float ratio = (float)texture.height / (float)texture.width;
             instance.transform.localScale = new Vector3(1f, ratio, 1f);
 
             // Apply texture — use Unlit/Transparent so PNG alpha works
@@ -88,8 +91,10 @@ public class PlaceStickerTag : MonoBehaviour
         PostTag postTag = instance.GetComponent<PostTag>();
         if (postTag != null)
         {
-            postTag.isFlat    = true;
-            postTag.mediaType = "sticker";
+            postTag.isFlat             = true;
+            postTag.postType           = PostTag.PostType.Sticker;  // 06/10/2026 - required so PostTag.Update() takes the aspect-preserving scale branch
+            postTag.mediaType          = "sticker";
+            postTag.stickerAspectRatio = ratio;   // 06/10/2026 - preserve aspect so PostTag.Update() distance-scale doesn't clobber XY ratio
         }
 
         // Set timestamp

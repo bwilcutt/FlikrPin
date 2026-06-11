@@ -56,6 +56,8 @@ public class TagBarController : MonoBehaviour
     public Button btnMedia;
     public Button btnCamera;
     public Button btnScavenger;
+    [Tooltip("Delete button — shown only when a tag is selected. Wire in Inspector.")]
+    public Button btnTrashcan;
 
     [Header("Audio")]
     public AudioClip clickSound;
@@ -222,6 +224,9 @@ public class TagBarController : MonoBehaviour
         if (btnMedia     != null) { btnMedia.onClick.AddListener(OnMediaSelected);         AddPointerDownSound(btnMedia.gameObject); }
         if (btnCamera    != null) { btnCamera.onClick.AddListener(OnCameraSelected);       AddPointerDownSound(btnCamera.gameObject); }
         if (btnScavenger != null) { btnScavenger.onClick.AddListener(OnScavengerSelected); AddPointerDownSound(btnScavenger.gameObject); }
+        Debug.Log("TagBarController: WireButtons — btnTrashcan=" + (btnTrashcan != null ? btnTrashcan.name : "NULL"));
+        if (btnTrashcan    != null) { btnTrashcan.onClick.AddListener(OnDeleteSelected);       AddPointerDownSound(btnTrashcan.gameObject);
+                                    btnTrashcan.gameObject.SetActive(false); } // hidden until a tag is selected
     }
 
     /// <summary>
@@ -575,6 +580,44 @@ public class TagBarController : MonoBehaviour
             PlacePictureTag(texture);
         };
         cameraCapture.TakePhoto();
+    }
+
+    // --------------------------------------------------------
+    // Delete button visibility
+    // --------------------------------------------------------
+
+    // -------------------------------------------------------------------------
+    // Function:    ShowDeleteButton
+    // Inputs:      show — true to reveal the delete button, false to hide it
+    // Outputs:     None
+    // Description: Called by TagSelectionManager whenever selection changes.
+    //              Reveals btnTrashcan when a tag is selected so the user can
+    //              delete it from the TagBar, hides it otherwise.
+    // -------------------------------------------------------------------------
+    public void ShowDeleteButton(bool show)
+    {
+        Debug.Log($"TagBarController: ShowDeleteButton({show}) btnTrashcan={btnTrashcan?.name ?? "NULL"}");
+        if (btnTrashcan != null)
+            btnTrashcan.gameObject.SetActive(show);
+    }
+
+    // -------------------------------------------------------------------------
+    // Function:    OnDeleteSelected
+    // Inputs:      None
+    // Outputs:     None
+    // Description: Called when the user taps the delete button in the TagBar.
+    //              Delegates to TagSelectionManager.TryDeleteSelected() which
+    //              handles both local Destroy and server DELETE via
+    //              TagEditDeleteController. Hides the TagBar after firing.
+    // -------------------------------------------------------------------------
+    void OnDeleteSelected()
+    {
+        Debug.Log("TagBarController: Delete selected.");
+        Hide();
+        if (TagSelectionManager.Instance != null)
+            TagSelectionManager.Instance.TryDeleteSelected();
+        else
+            Debug.LogWarning("TagBarController: TagSelectionManager.Instance is null — cannot delete.");
     }
 
     // --------------------------------------------------------
