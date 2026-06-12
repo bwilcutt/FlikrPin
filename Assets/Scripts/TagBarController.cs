@@ -76,6 +76,7 @@ public class TagBarController : MonoBehaviour
     private AudioSource       audioSource;
     private Vector3           dropPosition;
     private ARRaycastManager  arRaycastManager;
+    private ARAnchorManager   arAnchorManager;
     private ARSession         arSession;
     private bool              isVisible    = false;
     private Coroutine         slideRoutine = null;
@@ -101,6 +102,9 @@ public class TagBarController : MonoBehaviour
             placer = FindAnyObjectByType<PlacePrefabInWorld>();
 
         arRaycastManager = FindAnyObjectByType<ARRaycastManager>();
+        arAnchorManager  = FindAnyObjectByType<ARAnchorManager>();
+        if (arAnchorManager == null)
+            Debug.LogWarning("TagBarController: ARAnchorManager not found — anchoring disabled.");
         arSession        = FindAnyObjectByType<ARSession>();
 
         // Audio
@@ -425,28 +429,52 @@ public class TagBarController : MonoBehaviour
     // --------------------------------------------------------
 
     /// <summary>
-    /// Function:   GetARDropPosition
-    /// Inputs:     screenPos — the screen-space position to raycast from,
-    ///             typically the finger-up position
-    /// Outputs:    Vector3 — world-space position for tag placement
-    /// Description: Raycasts from screenPos against AR planes.
-    ///              Falls back to camera-forward 2m if no plane is hit.
-    /// </summary>
+    // -------------------------------------------------------------------------
+    // Function:    GetARDropPosition
+    // Inputs:      screenPos — screen-space tap position
+    // Outputs:     Vector3   — world position for tag placement
+    // Description: Raycasts against AR planes. If a plane is hit, attaches an
+    //              ARAnchor to the trackable for maximum stability. If no plane
+    //              is detected, creates a standalone ARAnchor at the camera-
+    //              forward fallback position. Stores anchor in _lastAnchor.
+    // -------------------------------------------------------------------------
+    private ARAnchor _lastAnchor = null;
+
     Vector3 GetARDropPosition(Vector2 screenPos)
     {
+        _lastAnchor = null;
+
         if (arRaycastManager != null)
         {
             var hits = new List<ARRaycastHit>();
-
             if (arRaycastManager.Raycast(screenPos, hits, TrackableType.PlaneWithinPolygon))
             {
                 Debug.Log($"TagBarController: AR plane hit at screenPos={screenPos}.");
+                if (arAnchorManager != null)
+                {
+                    _lastAnchor = arAnchorManager.AttachAnchor(
+                        hits[0].trackable as ARPlane, hits[0].pose);
+                    if (_lastAnchor != null)
+                        Debug.Log("TagBarController: ARAnchor attached to plane.");
+                }
                 return hits[0].pose.position;
             }
         }
 
-        Debug.Log($"TagBarController: No AR plane at screenPos={screenPos} — using camera forward fallback.");
-        return Camera.main.transform.position + Camera.main.transform.forward * 2f;
+        // No plane detected — create standalone anchor at camera-forward position
+        Vector3 fallbackPos = Camera.main.transform.position +
+                              Camera.main.transform.forward * 2f;
+        Debug.Log($"TagBarController: No AR plane — using camera forward fallback.");
+
+        if (arAnchorManager != null)
+        {
+            var anchorGO = new GameObject("StandaloneAnchor");
+            anchorGO.transform.position = fallbackPos;
+            _lastAnchor = anchorGO.AddComponent<ARAnchor>();
+            Debug.Log("TagBarController: Standalone ARAnchor created at fallback position.");
+        }
+
+        return fallbackPos;
     }
 
     // --------------------------------------------------------
@@ -493,7 +521,7 @@ public class TagBarController : MonoBehaviour
         {
             stickerPickerWindow.OnStickerSelected = (texture) =>
             {
-                placeStickerTag.PlaceSticker(texture, dropPosition);
+                placeStickerTag.PlaceSticker(texture, dropPosition, _lastAnchor);
             };
             stickerPickerWindow.Show();
         }

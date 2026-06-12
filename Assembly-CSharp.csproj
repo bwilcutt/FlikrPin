@@ -60,6 +60,7 @@
     <Compile Include="Assets/Scripts/DragController.cs" />
     <Compile Include="Assets/GoogleSignIn/Impl/BaseObject.cs" />
     <Compile Include="Assets/Scripts/UIBindings.cs" />
+    <Compile Include="Assets/Scripts/FusedLocationManager.cs" />
     <Compile Include="Assets/GoogleSignIn/GoogleSignInStatusCode.cs" />
     <Compile Include="Assets/GoogleSignIn/GoogleSignInUser.cs" />
     <Compile Include="Assets/GoogleSignIn/GoogleSignInConfiguration.cs" />

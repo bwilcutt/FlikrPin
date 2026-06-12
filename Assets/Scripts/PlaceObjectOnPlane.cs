@@ -125,7 +125,7 @@ public class PlaceObjectOnPlane : MonoBehaviour
         }
 
         if (postTypeWindow != null)
-            postTypeWindow.Show(dropPosition);
+            postTypeWindow.Show(tapPosition.Value);
         else
             Debug.LogWarning("PlaceObjectOnPlane: postTypeWindow is not assigned!");
     }

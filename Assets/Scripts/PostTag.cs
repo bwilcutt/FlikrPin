@@ -37,6 +37,25 @@ public class PostTag : MonoBehaviour
     private Collider  postCollider;
     private bool      isVisible = false;
 
+
+    // Fixed world position — set once at placement, enforced every frame
+    // to prevent ARCore world-origin drift from moving the tag.
+    private Vector3 _fixedPosition;
+    private bool    _positionLocked = false;
+
+    // -------------------------------------------------------------------------
+    // Function:    LockPosition
+    // Inputs:      worldPos — the world position to lock this tag to
+    // Outputs:     None
+    // Description: Called once after instantiation to record the intended
+    //              world position. Update() enforces it every frame.
+    // -------------------------------------------------------------------------
+    public void LockPosition(Vector3 worldPos)
+    {
+        _fixedPosition  = worldPos;
+        _positionLocked = true;
+    }
+
     void Start()
     {
         cameraTransform = Camera.main.transform;
@@ -44,10 +63,18 @@ public class PostTag : MonoBehaviour
 
         if (postType == PostType.Sticker && isFlat)
             transform.rotation = Quaternion.Euler(90f, 0f, 0f);
+        // Lock to spawn position if not explicitly set by caller
+        if (!_positionLocked)
+            LockPosition(transform.position);
     }
 
     void Update()
     {
+        // Enforce fixed world position every frame — prevents ARCore drift.
+        // Skip if parented to an ARAnchor — the anchor handles positioning.
+        if (_positionLocked && transform.parent == null)
+            transform.position = _fixedPosition;
+
         if (cameraTransform == null) return;
 
         float distance = Vector3.Distance(transform.position, cameraTransform.position);

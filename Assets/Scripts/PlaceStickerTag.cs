@@ -10,6 +10,7 @@
 
 using UnityEngine;
 using TMPro;
+using UnityEngine.XR.ARFoundation;
 
 public class PlaceStickerTag : MonoBehaviour
 {
@@ -29,7 +30,7 @@ public class PlaceStickerTag : MonoBehaviour
     //              Keeping PostTag enabled allows TagSelectionManager to find
     //              and select sticker tags for deletion.
     // -------------------------------------------------------------------------
-    public void PlaceSticker(Texture2D texture, Vector3 worldPosition)
+    public void PlaceSticker(Texture2D texture, Vector3 worldPosition, UnityEngine.XR.ARFoundation.ARAnchor anchor = null)
     {
         if (stickerPrefab == null)
         {
@@ -47,6 +48,19 @@ public class PlaceStickerTag : MonoBehaviour
         Quaternion flatRotation = Quaternion.Euler(90f, 0f, 0f);
         GameObject instance     = Instantiate(stickerPrefab, worldPosition, flatRotation);
         instance.name           = "StickerTag_" + texture.name;
+
+        // If an ARAnchor was provided, parent the tag to it so ARCore
+        // tracks it in physical space. Fall back to LockPosition if no anchor.
+        if (anchor != null)
+        {
+            instance.transform.SetParent(anchor.transform, true);
+            Debug.Log("PlaceStickerTag: Tag parented to ARAnchor.");
+        }
+
+        // Lock world position to prevent ARCore drift from moving the tag.
+        PostTag anchorTag = instance.GetComponent<PostTag>();
+        if (anchorTag != null)
+            anchorTag.LockPosition(worldPosition);
 
         // Find renderer — try root first, then child named "sticker"
         Renderer rend = instance.GetComponent<Renderer>();
